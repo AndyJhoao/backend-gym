@@ -27,6 +27,7 @@ app.get("/", (req, res) => {
 
 app.post("/signin", (req, res) => {
   console.log(req.body);
+  res.json(req.body);
 });
 
 app.listen(port, (err) => {
