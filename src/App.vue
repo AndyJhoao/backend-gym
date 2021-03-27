@@ -20,7 +20,7 @@
   flex-direction: column;
   width: 100%;
   height: 100vh;
-  background-image: url("C:/Users/Andy_/Desktop/8voSemestre/SENSORES/PRACTICA1/ProyectoGym/ProyectoGYM/project-gym/src/assets/background-gym.jpg");
+  background-image: url("C:/Users/Yael Leon/Documents/projectGym/gym-app/src/assets/background-gym.jpg");
   background-size: cover;
 }
 

@@ -31,9 +31,11 @@
         </div>
         <div class="body__user--button">
           <div class="user__button--sign">
-            <button class="font_size-24" v-on:click="callSign">
-              Ingresar ->
-            </button>
+            <router-link to="/home">
+              <button class="font_size-24" v-on:click="callSign">
+                Ingresar ->
+              </button>
+            </router-link>
           </div>
           <div class="user__button--forgot">
             <a class="font_size-20" href="#"><u>Olvidaste tu contraseña?</u></a>
