@@ -2,13 +2,13 @@
   <main>
     <section>
       <h2>
-        <a href="/index.html">Home </a> - >
-        <a href="/Maquinas.html"> Maquinas </a>- > <a href=""> Remo </a>
+        <router-link to="/home"> Home </router-link> //
+        <router-link to="/home/machines"> Maquinas </router-link> // Remo
       </h2>
 
       <article class="Container">
         <div class="Container-Image">
-          <img src="/imagenes/remo.jpg" alt="Remo" />
+          <img :src="`${Image}`" alt="Remo" />
         </div>
 
         <div class="Container-Description">
@@ -16,37 +16,9 @@
 
           <div class="Container-Remo">
             <img
-              src="/imagenes/remo.jpg"
-              alt="Remo"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/remo.jpg"
-              alt="Remo"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/remo.jpg"
-              alt="Remo"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/remo.jpg"
-              alt="Remo"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/remo.jpg"
-              alt="Remo"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/remo.jpg"
+              v-for="i in 10"
+              :key="`${i}`"
+              :src="`${Image}`"
               alt="Remo"
               width="120px"
               height="110px"
@@ -57,6 +29,18 @@
     </section>
   </main>
 </template>
+
+<script>
+export default {
+  name: "Mach-remo",
+  data() {
+    return {
+      Image:
+        "https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/remo.jpg?alt=media&token=d0a774fc-5f7d-41e9-93bb-c4771530a868",
+    };
+  },
+};
+</script>
 
 <style>
 h2,

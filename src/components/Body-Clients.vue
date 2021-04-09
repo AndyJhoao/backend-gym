@@ -2,14 +2,11 @@
   <div>
     <main>
       <section>
-        <h1>
-          <router-link to="/home/"> Home - > </router-link>
-          <router-link to="/home/clients/"> Clientes - > </router-link>
-        </h1>
+        <h1><router-link to="/home/"> Home </router-link> // Clientes //</h1>
         <div class="contenedor-3">
           <div class="caja-Consultar-Clientes">
             <img
-              src="/imagenes/Consultar.png"
+              src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/Consultar.png?alt=media&token=fbf27e19-de92-4a9f-b6e5-ea5f154e291e"
               alt="Ventas"
               width="300px"
               height="300px"
@@ -20,7 +17,7 @@
           <div class="caja-Agregar-Clientes">
             <a href="/">
               <img
-                src="/imagenes/Agregar.png"
+                src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/Agregar.png?alt=media&token=1dc17511-125b-487a-b77b-39128b9d9658"
                 alt="Proveedores"
                 width="300px"
                 height="300px"
@@ -32,7 +29,7 @@
           <div class="caja-Actualizar-Clientes">
             <a href="">
               <img
-                src="/imagenes/Consultar.png"
+                src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/Editar.png?alt=media&token=d8d5a2b8-ef62-480e-a427-f0659a242cb6"
                 alt="Reportes de Maquinas"
                 width="300px"
                 height="300px"
@@ -44,7 +41,7 @@
           <div class="caja-Eliminar-Clientes">
             <a href="/">
               <img
-                src="/imagenes/Eliminar.png"
+                src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/Eliminar.png?alt=media&token=b72d6b70-0877-4d00-adc0-2cf0f7d03dbf"
                 alt="Proveedores"
                 width="300px"
                 height="300px"

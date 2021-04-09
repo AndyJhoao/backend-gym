@@ -2,17 +2,14 @@
   <div>
     <main>
       <section>
-        <h1>
-          <router-link to="/home/"> Home - > </router-link>
-          <router-link to="/home/machines"> Maquinas - > </router-link>
-        </h1>
+        <h1><router-link to="/home/"> Home </router-link> // Maquinas //</h1>
         <div class="contenedor-2">
           <div class="imagenes-maquinas">
-            <div class="caja-Caminadoras">
+            <div class="caja-maquina">
               <a href="">
                 <img
                   class="imagen"
-                  src="1Iy7NWsjj-ujEhN6HQDzCEx4JNTav6Syo"
+                  src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/caminadora.jpg?alt=media&token=75f3a02b-21a5-4187-9704-560cf6fc7f29"
                   alt="Caminadora"
                   width="200px"
                   height="200px"
@@ -21,11 +18,11 @@
               </a>
             </div>
 
-            <div class="caja-Bicicletas">
+            <div class="caja-maquina">
               <a href="/">
                 <img
                   class="imagen"
-                  src="18boyX2uwgsSyDYoUTB7vifiwwmRuvOZR"
+                  src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/bicycle.png?alt=media&token=c1f63916-d5b9-4369-a730-019fbe1ce9ed"
                   alt="Bicicleta"
                   width="200px"
                   height="200px"
@@ -34,11 +31,11 @@
               </a>
             </div>
 
-            <div class="caja-Prensa-Pierna">
+            <div class="caja-maquina">
               <a href="">
                 <img
                   class="imagen"
-                  src="/imagenes/Prensa.png"
+                  src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/prensa-pierna.jpg?alt=media&token=7c8b2882-b61a-4b5a-83c7-3b711395bd46"
                   alt="Prensa de Pierna"
                   width="200px"
                   height="200px"
@@ -47,11 +44,11 @@
               </a>
             </div>
 
-            <div class="caja-Banco-Pesas">
+            <div class="caja-maquina">
               <a href="">
                 <img
                   class="imagen"
-                  src="/imagenes/Banco_de_pesas.jpg"
+                  src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/banco-pesas.jpg?alt=media&token=63063c8b-a659-4af5-ae48-ddf996029adb"
                   alt="Banco de pesas"
                   width="200px"
                   height="200px"
@@ -62,11 +59,11 @@
           </div>
 
           <div class="imagenes-maquinas">
-            <div class="caja-Poleas">
+            <div class="caja-maquina">
               <a href="/">
                 <img
                   class="imagen"
-                  src="/imagenes/Polea.jpg"
+                  src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/poleas.jpg?alt=media&token=01bfbee0-e057-480e-ba5f-b99205d6b018"
                   alt="Poleas"
                   width="200px"
                   height="200px"
@@ -75,11 +72,11 @@
               </a>
             </div>
 
-            <div class="caja-Eliptica">
+            <div class="caja-maquina">
               <router-link to="/home/machines/eliptica">
                 <img
                   class="imagen"
-                  src="/imagenes/Eliptica.jpg"
+                  src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/eliptica.jpg?alt=media&token=c5e67941-660f-4884-b5fc-e1b4662ba308"
                   alt="Eliptica"
                   width="200px"
                   height="200px"
@@ -88,11 +85,11 @@
               </router-link>
             </div>
 
-            <div class="caja-Remo">
+            <div class="caja-maquina">
               <a href="/">
                 <img
                   class="imagen"
-                  src="/imagenes/remo.jpg"
+                  src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/remo.jpg?alt=media&token=d0a774fc-5f7d-41e9-93bb-c4771530a868"
                   alt="Remo"
                   width="200px"
                   height="200px"
@@ -101,11 +98,11 @@
               </a>
             </div>
 
-            <div class="caja-Area-Cross">
+            <div class="caja-maquina">
               <a href="">
                 <img
                   class="imagen"
-                  src="/imagenes/Crossfit.jpg"
+                  src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/crossfit.jpg?alt=media&token=e9fa51f1-9d83-4270-ae36-2b0035b17725"
                   alt="Area de CrossfitS"
                   width="200px"
                   height="200px"
@@ -126,115 +123,35 @@
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  padding: 2em;
-  margin: 1em;
+  align-items: center;
+  justify-content: center;
 }
 .imagenes-maquinas {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  padding: 2em;
+  width: 80%;
+  align-items: center;
+  justify-content: center;
 }
 .imagen {
   border: 1px solid black;
   border-radius: 50px;
 }
-.caja-Caminadoras {
+
+.caja-maquina {
+  background: rgba(14, 14, 14, 0.8);
   text-align: center;
   margin: auto;
   transition: 1s;
-  margin-left: 25px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  width: 270px;
 }
-.caja-Caminadoras a {
+.caja-maquina a {
   text-decoration: none;
-  color: black;
+  color: #c8eed9;
 }
-.caja-Caminadoras:hover {
-  transform: scale(1.3);
-}
-.caja-Bicicletas {
-  text-align: center;
-  margin: auto;
-  transition: 1s;
-}
-.caja-Bicicletas:hover {
-  transform: scale(1.3);
-}
-.caja-Bicicletas a {
-  text-decoration: none;
-  color: black;
-}
-.caja-Banco-Pesas {
-  text-align: center;
-  margin: auto;
-  transition: 1s;
-}
-.caja-Banco-Pesas:hover {
-  transform: scale(1.3);
-}
-.caja-Banco-Pesas a {
-  text-decoration: none;
-  color: black;
-}
-.caja-Prensa-Pierna {
-  text-align: center;
-  margin: auto;
-  transition: 1s;
-}
-.caja-Prensa-Pierna:hover {
-  transform: scale(1.3);
-}
-.caja-Prensa-Pierna a {
-  text-decoration: none;
-  color: black;
-}
-.caja-Poleas {
-  text-align: center;
-  margin: auto;
-  transition: 1s;
-}
-.caja-Poleas:hover {
-  transform: scale(1.3);
-}
-.caja-Poleas a {
-  text-decoration: none;
-  color: black;
-}
-.caja-Eliptica {
-  text-align: center;
-  margin: auto;
-  transition: 1s;
-}
-.caja-Eliptica:hover {
-  transform: scale(1.3);
-}
-.caja-Eliptica a {
-  text-decoration: none;
-  color: black;
-}
-.caja-Remo {
-  text-align: center;
-  margin: auto;
-  transition: 1s;
-}
-.caja-Remo:hover {
-  transform: scale(1.3);
-}
-.caja-Remo a {
-  text-decoration: none;
-  color: black;
-}
-.caja-Area-Cross {
-  text-align: center;
-  margin: auto;
-  transition: 1s;
-}
-.caja-Area-Cross:hover {
-  transform: scale(1.3);
-}
-.caja-Area-Cross a {
-  text-decoration: none;
-  color: black;
+.caja-maquina:hover {
+  transform: scale(1.1);
 }
 h2 {
   font-size: 2em;

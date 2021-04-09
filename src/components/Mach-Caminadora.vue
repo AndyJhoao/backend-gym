@@ -2,13 +2,13 @@
   <main>
     <section>
       <h2>
-        <a href="/index.html">Home </a> - >
-        <a href="/Maquinas.html"> Maquinas </a>- > <a href="">Caminadoras </a>
+        <router-link to="/home"> Home </router-link> //
+        <router-link to="/home/machines"> Maquinas </router-link> // Caminadoras
       </h2>
 
       <article class="Container">
         <div class="Container-Image">
-          <img src="/imagenes/Caminadora.jpg" alt="Caminadora" />
+          <img :src="`${Image}`" alt="Caminadora" />
         </div>
 
         <div class="Container-Description">
@@ -16,73 +16,9 @@
 
           <div class="Container-Caminadoras">
             <img
-              src="/imagenes/Caminadora.jpg"
-              alt="Caminadora"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Caminadora.jpg"
-              alt="Caminadora"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Caminadora.jpg"
-              alt="Caminadora"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Caminadora.jpg"
-              alt="Caminadora"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Caminadora.jpg"
-              alt="Caminadora"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Caminadora.jpg"
-              alt="Caminadora"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Caminadora.jpg"
-              alt="Caminadora"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Caminadora.jpg"
-              alt="Caminadora"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Caminadora.jpg"
-              alt="Caminadora"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Caminadora.jpg"
-              alt="Caminadora"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Caminadora.jpg"
-              alt="Caminadora"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Caminadora.jpg"
+              v-for="i in 10"
+              :key="`${i}`"
+              :src="`${Image}`"
               alt="Caminadora"
               width="120px"
               height="110px"
@@ -93,6 +29,18 @@
     </section>
   </main>
 </template>
+
+<script>
+export default {
+  name: "Mach-caminadora",
+  data() {
+    return {
+      Image:
+        "https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/caminadora.jpg?alt=media&token=75f3a02b-21a5-4187-9704-560cf6fc7f29",
+    };
+  },
+};
+</script>
 
 <style>
 h2 {

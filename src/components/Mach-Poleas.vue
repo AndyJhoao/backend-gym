@@ -2,13 +2,13 @@
   <main>
     <section>
       <h2>
-        <a href="/index.html">Home </a> - >
-        <a href="/Maquinas.html"> Maquinas </a>- > <a href=""> Poleas </a>
+        <router-link to="/home"> Home </router-link> //
+        <router-link to="/home/machines"> Maquinas </router-link> // Poleas
       </h2>
 
       <article class="Container">
         <div class="Container-Image">
-          <img src="/imagenes/Polea.jpg" alt="Poleas" />
+          <img :src="`${Image}`" alt="Poleas" />
         </div>
 
         <div class="Container-Description">
@@ -16,61 +16,9 @@
 
           <div class="Container-Poleas">
             <img
-              src="/imagenes/Polea.jpg"
-              alt="Poleas"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Polea.jpg"
-              alt="Poleas"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Polea.jpg"
-              alt="Poleas"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Polea.jpg"
-              alt="Poleas"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Polea.jpg"
-              alt="Poleas"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Polea.jpg"
-              alt="Poleas"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Polea.jpg"
-              alt="Poleas"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Polea.jpg"
-              alt="Poleas"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Polea.jpg"
-              alt="Poleas"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Polea.jpg"
+              v-for="i in 10"
+              :key="`${i}`"
+              :src="`${Image}`"
               alt="Poleas"
               width="120px"
               height="110px"
@@ -81,6 +29,18 @@
     </section>
   </main>
 </template>
+
+<script>
+export default {
+  name: "Mach-poleas",
+  data() {
+    return {
+      Image:
+        "https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/poleas.jpg?alt=media&token=01bfbee0-e057-480e-ba5f-b99205d6b018",
+    };
+  },
+};
+</script>
 
 <style>
 h2 {

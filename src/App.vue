@@ -9,7 +9,7 @@
 </template>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Oswald&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -21,21 +21,7 @@
   flex-direction: column;
   width: 100%;
   height: 100vh;
-  background-image: url("C:/Users/Yael Leon/Documents/projectGym/gym-app/src/assets/background-gym.jpg");
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/background-gym.jpg?alt=media&token=9f7ee7e7-2606-4fbf-b573-f660a2ddd7d6");
   background-size: cover;
-}
-
-#nav {
-  padding: 30px;
-  background-color: #666666;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
 }
 </style>

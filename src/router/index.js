@@ -6,6 +6,7 @@ import Machine from "../views/Machines.vue";
 import Clients from "../views/Clients.vue";
 import Reports from "../views/Reports.vue";
 import Eliptica from "../views/Eliptica.vue";
+import Products from "../views/Products.vue";
 
 Vue.use(VueRouter);
 
@@ -34,6 +35,11 @@ const routes = [
     path: "/home/reports",
     name: "reports",
     component: Reports,
+  },
+  {
+    path: "/home/products",
+    name: "products",
+    component: Products,
   },
   {
     path: "/home/machines/eliptica",
@@ -67,6 +73,7 @@ const routes = [
 
 const router = new VueRouter({
   routes,
+  mode: "history",
 });
 
 export default router;

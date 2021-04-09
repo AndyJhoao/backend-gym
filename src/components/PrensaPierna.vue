@@ -2,14 +2,14 @@
   <main>
     <section>
       <h2>
-        <a href="/index.html">Home </a> - >
-        <a href="/Maquinas.html"> Maquinas </a>- >
-        <a href="">Prensa de pierna </a>
+        <router-link to="/home"> Home </router-link> //
+        <router-link to="/home/machines"> Maquinas </router-link> // Prensa de
+        pierna
       </h2>
 
       <article class="Container">
         <div class="Container-Image">
-          <img src="/imagenes/Prensa.png" alt="Prensa de pierna" />
+          <img :src="`${Image}`" alt="Prensa de pierna" />
         </div>
 
         <div class="Container-Description">
@@ -17,49 +17,9 @@
 
           <div class="Container-PrensaPierna">
             <img
-              src="/imagenes/Prensa.png"
-              alt="Prensa de pierna"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Prensa.png"
-              alt="Prensa de pierna"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Prensa.png"
-              alt="Prensa de pierna"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Prensa.png"
-              alt="Prensa de pierna"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Prensa.png"
-              alt="Prensa de pierna"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Prensa.png"
-              alt="Prensa de pierna"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Prensa.png"
-              alt="Prensa de pierna"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Prensa.png"
+              v-for="i in 10"
+              :key="`${i}`"
+              :src="`${Image}`"
               alt="Prensa de pierna"
               width="120px"
               height="110px"
@@ -70,6 +30,18 @@
     </section>
   </main>
 </template>
+
+<script>
+export default {
+  name: "Mach-prensa-pierna",
+  data() {
+    return {
+      Image:
+        "https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/prensa-pierna.jpg?alt=media&token=7c8b2882-b61a-4b5a-83c7-3b711395bd46",
+    };
+  },
+};
+</script>
 
 <style>
 h2,

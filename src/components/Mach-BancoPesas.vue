@@ -2,14 +2,14 @@
   <main>
     <section>
       <h2>
-        <a href="/index.html">Home </a> - >
-        <a href="/Maquinas.html"> Maquinas </a>- >
-        <a href="">Banco de Pesas </a>
+        <router-link to="/home"> Home </router-link> //
+        <router-link to="/home/machines"> Maquinas </router-link> // Banco de
+        pesas
       </h2>
 
       <article class="Container">
         <div class="Container-Image">
-          <img src="/imagenes/Banco_de_pesas.jpg" alt="Banco de pesas" />
+          <img :src="`${Image}`" alt="Banco de pesas" />
         </div>
 
         <div class="Container-Description">
@@ -17,49 +17,9 @@
 
           <div class="Container-Banco">
             <img
-              src="/imagenes/Banco_de_pesas.jpg"
-              alt="Banco de pesas"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Banco_de_pesas.jpg"
-              alt="Banco de pesas"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Banco_de_pesas.jpg"
-              alt="Banco de pesas"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Banco_de_pesas.jpg"
-              alt="Banco de pesas"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Banco_de_pesas.jpg"
-              alt="Banco de pesas"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Banco_de_pesas.jpg"
-              alt="Banco de pesas"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Banco_de_pesas.jpg"
-              alt="Banco de pesas"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Banco_de_pesas.jpg"
+              v-for="i in 10"
+              :key="`${i}`"
+              :src="`${Image}`"
               alt="Banco de pesas"
               width="120px"
               height="110px"
@@ -70,6 +30,18 @@
     </section>
   </main>
 </template>
+
+<script>
+export default {
+  name: "Mach-banco-pesas",
+  data() {
+    return {
+      Image:
+        "https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/banco-pesas.jpg?alt=media&token=63063c8b-a659-4af5-ae48-ddf996029adb",
+    };
+  },
+};
+</script>
 
 <style>
 h2 {

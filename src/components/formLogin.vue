@@ -22,7 +22,7 @@
           </div>
           <div class="user__password--field font_size-24">
             <input
-              type="text"
+              type="password"
               name="password__login"
               id="password__login"
               v-model="password"
@@ -31,11 +31,9 @@
         </div>
         <div class="body__user--button">
           <div class="user__button--sign">
-            <router-link to="/home">
-              <button class="font_size-24" v-on:click="callSign">
-                Ingresar ->
-              </button>
-            </router-link>
+            <button class="font_size-24" v-on:click="callSign">
+              Ingresar ->
+            </button>
           </div>
           <div class="user__button--forgot">
             <a class="font_size-20" href="#"><u>Olvidaste tu contraseña?</u></a>
@@ -47,7 +45,7 @@
         <div class="body__social--redes">
           <div class="social__redes--facebook spacingV-5">
             <img
-              src="../assets/facebook-brands.svg"
+              src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/facebook-brands.svg?alt=media&token=6986bffb-b6ed-4d6a-944c-8f53e8e09409"
               alt="facebook-logo"
               width="40px"
               height="40px"
@@ -58,7 +56,7 @@
           </div>
           <div class="social__redes--instagram spacingV-5">
             <img
-              src="../assets/instagram-brands.svg"
+              src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/instagram-brands.svg?alt=media&token=632e88f7-9e66-4520-b9fb-7e3d96c6a7d0"
               alt="instagram-logo"
               width="40px"
               height="40px"
@@ -89,6 +87,9 @@ export default {
   },
   methods: {
     callSign() {
+      if (this.name == "admin" && this.password == "1234") {
+        this.$router.push("/home");
+      }
       this.$emit("signUp", { name: this.name, password: this.password });
     },
   },

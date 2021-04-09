@@ -2,13 +2,13 @@
   <main>
     <section>
       <h2>
-        <a href="/index.html">Home </a> - >
-        <a href="/Maquinas.html"> Maquinas </a>- > <a href="">Bicicletas </a>
+        <router-link to="/home"> Home </router-link> //
+        <router-link to="/home/machines"> Maquinas </router-link> // Bicicletas
       </h2>
 
       <article class="Container">
         <div class="Container-Image">
-          <img src="/imagenes/Bicicleta.jpeg" alt="Bicicletas" />
+          <img :src="`${Image}`" alt="Bicicletas" />
         </div>
 
         <div class="Container-Description">
@@ -16,74 +16,10 @@
 
           <div class="Container-Bicicleta">
             <img
-              src="/imagenes/Bicicleta.jpeg"
+              v-for="i in 10"
+              :key="`${i}`"
+              :src="`${Image}`"
               alt="Bicicleta-1"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Bicicleta.jpeg"
-              alt="Bicicleta-2"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Bicicleta.jpeg"
-              alt="Bicicleta-3"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Bicicleta.jpeg"
-              alt="Bicicleta-4"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Bicicleta.jpeg"
-              alt="Bicicleta-5"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Bicicleta.jpeg"
-              alt="Bicicleta-6"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Bicicleta.jpeg"
-              alt="Bicicleta-7"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Bicicleta.jpeg"
-              alt="Bicicleta-8"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Bicicleta.jpeg"
-              alt="Bicicleta-9"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Bicicleta.jpeg"
-              alt="Bicicleta-10"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Bicicleta.jpeg"
-              alt="Bicicleta-11"
-              width="120px"
-              height="110px"
-            />
-            <img
-              src="/imagenes/Bicicleta.jpeg"
-              alt="Bicicleta-12"
               width="120px"
               height="110px"
             />
@@ -93,6 +29,18 @@
     </section>
   </main>
 </template>
+
+<script>
+export default {
+  name: "Mach-bicicletas",
+  data() {
+    return {
+      Image:
+        "https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/bicycle.png?alt=media&token=c1f63916-d5b9-4369-a730-019fbe1ce9ed",
+    };
+  },
+};
+</script>
 
 <style>
 h2 {

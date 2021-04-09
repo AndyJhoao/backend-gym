@@ -4,7 +4,7 @@
       <ul class="header-nav-logo">
         <li>
           <img
-            src="1Iy7NWsjj-ujEhN6HQDzCEx4JNTav6Syo"
+            src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/logosvg.svg?alt=media&token=43e848cf-f8d8-4000-9fa1-ccf9b8acffa5"
             alt="logo"
             height="100px"
             width="auto"
@@ -18,6 +18,9 @@
         </li>
         <li class="header-nav__item">
           <router-link to="/home/clients"> Clientes </router-link>
+        </li>
+        <li class="header-nav__item">
+          <router-link to="/home/products"> Productos </router-link>
         </li>
         <li class="header-nav__item">
           <router-link to="/home/reports"> Reportes </router-link>

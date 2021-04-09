@@ -2,12 +2,12 @@
   <div>
     <main>
       <section>
-        <h1><router-link to="/home/"> Home - > </router-link></h1>
+        <h1><router-link to="/home/"> Home </router-link> //</h1>
         <div class="contenedor-1">
           <div class="caja-Maquina">
             <router-link to="/home/machines">
               <img
-                src="/imagenes/Maquinas.png"
+                src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/maquinas.jpg?alt=media&token=6ca85662-feda-42b0-b15b-68c06701db46"
                 alt="Maquinas"
                 width="300px"
                 height="300px"
@@ -19,7 +19,7 @@
           <div class="caja-Clientes">
             <router-link to="/home/clients">
               <img
-                src="/imagenes/Clientes.png"
+                src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/users.jpg?alt=media&token=a0e36394-3041-451c-a756-6b905aef4f44"
                 alt="Clientes"
                 width="300px"
                 height="300px"
@@ -28,10 +28,22 @@
             </router-link>
           </div>
 
+          <div class="caja-Clientes">
+            <router-link to="/home/productos">
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/productos.jpg?alt=media&token=1823d520-5142-4674-a6b4-7e4bb9e07136"
+                alt="Productos"
+                width="300px"
+                height="300px"
+              />
+              <h2>Productos</h2>
+            </router-link>
+          </div>
+
           <div class="caja-Reportes">
             <router-link to="/home/reports">
               <img
-                src="/imagenes/Reportes.png"
+                src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/reportes.jpg?alt=media&token=ba27d6e5-1aca-479f-80ac-c42606c34ba4"
                 alt="Reportes"
                 width="300px"
                 height="300px"
