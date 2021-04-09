@@ -1,23 +1,21 @@
 <template>
   <div class="contenedor">
     <dashboard />
-    <body_main />
+    <eliptica />
   </div>
 </template>
-
 <script>
 import dashboard from "@/components/Dashboard.vue";
-import body_main from "@/components/Body-Main.vue";
+import eliptica from "@/components/Mach-Eliptica.vue";
 
 export default {
-  name: "Home",
+  name: "view Machine",
   components: {
     dashboard,
-    body_main,
+    eliptica,
   },
 };
 </script>
-
 <style>
 .contenedor {
   width: 100%;

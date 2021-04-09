@@ -2,6 +2,10 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Login from "../views/Login.vue";
 import Home from "../views/Home.vue";
+import Machine from "../views/Machines.vue";
+import Clients from "../views/Clients.vue";
+import Reports from "../views/Reports.vue";
+import Eliptica from "../views/Eliptica.vue";
 
 Vue.use(VueRouter);
 
@@ -15,6 +19,26 @@ const routes = [
     path: "/home",
     name: "home",
     component: Home,
+  },
+  {
+    path: "/home/machines",
+    name: "machines",
+    component: Machine,
+  },
+  {
+    path: "/home/clients",
+    name: "clients",
+    component: Clients,
+  },
+  {
+    path: "/home/reports",
+    name: "reports",
+    component: Reports,
+  },
+  {
+    path: "/home/machines/eliptica",
+    name: "elipticas",
+    component: Eliptica,
   },
   {
     path: "/facebook",

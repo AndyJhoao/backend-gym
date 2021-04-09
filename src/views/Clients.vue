@@ -1,19 +1,19 @@
 <template>
   <div class="contenedor">
     <dashboard />
-    <body_main />
+    <body_clients />
   </div>
 </template>
 
 <script>
+import body_clients from "@/components/Body-Clients.vue";
 import dashboard from "@/components/Dashboard.vue";
-import body_main from "@/components/Body-Main.vue";
 
 export default {
-  name: "Home",
+  name: "view Clients",
   components: {
     dashboard,
-    body_main,
+    body_clients,
   },
 };
 </script>
