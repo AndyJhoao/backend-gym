@@ -3,23 +3,23 @@
     <section>
       <h2>
         <router-link to="/home"> Home </router-link> //
-        <router-link to="/home/machines"> Maquinas </router-link> // Poleas
+        <router-link to="/home/machines"> Maquinas </router-link> // Crossfit
       </h2>
 
       <article class="Container">
         <div class="Container-Image">
-          <img class="size-image" :src="`${Image}`" alt="Poleas" />
+          <img class="size-image" :src="`${Image}`" alt="Caminadora" />
         </div>
 
         <div class="Container-Description">
-          <div class="subtitulo">Poleas</div>
+          <div class="subtitulo">Crossfit</div>
 
           <div class="Container-Eliptica">
             <img
               v-for="i in 10"
               :key="`${i}`"
               :src="`${Image}`"
-              alt="Poleas"
+              alt="Caminadora"
               width="120px"
               height="110px"
             />
@@ -32,11 +32,11 @@
 
 <script>
 export default {
-  name: "Mach-poleas",
+  name: "Mach-crossfit",
   data() {
     return {
       Image:
-        "https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/poleas.jpg?alt=media&token=01bfbee0-e057-480e-ba5f-b99205d6b018",
+        "https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/crossfit.jpg?alt=media&token=e9fa51f1-9d83-4270-ae36-2b0035b17725",
     };
   },
 };

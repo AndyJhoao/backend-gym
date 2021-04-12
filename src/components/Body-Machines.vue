@@ -2,11 +2,11 @@
   <div>
     <main>
       <section>
-        <h1><router-link to="/home/"> Home </router-link> // Maquinas //</h1>
+        <h2><router-link to="/home/"> Home </router-link> // Maquinas //</h2>
         <div class="contenedor-2">
           <div class="imagenes-maquinas">
             <div class="caja-maquina">
-              <a href="">
+              <router-link to="/home/machines/caminadoras">
                 <img
                   class="imagen"
                   src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/caminadora.jpg?alt=media&token=75f3a02b-21a5-4187-9704-560cf6fc7f29"
@@ -15,11 +15,11 @@
                   height="200px"
                 />
                 <h2>Caminadoras</h2>
-              </a>
+              </router-link>
             </div>
 
             <div class="caja-maquina">
-              <a href="/">
+              <router-link to="/home/machines/bicicleta">
                 <img
                   class="imagen"
                   src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/bicycle.png?alt=media&token=c1f63916-d5b9-4369-a730-019fbe1ce9ed"
@@ -28,11 +28,11 @@
                   height="200px"
                 />
                 <h2>Bicicletas</h2>
-              </a>
+              </router-link>
             </div>
 
             <div class="caja-maquina">
-              <a href="">
+              <router-link to="/home/machines/prensa-pierna">
                 <img
                   class="imagen"
                   src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/prensa-pierna.jpg?alt=media&token=7c8b2882-b61a-4b5a-83c7-3b711395bd46"
@@ -41,11 +41,11 @@
                   height="200px"
                 />
                 <h2>Prensa Pierna</h2>
-              </a>
+              </router-link>
             </div>
 
             <div class="caja-maquina">
-              <a href="">
+              <router-link to="/home/machines/banco-pesas">
                 <img
                   class="imagen"
                   src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/banco-pesas.jpg?alt=media&token=63063c8b-a659-4af5-ae48-ddf996029adb"
@@ -54,13 +54,13 @@
                   height="200px"
                 />
                 <h2>Banco de Pesas</h2>
-              </a>
+              </router-link>
             </div>
           </div>
 
           <div class="imagenes-maquinas">
             <div class="caja-maquina">
-              <a href="/">
+              <router-link to="/home/machines/poleas">
                 <img
                   class="imagen"
                   src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/poleas.jpg?alt=media&token=01bfbee0-e057-480e-ba5f-b99205d6b018"
@@ -69,7 +69,7 @@
                   height="200px"
                 />
                 <h2>Poleas</h2>
-              </a>
+              </router-link>
             </div>
 
             <div class="caja-maquina">
@@ -86,7 +86,7 @@
             </div>
 
             <div class="caja-maquina">
-              <a href="/">
+              <router-link to="/home/machines/remo">
                 <img
                   class="imagen"
                   src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/remo.jpg?alt=media&token=d0a774fc-5f7d-41e9-93bb-c4771530a868"
@@ -95,11 +95,11 @@
                   height="200px"
                 />
                 <h2>Remo</h2>
-              </a>
+              </router-link>
             </div>
 
             <div class="caja-maquina">
-              <a href="">
+              <router-link to="/home/machines/crossfit">
                 <img
                   class="imagen"
                   src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/crossfit.jpg?alt=media&token=e9fa51f1-9d83-4270-ae36-2b0035b17725"
@@ -108,7 +108,7 @@
                   height="200px"
                 />
                 <h2>Area de Crossfit</h2>
-              </a>
+              </router-link>
             </div>
           </div>
         </div>

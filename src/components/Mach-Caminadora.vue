@@ -8,13 +8,13 @@
 
       <article class="Container">
         <div class="Container-Image">
-          <img :src="`${Image}`" alt="Caminadora" />
+          <img class="size-image" :src="`${Image}`" alt="Caminadora" />
         </div>
 
         <div class="Container-Description">
           <div class="subtitulo">Caminadoras</div>
 
-          <div class="Container-Caminadoras">
+          <div class="Container-Eliptica">
             <img
               v-for="i in 10"
               :key="`${i}`"
@@ -43,6 +43,10 @@ export default {
 </script>
 
 <style>
+.size-image {
+  width: 100%;
+  height: 100%;
+}
 h2 {
   font-size: 2em;
   padding: 10px;
@@ -50,9 +54,6 @@ h2 {
 h2 a {
   text-decoration: none;
   color: black;
-}
-h2 {
-  padding: 0.5em;
 }
 .Container {
   width: 100%;
@@ -67,6 +68,7 @@ h2 {
   /* background-color: brown; */
   align-items: center;
   justify-content: center;
+  margin: 4px;
 }
 .Container-Image img {
   border-radius: 5px;
@@ -84,7 +86,7 @@ h2 {
   height: auto;
   text-align: center;
 }
-.Container-Caminadoras {
+.Container-Eliptica {
   display: flex;
   width: 100%;
   height: 80%;
@@ -93,7 +95,7 @@ h2 {
   justify-content: center;
   align-items: center;
 }
-.Container-Caminadoras img {
+.Container-Eliptica img {
   margin: 10px;
 }
 </style>
