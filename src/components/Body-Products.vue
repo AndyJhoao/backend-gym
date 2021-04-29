@@ -7,7 +7,7 @@
           <article class="card">
             <img
               class="img"
-              src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/ventas.jpg?alt=media&token=9b924c49-248c-4ac3-b83e-1d16497c5334"
+              src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/punto-venta.jpg?alt=media&token=a60b3851-2e98-45dc-9f1a-e128607e702b"
               alt="ventas"
             />
           </article>
@@ -19,11 +19,11 @@
           <article class="card">
             <img
               class="img"
-              src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/registro.jpg?alt=media&token=8b63a7fe-0841-458d-8f69-a0b22ad93b27"
+              src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/registro.jpg?alt=media&token=2bc9c2b1-829b-40c1-8c64-314384d77aa2"
               alt="registro"
             />
           </article>
-          <router-link to="/home/products/punto-de-venta">
+          <router-link to="/home/products/agregar-producto">
             <div class="sombra">
               <p>Agregar Producto</p>
             </div>
@@ -31,7 +31,7 @@
           <article class="card">
             <img
               class="img"
-              src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/update.jpeg?alt=media&token=8f65a373-81b0-49d0-ad30-3f514728030e"
+              src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/update.jpeg?alt=media&token=383afc95-2def-49d8-9de1-2ed4bdb5a98d"
               alt="Update"
             />
           </article>
@@ -43,13 +43,13 @@
           <article class="card">
             <img
               class="img"
-              src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/inventario2.png?alt=media&token=3cf6b0c7-a26f-46b9-b785-410a0eaf7b51"
+              src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/inventario2.png?alt=media&token=8f8dc05f-9842-451d-9e6a-7107617ea904"
               alt="Inventario"
             />
           </article>
           <router-link to="/home/products/inventario">
             <div class="sombra">
-              <p>inventario</p>
+              <p>Inventario</p>
             </div>
           </router-link>
         </div>
@@ -82,7 +82,7 @@ h2 a {
   margin: 10px;
   width: 300px;
   height: 300px;
-  margin-top: 100px;
+  margin-top: 50px;
   background: wheat;
 }
 
@@ -91,7 +91,7 @@ h2 a {
   margin: 10px;
   width: 300px;
   height: 300px;
-  margin-top: 100px;
+  margin-top: 50px;
   margin-left: -310px;
   color: white;
   background: rgb(0, 0, 0, 0.5);

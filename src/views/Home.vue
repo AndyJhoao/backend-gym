@@ -1,19 +1,19 @@
 <template>
   <div class="contenedor">
-    <dashboard />
+    <Dashboard />
     <body_main />
   </div>
 </template>
 
 <script>
-import dashboard from "@/components/Dashboard.vue";
 import body_main from "@/components/Body-Main.vue";
+import Dashboard from "../components/Dashboard.vue";
 
 export default {
   name: "Home",
   components: {
-    dashboard,
     body_main,
+    Dashboard,
   },
 };
 </script>

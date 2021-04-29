@@ -7,7 +7,7 @@
           <article class="card">
             <img
               class="img"
-              src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/maquinas.jpg?alt=media&token=6ca85662-feda-42b0-b15b-68c06701db46"
+              src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/maquinas.jpg?alt=media&token=9e16fc71-7f02-4380-be56-c564912daf28"
               alt="maquinas"
             />
           </article>
@@ -19,7 +19,7 @@
           <article class="card">
             <img
               class="img"
-              src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/users.jpg?alt=media&token=a0e36394-3041-451c-a756-6b905aef4f44"
+              src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/clientes.jpg?alt=media&token=e6fb8c94-612e-401f-a4a9-150aa6b1c8c2"
               alt="clientes"
             />
           </article>
@@ -31,7 +31,7 @@
           <article class="card">
             <img
               class="img"
-              src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/reportes.jpg?alt=media&token=ba27d6e5-1aca-479f-80ac-c42606c34ba4"
+              src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/reportes.jpg?alt=media&token=aeafe8dd-8ec7-43ad-a8e7-1134efe28352"
               alt="reportes"
             />
           </article>
@@ -43,7 +43,7 @@
           <article class="card">
             <img
               class="img"
-              src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/productos.jpg?alt=media&token=1823d520-5142-4674-a6b4-7e4bb9e07136"
+              src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/productos.png?alt=media&token=266f7ff9-73bc-42e3-9c72-f67d28684743"
               alt="productos"
             />
           </article>
