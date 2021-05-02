@@ -5,13 +5,19 @@
         <h2><router-link to="/home/"> Home </router-link> // Clientes //</h2>
         <div class="contenedor">
           <form class="form-search">
-            <div class="buscadores">
-              <input type="search" class="search" placeholder="Buscador" />
-              <button type="submit" class="btn-s">Buscar</button>
+            <div class="menu-op">
+              <input
+                type="text"
+                class="menu input-search"
+                placeholder="Buscar"
+              />
+            </div>
+            <div class="b-search">
+              <button type="submit" class="btn-b">Buscar</button>
             </div>
 
-            <div class="boton-añadircliente">
-              <button class="venta">Agregar Cliente</button>
+            <div class="b-add">
+              <button type="submit" class="btn-add">Agregar Cliente</button>
             </div>
           </form>
 
@@ -22,24 +28,154 @@
                 <th>Nombre</th>
                 <th>Apellidos</th>
                 <th>Membresia</th>
-                <th>Tipo</th>
+                <th>plan</th>
                 <th>Telefono</th>
                 <th>Genero</th>
-                <th>boton</th>
+                <th>Acciones</th>
               </tr>
             </thead>
 
             <tbody>
               <tr>
                 <td>001</td>
-                <td>Daniel</td>
-                <td>Escamilla Cervantes</td>
+                <td>Mark</td>
+                <td>Town Down hill climb</td>
                 <td>Activa</td>
                 <td>Mensual</td>
-                <td>1234567891</td>
-                <td>F</td>
+                <td>7351804623</td>
+                <td>H</td>
                 <td>
-                  <button type="button" class="b-editar">Mas Info</button>
+                  <button type="button" class="b-eliminar">mas info...</button>
+                </td>
+              </tr>
+
+              <tr>
+                <td>001</td>
+                <td>Mark</td>
+                <td>Town Down hill climb</td>
+                <td>Activa</td>
+                <td>Mensual</td>
+                <td>7351804623</td>
+                <td>H</td>
+                <td>
+                  <button type="button" class="b-eliminar">mas info...</button>
+                </td>
+              </tr>
+
+              <tr>
+                <td>001</td>
+                <td>Mark</td>
+                <td>Town Down hill climb</td>
+                <td>Activa</td>
+                <td>Mensual</td>
+                <td>7351804623</td>
+                <td>H</td>
+                <td>
+                  <button type="button" class="b-eliminar">mas info...</button>
+                </td>
+              </tr>
+
+              <tr>
+                <td>001</td>
+                <td>Mark</td>
+                <td>Town Down hill climb</td>
+                <td>Activa</td>
+                <td>Mensual</td>
+                <td>7351804623</td>
+                <td>H</td>
+                <td>
+                  <button type="button" class="b-eliminar">mas info...</button>
+                </td>
+              </tr>
+
+              <tr>
+                <td>001</td>
+                <td>Mark</td>
+                <td>Town Down hill climb</td>
+                <td>Activa</td>
+                <td>Mensual</td>
+                <td>7351804623</td>
+                <td>H</td>
+                <td>
+                  <button type="button" class="b-eliminar">mas info...</button>
+                </td>
+              </tr>
+
+              <tr>
+                <td>001</td>
+                <td>Mark</td>
+                <td>Town Down hill climb</td>
+                <td>Activa</td>
+                <td>Mensual</td>
+                <td>7351804623</td>
+                <td>H</td>
+                <td>
+                  <button type="button" class="b-eliminar">mas info...</button>
+                </td>
+              </tr>
+
+              <tr>
+                <td>001</td>
+                <td>Mark</td>
+                <td>Town Down hill climb</td>
+                <td>Activa</td>
+                <td>Mensual</td>
+                <td>7351804623</td>
+                <td>H</td>
+                <td>
+                  <button type="button" class="b-eliminar">mas info...</button>
+                </td>
+              </tr>
+
+              <tr>
+                <td>001</td>
+                <td>Mark</td>
+                <td>Town Down hill climb</td>
+                <td>Activa</td>
+                <td>Mensual</td>
+                <td>7351804623</td>
+                <td>H</td>
+                <td>
+                  <button type="button" class="b-eliminar">mas info...</button>
+                </td>
+              </tr>
+
+              <tr>
+                <td>001</td>
+                <td>Mark</td>
+                <td>Town Down hill climb</td>
+                <td>Activa</td>
+                <td>Mensual</td>
+                <td>7351804623</td>
+                <td>H</td>
+                <td>
+                  <button type="button" class="b-eliminar">mas info...</button>
+                </td>
+              </tr>
+
+              <tr>
+                <td>001</td>
+                <td>Mark</td>
+                <td>Town Down hill climb</td>
+                <td>Activa</td>
+                <td>Mensual</td>
+                <td>7351804623</td>
+                <td>H</td>
+                <td>
+                  <button type="button" class="b-eliminar">mas info...</button>
+                </td>
+              </tr>
+
+              <tr>
+                <td>001</td>
+                <td>Mark</td>
+                <td>Town Down hill climb</td>
+                <td>Activa</td>
+                <td>Mensual</td>
+                <td>7351804623</td>
+                <td>H</td>
+                <td>
+                  <button type="button" class="b-eliminar">mas info...</button>
                 </td>
               </tr>
             </tbody>
@@ -51,105 +187,141 @@
 </template>
 
 <style scoped>
-/* .contenedor-3 {
-  
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  padding: 3em;
-  margin: 1em;
-} */
-h2 {
-  font-size: 2em;
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
+/* contenedor principal */
 .contenedor {
-  width: 90%;
-  height: 77%;
   margin: auto;
-  margin-top: 20px;
-  border: solid 3px crimson;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin-top: 40px;
+  padding: 20px;
+  width: 80%;
+  height: auto;
+  border: solid 1px grey;
   border-radius: 5px;
-  border-color: gainsboro;
-  font-size: 1.5em;
   background-color: white;
 }
+
+/* contenedor formulario */
 .form-search {
   width: 100%;
-  height: 20%;
-  padding: 15px;
+  height: 40px;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
 }
-.buscadores {
-  width: 500px;
+/* contenedores */
+
+/* del menu de opciones lista desplegable */
+.menu-op {
+  flex: 1;
   display: flex;
-  align-items: center;
-  margin-left: 30px;
+  flex-direction: row;
+  justify-content: flex-start;
 }
 
-.boton-añadircliente {
-  width: 300px;
+/* del boton buscar */
+.b-search {
+  flex: 1;
   display: flex;
-  align-items: center;
+  flex-direction: row;
+  justify-content: flex-end;
 }
-.venta {
-  width: 250px;
-  height: 50px;
-  margin-right: 90px;
-  font-size: 1.1em;
-  border: black solid 0.5px;
-  border-radius: 4px 4px 4px 4px;
-  font-family: sans-serif;
-  font-weight: bold;
-  color: black;
-  padding: 5px;
-  background-color: rgb(23, 204, 93);
+/*del boton agregar*/
+.b-add {
+  margin-right: 10px;
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: flex-end;
 }
 
-.search {
-  width: 300px;
-  height: 50px;
-  border: black solid 0.5px;
-  border-radius: 4px 4px 4px 4px;
+/*-------Estilos de las clases de los elementos-------------*/
+
+/* menu lista desplegable e input de fecha*/
+
+.menu,
+.fecha {
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  margin-right: 15px;
+  outline: none;
   font-family: sans-serif;
   font-weight: bold;
-  color: black;
-  font-size: 1.5em;
-  border-color: gray;
-  padding: 5px;
+  font-size: 1em;
+  border: solid 1px gainsboro;
+  border-radius: 5px;
+  color: grey;
 }
-.btn-s {
-  height: 50px;
-  width: 130px;
-  font-size: 1.1em;
+
+/* boton buscar */
+.btn-b {
+  width: 30%;
+  height: auto;
+  font-family: sans-serif;
   font-weight: bold;
-  border-radius: 4px 4px 4px 4px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background-color: dodgerblue;
+  font-size: 1em;
+  background-color: white;
+  border-radius: 5px;
+  color: #ffbe00;
+  border: solid 1px #ffbe00;
+}
+
+.btn-b:hover {
+  width: 30%;
+  height: auto;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  background-color: #ffbe00;
   color: white;
-  border-color: white;
-  margin-left: 10px;
+  border-color: #ffbe00;
+  border-radius: 5px;
+  outline: none;
+}
+
+/* boton agregar */
+.btn-add {
+  width: 40%;
+  height: auto;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  background-color: white;
+  border-radius: 5px;
+  color: yellowgreen;
+  border: solid 1px yellowgreen;
+}
+
+.btn-add:hover {
+  width: 40%;
+  height: auto;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  background-color: yellowgreen;
+  color: white;
+  border-color: yellowgreen;
+  border-radius: 5px;
+  outline: none;
 }
 
 /* estilos de la tabla */
 
 /* estilo del cuerpo de la tabla */
 .tabla {
-  display: block;
   width: 100%;
   padding: 10px;
   border-radius: 5px;
   border: solid 1px gainsboro;
-  background-color: white;
 }
 
 /* encabezado de la tabla  */
 th {
-  width: 9.3%;
   border: solid 0px;
   background-color: #35b0df;
   color: white;
@@ -159,14 +331,13 @@ th {
 
 /* celdas de la tabla  */
 td {
-  padding: 10px;
-  width: 12.65%;
   text-align: center;
   font-family: sans-serif;
 }
+
 /* estilo del boton editar*/
 .b-editar {
-  width: 80%;
+  width: 100px;
   height: auto;
   font-family: sans-serif;
   font-weight: bold;
@@ -176,18 +347,9 @@ td {
   color: #60db22;
   border: solid 1px #60db22;
 }
-thead,
-tbody {
-  display: block;
-}
-tbody {
-  width: 100%;
-  height: 335px;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
 
 .b-editar:hover {
+  width: 100px;
   height: auto;
   font-family: sans-serif;
   font-weight: bold;
@@ -201,7 +363,7 @@ tbody {
 
 /* estilo del boton eliminar*/
 .b-eliminar {
-  width: 40%;
+  width: 100px;
   height: auto;
   font-family: sans-serif;
   font-weight: bold;
@@ -213,7 +375,7 @@ tbody {
 }
 
 .b-eliminar:hover {
-  width: 40%;
+  width: 100px;
   height: auto;
   font-family: sans-serif;
   font-weight: bold;
@@ -223,5 +385,85 @@ tbody {
   border-color: #ec1207;
   border-radius: 5px;
   outline: none;
+}
+
+/*estilos extra de la pagina search */
+
+.botones {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.margin-5 {
+  margin-bottom: 5px;
+}
+
+.centrar {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+}
+
+.search-width {
+  width: 250px;
+}
+
+/*Estilos extra de la pagina inventario*/
+.margint-10 {
+  margin-top: 400px;
+}
+
+.a-cel {
+  width: 25%;
+}
+
+.izquierda {
+  display: flex;
+  flex-direction: row;
+  margin-right: 120px;
+}
+
+.centro {
+  display: flex;
+  flex-direction: row;
+  margin-right: 120px;
+}
+
+.derecha {
+  display: flex;
+  flex-direction: row;
+}
+/*estilos extra de la tabla punto de venta*/
+.a-cel35 {
+  width: 35%;
+}
+
+.a-cel20 {
+  width: 20%;
+}
+.a-cel25 {
+  width: 25%;
+}
+
+.a-cel15 {
+  width: 15%;
+}
+
+.a-cel10 {
+  width: 10%;
+}
+
+.align-left {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+
+.align-right {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  flex: 1;
 }
 </style>

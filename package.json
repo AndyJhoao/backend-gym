@@ -30,5 +30,17 @@
     "eslint-plugin-vue": "^6.2.2",
     "prettier": "^2.2.1",
     "vue-template-compiler": "^2.6.11"
-  }
+  },
+  "main": ".eslintrc.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndyJhoao/gym-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndyJhoao/gym-app/issues"
+  },
+  "homepage": "https://github.com/AndyJhoao/gym-app#readme",
+  "description": ""
 }

@@ -8,117 +8,43 @@
           Venta
         </h2>
         <div class="contenedor">
-          <div class="container-table">
-            <table class="table">
-              <thead>
-                <tr class="filas-cabeza">
-                  <th class="id-size">Cantidad</th>
-                  <th class="desc-size">Nombre producto</th>
-                  <th class="precio-size">Precio</th>
-                  <th class="desc-size">Descripcion</th>
-                  <th class="precio-size">Acciones</th>
-                </tr>
-              </thead>
+          <table class="tabla">
+            <thead>
+              <tr>
+                <th class="a-cel15">Cantidad</th>
+                <th class="a-cel25">Nombre del producto</th>
+                <th class="a-cel15">Precio</th>
+                <th class="a-cel25">Descripcion</th>
+                <th class="a-cel20">Acciones</th>
+              </tr>
+            </thead>
 
-              <tbody>
-                <tr class="filas-tamaño">
-                  <td class="id-size">jb87hb097</td>
-                  <td class="desc-size">Suero de leche</td>
-                  <td class="precio-size">$ 17.90</td>
-                  <td class="desc-size">
-                    Suero de leche hidrolizado sabor chocolate
-                  </td>
-                  <td class="precio-size">
-                    <button class="quitar">Retirar</button>
-                  </td>
-                </tr>
-                <tr class="filas-tamaño">
-                  <td class="id-size">jb87hb097</td>
-                  <td class="desc-size">Suero de leche</td>
-                  <td class="precio-size">$ 17.90</td>
-                  <td class="desc-size">
-                    Suero de leche hidrolizado sabor chocolate
-                  </td>
-                  <td class="precio-size">
-                    <button class="quitar">Retirar</button>
-                  </td>
-                </tr>
-                <tr class="filas-tamaño">
-                  <td class="id-size">jb87hb097</td>
-                  <td class="desc-size">Suero de leche</td>
-                  <td class="precio-size">$ 17.90</td>
-                  <td class="desc-size">
-                    Suero de leche hidrolizado sabor chocolate
-                  </td>
-                  <td class="precio-size">
-                    <button class="quitar">Retirar</button>
-                  </td>
-                </tr>
-                <tr class="filas-tamaño">
-                  <td class="id-size">jb87hb097</td>
-                  <td class="desc-size">Suero de leche</td>
-                  <td class="precio-size">$ 17.90</td>
-                  <td class="desc-size">
-                    Suero de leche hidrolizado sabor chocolate
-                  </td>
-                  <td class="precio-size">
-                    <button class="quitar">Retirar</button>
-                  </td>
-                </tr>
-                <tr class="filas-tamaño">
-                  <td class="id-size">jb87hb097</td>
-                  <td class="desc-size">Suero de leche</td>
-                  <td class="precio-size">$ 17.90</td>
-                  <td class="desc-size">
-                    Suero de leche hidrolizado sabor chocolate
-                  </td>
-                  <td class="precio-size">
-                    <button class="quitar">Retirar</button>
-                  </td>
-                </tr>
-                <tr class="filas-tamaño">
-                  <td class="id-size">jb87hb097</td>
-                  <td class="desc-size">Suero de leche</td>
-                  <td class="precio-size">$ 17.90</td>
-                  <td class="desc-size">
-                    Suero de leche hidrolizado sabor chocolate
-                  </td>
-                  <td class="precio-size">
-                    <button class="quitar">Retirar</button>
-                  </td>
-                </tr>
-                <tr class="filas-tamaño">
-                  <td class="id-size">jb87hb097</td>
-                  <td class="desc-size">Suero de leche</td>
-                  <td class="precio-size">$ 17.90</td>
-                  <td class="desc-size">
-                    Suero de leche hidrolizado sabor chocolate
-                  </td>
-                  <td class="precio-size">
-                    <button class="quitar">Retirar</button>
-                  </td>
-                </tr>
-                <tr class="filas-tamaño">
-                  <td class="id-size">jb87hb097</td>
-                  <td class="desc-size">Suero de leche</td>
-                  <td class="precio-size">$ 17.90</td>
-                  <td class="desc-size">
-                    Suero de leche hidrolizado sabor chocolate
-                  </td>
-                  <td class="precio-size">
-                    <button class="quitar">Retirar</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+            <tbody>
+              <tr>
+                <td>001</td>
+                <td>Mark</td>
+                <td>Town Down hill climb</td>
+                <td>Activa</td>
+                <td>
+                  <button type="submit" class="b-eliminar">Retirar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
-          <form class="form-search">
-            <div class="buscadores">
-              <input type="search" class="search" placeholder="Buscador" />
-              <button type="submit" class="btn-s">Buscar</button>
+          <form class="form-search margint-10">
+            <div class="align-left">
+              <input
+                type="text"
+                class="menu input-search search-width"
+                placeholder="Buscar"
+              />
+              <button type="submit" class="btn-b">Buscar</button>
             </div>
-            <button class="venta">venta</button>
+
+            <div class="align-right">
+              <button type="submit" class="b-editar">Buscar</button>
+            </div>
           </form>
         </div>
       </section>
@@ -127,136 +53,283 @@
 </template>
 
 <style scoped>
-h2 {
-  font-size: 2em;
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-.padre {
-  width: 100%;
-  height: 85vh;
-}
+
+/* contenedor principal */
 .contenedor {
-  width: 80%;
-  height: 75%;
   margin: auto;
-  margin-top: 20px;
-  padding: 10px;
-  border: solid 3px crimson;
-  display: flex;
-  flex-direction: column;
+  margin-top: 13px;
+  padding: 20px;
+  width: 80%;
+  height: auto;
+  border: solid 1px grey;
   border-radius: 5px;
-  border-color: gainsboro;
-  font-size: 1.5em;
   background-color: white;
 }
+
+/* contenedor formulario */
 .form-search {
   width: 100%;
-  height: auto;
+  height: 40px;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: row;
-  margin-top: 30px;
-  justify-content: space-between;
 }
-.buscadores {
-  width: 500px;
+/* contenedores */
+
+/* del menu de opciones lista desplegable */
+.menu-op {
+  flex: 1;
   display: flex;
-  align-items: center;
-  margin-left: 30px;
+  flex-direction: row;
+  justify-content: flex-start;
 }
-.table {
-  border: 1px solid;
-  border-radius: 3px;
+
+/* del boton buscar */
+.b-search {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+/*del boton agregar*/
+.b-add {
+  margin-right: 10px;
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+/*-------Estilos de las clases de los elementos-------------*/
+
+/* menu lista desplegable e input de fecha*/
+
+.menu,
+.fecha {
   width: 100%;
   height: auto;
-  display: block;
+  padding: 10px;
+  margin-right: 15px;
+  outline: none;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  border: solid 1px gainsboro;
+  border-radius: 5px;
+  color: grey;
+}
+
+/* boton buscar */
+.btn-b {
+  width: 30%;
+  height: auto;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1em;
   background-color: white;
+  border-radius: 5px;
+  color: #ffbe00;
+  border: solid 1px #ffbe00;
 }
-.container-table {
+
+.btn-b:hover {
+  width: 30%;
+  height: auto;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  background-color: #ffbe00;
+  color: white;
+  border-color: #ffbe00;
+  border-radius: 5px;
+  outline: none;
+}
+
+/* boton agregar */
+.btn-add {
+  width: 40%;
+  height: auto;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  background-color: white;
+  border-radius: 5px;
+  color: yellowgreen;
+  border: solid 1px yellowgreen;
+}
+
+.btn-add:hover {
+  width: 40%;
+  height: auto;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  background-color: yellowgreen;
+  color: white;
+  border-color: yellowgreen;
+  border-radius: 5px;
+  outline: none;
+}
+
+/* estilos de la tabla */
+
+/* estilo del cuerpo de la tabla */
+.tabla {
   width: 100%;
-  height: 80%;
+  padding: 10px;
+  border-radius: 5px;
+  border: solid 1px gainsboro;
 }
+
+/* encabezado de la tabla  */
 th {
+  border: solid 0px;
+  background-color: #35b0df;
+  color: white;
+  font-size: 1em;
   padding: 5px;
-  width: 1225px;
-  text-align: center;
-  border-bottom: 0.2px solid;
 }
-thead,
-tbody {
+
+/* celdas de la tabla  */
+td {
+  text-align: center;
+  font-family: sans-serif;
+}
+
+/* estilo del boton editar*/
+.b-editar {
+  width: 100px;
+  height: auto;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  background-color: white;
+  border-radius: 5px;
+  color: #60db22;
+  border: solid 1px #60db22;
+}
+
+.b-editar:hover {
+  width: 100px;
+  height: auto;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  background-color: #60db22;
+  color: white;
+  border-color: #60db22;
+  border-radius: 5px;
+  outline: none;
+}
+
+/* estilo del boton eliminar*/
+.b-eliminar {
+  width: 100px;
+  height: auto;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  background-color: white;
+  border-radius: 5px;
+  color: #ec1207;
+  border: solid 1px #ec1207;
+}
+
+.b-eliminar:hover {
+  width: 100px;
+  height: auto;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  background-color: #ec1207;
+  color: white;
+  border-color: #ec1207;
+  border-radius: 5px;
+  outline: none;
+}
+
+/*estilos extra de la pagina search */
+
+.botones {
   display: flex;
   flex-direction: column;
-  align-items: initial;
+  align-items: center;
 }
-.id-size {
-  width: 150px;
+
+.margin-5 {
+  margin-bottom: 5px;
 }
-.precio-size {
-  width: 120px;
+
+.centrar {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
 }
-.desc-size {
-  width: 433px !important ;
+
+.search-width {
+  width: 250px;
 }
-tbody {
-  width: 100%;
-  height: 335px;
-  overflow-y: auto;
-  overflow-x: hidden;
+
+/*Estilos extra de la pagina inventario*/
+.margint-10 {
+  margin-top: 400px;
 }
-.filas-tamaño {
-  width: 1225px;
-  height: auto;
-  border-bottom: 0.2px solid;
+
+.a-cel {
+  width: 25%;
 }
-td {
-  width: 300px;
-  padding: 10px 0;
-  text-align: center;
+
+.izquierda {
+  display: flex;
+  flex-direction: row;
+  margin-right: 120px;
 }
-.search {
-  width: 300px;
-  height: 50px;
-  border: black solid 0.5px;
-  border-radius: 4px 4px 4px 4px;
-  font-family: sans-serif;
-  font-weight: bold;
-  color: black;
-  font-size: 1.5em;
-  border-color: gray;
-  padding: 5px;
+
+.centro {
+  display: flex;
+  flex-direction: row;
+  margin-right: 120px;
 }
-.btn-s {
-  height: 50px;
-  width: 130px;
-  font-size: 1.1em;
-  font-weight: bold;
-  border-radius: 4px 4px 4px 4px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background-color: dodgerblue;
-  color: white;
-  border-color: white;
-  margin-left: 10px;
+
+.derecha {
+  display: flex;
+  flex-direction: row;
 }
-.quitar {
-  width: auto;
-  height: 30px;
-  background-color: rgb(252, 50, 50);
-  color: white;
-  border-radius: 5px;
-  padding: 3px;
+/*estilos extra de la tabla punto de venta*/
+.a-cel35 {
+  width: 35%;
 }
-.quitar:hover {
-  transform: scale(1.08);
+
+.a-cel20 {
+  width: 20%;
 }
-.venta {
-  width: 100px;
-  height: 50px;
-  margin-right: 90px;
-  font-size: 1.1em;
-  border: black solid 0.5px;
-  border-radius: 4px 4px 4px 4px;
-  font-family: sans-serif;
-  font-weight: bold;
-  color: black;
-  padding: 5px;
-  background-color: rgb(23, 204, 93);
+.a-cel25 {
+  width: 25%;
+}
+
+.a-cel15 {
+  width: 15%;
+}
+
+.a-cel10 {
+  width: 10%;
+}
+
+.align-left {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+
+.align-right {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  flex: 1;
 }
 </style>

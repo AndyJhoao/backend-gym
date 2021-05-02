@@ -4,83 +4,53 @@
       <section class="padre">
         <h2>
           <router-link to="/home/"> Home </router-link> //
-          <router-link to="/home/products"> Productos </router-link> // Punto de
-          Venta
+          <router-link to="/home/products"> Productos </router-link> //
+          Actualizar Producto
         </h2>
         <div class="contenedor">
           <form class="form-search">
-            <div class="buscadores">
-              <input type="search" class="search" placeholder="Buscador" />
-              <button type="submit" class="btn-s">Buscar</button>
+            <div class="centrar">
+              <input
+                type="text"
+                class="menu input-search search-width"
+                placeholder="Buscar"
+              />
+              <button type="submit" class="btn-b">Buscar</button>
             </div>
           </form>
 
-          <div class="container">
-            <table class="table">
-              <thead class="thead">
-                <tr class="rows">
-                  <th class="title1"><p>Clave</p></th>
-                  <th class="title2"><p>Nombre</p></th>
-                  <th class="title3"><p>Precio compra</p></th>
-                  <th class="title4"><p>Precio Venta</p></th>
-                  <th class="title5"><p>Descripción</p></th>
-                  <th class="title6"><p>RFC Proveedor</p></th>
-                  <th class="title7"><p>Acciones</p></th>
-                </tr>
-              </thead>
+          <table class="tabla">
+            <thead>
+              <tr>
+                <th>Clave</th>
+                <th>Nombre</th>
+                <th>Precio compra</th>
+                <th>Precio venta</th>
+                <th>Descripcion</th>
+                <th>RFC proveedor</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
 
-              <tbody class="tbody">
-                <tr class="rows">
-                  <td class="cell1"><p>nb98b78</p></td>
-                  <td class="cell2">
-                    <p>Suero hidroliza doasdadasa asdasdsd</p>
-                  </td>
-                  <td class="cell3"><p>$ 19.75</p></td>
-                  <td class="cell4"><p>$ 21.90</p></td>
-                  <td class="cell5">
-                    <p>Es una prona uwuEs una proteina mamalona uwu</p>
-                  </td>
-                  <td class="cell6"><p>LKDOD0998h</p></td>
-                  <td class="cell7">
-                    <button type="button" class="b-editar">Editar</button>
-                    <button type="button" class="b-eliminar">Eliminar</button>
-                  </td>
-                </tr>
-                <tr class="rows">
-                  <td class="cell1"><p>nb98b78</p></td>
-                  <td class="cell2">
-                    <p>Suero hidroliza doasdadasa asdasdsd</p>
-                  </td>
-                  <td class="cell3"><p>$ 19.75</p></td>
-                  <td class="cell4"><p>$ 21.90</p></td>
-                  <td class="cell5">
-                    <p>Es una prona uwuEs una proteina mamalona uwu</p>
-                  </td>
-                  <td class="cell6"><p>LKDOD0998h</p></td>
-                  <td class="cell7">
-                    <button type="button" class="b-editar">Editar</button>
-                    <button type="button" class="b-eliminar">Eliminar</button>
-                  </td>
-                </tr>
-                <tr class="rows">
-                  <td class="cell1"><p>nb98b78</p></td>
-                  <td class="cell2">
-                    <p>Suero hidroliza doasdadasa asdasdsd</p>
-                  </td>
-                  <td class="cell3"><p>$ 19.75</p></td>
-                  <td class="cell4"><p>$ 21.90</p></td>
-                  <td class="cell5">
-                    <p>Es una prona uwuEs una proteina mamalona uwu</p>
-                  </td>
-                  <td class="cell6"><p>LKDOD0998h</p></td>
-                  <td class="cell7">
-                    <button type="button" class="b-editar">Editar</button>
-                    <button type="button" class="b-eliminar">Eliminar</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+            <tbody>
+              <tr>
+                <td>001</td>
+                <td>Mark</td>
+                <td>Town Down hill climb</td>
+                <td>Activa</td>
+                <td>Mensual</td>
+                <td>7351804623</td>
+                <td class="botones">
+                  <button type="button" class="b-eliminar margin-5">
+                    Eliminar
+                  </button>
+                  <button type="button" class="b-editar margin-5">
+                    Editar
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </section>
     </main>
@@ -88,127 +58,157 @@
 </template>
 
 <style scoped>
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* contenedor principal */
 .contenedor {
-  width: 90%;
-  height: 77%;
   margin: auto;
-  margin-top: 20px;
-  padding: 10px;
-  border: solid 3px crimson;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin-top: 40px;
+  padding: 20px;
+  width: 80%;
+  height: auto;
+  border: solid 1px grey;
   border-radius: 5px;
-  border-color: gainsboro;
-  font-size: 1.5em;
   background-color: white;
 }
 
-body {
+/* contenedor formulario */
+.form-search {
   width: 100%;
-  height: 100vh;
-}
-.container {
-  width: 100%;
-  height: 60%;
+  height: 40px;
+  margin-bottom: 20px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: row;
 }
-.table {
-  height: 100%;
-  border: 2px solid;
-  table-layout: fixed;
-}
-.thead {
-  display: block;
-}
-.tbody {
-  display: block;
-  height: 300px;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-td,
-th {
-  text-align: center;
+/* contenedores */
 
-  height: auto;
+/* del menu de opciones lista desplegable */
+.menu-op {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 }
+
+/* del boton buscar */
+.b-search {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+/*del boton agregar*/
+.b-add {
+  margin-right: 10px;
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+/*-------Estilos de las clases de los elementos-------------*/
+
+/* menu lista desplegable e input de fecha*/
+
+.menu,
+.fecha {
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  margin-right: 15px;
+  outline: none;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  border: solid 1px gainsboro;
+  border-radius: 5px;
+  color: grey;
+}
+
+/* boton buscar */
+.btn-b {
+  width: 30%;
+  height: auto;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  background-color: white;
+  border-radius: 5px;
+  color: #ffbe00;
+  border: solid 1px #ffbe00;
+}
+
+.btn-b:hover {
+  width: 30%;
+  height: auto;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  background-color: #ffbe00;
+  color: white;
+  border-color: #ffbe00;
+  border-radius: 5px;
+  outline: none;
+}
+
+/* boton agregar */
+.btn-add {
+  width: 40%;
+  height: auto;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  background-color: white;
+  border-radius: 5px;
+  color: yellowgreen;
+  border: solid 1px yellowgreen;
+}
+
+.btn-add:hover {
+  width: 40%;
+  height: auto;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  background-color: yellowgreen;
+  color: white;
+  border-color: yellowgreen;
+  border-radius: 5px;
+  outline: none;
+}
+
+/* estilos de la tabla */
+
+/* estilo del cuerpo de la tabla */
+.tabla {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: solid 1px gainsboro;
+}
+
+/* encabezado de la tabla  */
 th {
+  border: solid 0px;
+  background-color: #35b0df;
   color: white;
   font-size: 1em;
-  background-color: #35b0df;
+  padding: 5px;
 }
 
-.cell1,
-.title1 {
-  min-width: 150px;
-  max-width: 150px;
-  width: 150px;
-  height: auto;
-}
-.cell2,
-.title2 {
-  min-width: 196px;
-  max-width: 196px;
-  width: 196px;
-  height: auto;
-}
-.cell3,
-.title3 {
-  min-width: 160px;
-  max-width: 160px;
-  width: 160px;
-  height: auto;
-}
-.cell4,
-.title4 {
-  min-width: 160px;
-  max-width: 160px;
-  width: 160px;
-  height: auto;
-}
-.cell5,
-.title5 {
-  min-width: 199px;
-  max-width: 199px;
-  width: 199px;
-  height: auto;
-}
-.cell6,
-.title6 {
-  min-width: 173px;
-  max-width: 173px;
-  width: 173px;
-  height: auto;
-}
-.cell7,
-.title7 {
-  min-width: 173px;
-  max-width: 173px;
-  width: 173px;
-  padding: 10px 0px;
-  height: auto;
+/* celdas de la tabla  */
+td {
+  text-align: center;
+  font-family: sans-serif;
 }
 
-.title1 {
-  height: 90px;
-}
-.rows {
-  display: block;
-  width: 1281px;
-  height: auto;
-}
-p {
-  width: 100%;
-  height: auto;
-  overflow: auto;
-  white-space: initial;
-  text-overflow: ellipsis;
-}
+/* estilo del boton editar*/
 .b-editar {
-  width: 85%;
+  width: 100px;
   height: auto;
   font-family: sans-serif;
   font-weight: bold;
@@ -217,9 +217,11 @@ p {
   border-radius: 5px;
   color: #60db22;
   border: solid 1px #60db22;
-  margin: 5px 0px;
 }
+
 .b-editar:hover {
+  width: 100px;
+  height: auto;
   font-family: sans-serif;
   font-weight: bold;
   font-size: 1em;
@@ -230,8 +232,9 @@ p {
   outline: none;
 }
 
+/* estilo del boton eliminar*/
 .b-eliminar {
-  width: 85%;
+  width: 100px;
   height: auto;
   font-family: sans-serif;
   font-weight: bold;
@@ -240,10 +243,11 @@ p {
   border-radius: 5px;
   color: #ec1207;
   border: solid 1px #ec1207;
-  margin: 5px 0px;
 }
 
 .b-eliminar:hover {
+  width: 100px;
+  height: auto;
   font-family: sans-serif;
   font-weight: bold;
   font-size: 1em;
@@ -253,43 +257,84 @@ p {
   border-radius: 5px;
   outline: none;
 }
-.form-search {
-  padding: 20px 0px;
-  height: 20%;
+
+/*estilos extra de la pagina search */
+
+.botones {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.buscadores {
-  width: 500px;
-  display: flex;
+  flex-direction: column;
   align-items: center;
-  margin-left: 30px;
 }
 
-.search {
-  width: 300px;
-  height: 50px;
-  border: black solid 0.5px;
-  border-radius: 4px 4px 4px 4px;
-  font-family: sans-serif;
-  font-weight: bold;
-  color: black;
-  font-size: 1.5em;
-  border-color: gray;
-  padding: 5px;
+.margin-5 {
+  margin-bottom: 5px;
 }
-.btn-s {
-  height: 50px;
-  width: 130px;
-  font-size: 1.1em;
-  font-weight: bold;
-  border-radius: 4px 4px 4px 4px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background-color: dodgerblue;
-  color: white;
-  border-color: white;
-  margin-left: 10px;
-  outline: none;
+
+.centrar {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+}
+
+.search-width {
+  width: 250px;
+}
+
+/*Estilos extra de la pagina inventario*/
+.margint-10 {
+  margin-top: 400px;
+}
+
+.a-cel {
+  width: 25%;
+}
+
+.izquierda {
+  display: flex;
+  flex-direction: row;
+  margin-right: 120px;
+}
+
+.centro {
+  display: flex;
+  flex-direction: row;
+  margin-right: 120px;
+}
+
+.derecha {
+  display: flex;
+  flex-direction: row;
+}
+/*estilos extra de la tabla punto de venta*/
+.a-cel35 {
+  width: 35%;
+}
+
+.a-cel20 {
+  width: 20%;
+}
+.a-cel25 {
+  width: 25%;
+}
+
+.a-cel15 {
+  width: 15%;
+}
+
+.a-cel10 {
+  width: 10%;
+}
+
+.align-left {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+
+.align-right {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  flex: 1;
 }
 </style>
