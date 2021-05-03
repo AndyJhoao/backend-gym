@@ -18,39 +18,40 @@
               <button type="submit" class="btn-b">Buscar</button>
             </div>
           </form>
+          <div class="container-table">
+            <table class="tabla">
+              <thead class="head">
+                <tr class="head_row">
+                  <th>Clave</th>
+                  <th>Nombre</th>
+                  <th>Precio compra</th>
+                  <th>Precio venta</th>
+                  <th>Descripcion</th>
+                  <th>RFC proveedor</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
 
-          <table class="tabla">
-            <thead>
-              <tr>
-                <th>Clave</th>
-                <th>Nombre</th>
-                <th>Precio compra</th>
-                <th>Precio venta</th>
-                <th>Descripcion</th>
-                <th>RFC proveedor</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr>
-                <td>001</td>
-                <td>Mark</td>
-                <td>Town Down hill climb</td>
-                <td>Activa</td>
-                <td>Mensual</td>
-                <td>7351804623</td>
-                <td class="botones">
-                  <button type="button" class="b-eliminar margin-5">
-                    Eliminar
-                  </button>
-                  <button type="button" class="b-editar margin-5">
-                    Editar
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+              <tbody class="body">
+                <tr>
+                  <td>001</td>
+                  <td>Mark</td>
+                  <td>Town Down hill climb</td>
+                  <td>Activa</td>
+                  <td>Mensual</td>
+                  <td>7351804623</td>
+                  <td class="botones">
+                    <button type="button" class="b-eliminar margin-5">
+                      Eliminar
+                    </button>
+                    <button type="button" class="b-editar margin-5">
+                      Editar
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
     </main>
@@ -184,13 +185,27 @@ body {
 /* estilos de la tabla */
 
 /* estilo del cuerpo de la tabla */
+.container-table {
+  overflow-y: auto;
+  height: 400px;
+}
 .tabla {
   width: 100%;
+  min-height: 100px;
+  max-height: 400px;
   padding: 10px;
   border-radius: 5px;
   border: solid 1px gainsboro;
 }
-
+.head {
+  height: 90px;
+}
+.body {
+  height: calc(100% - 90px);
+}
+.head_row {
+  height: 90px;
+}
 /* encabezado de la tabla  */
 th {
   border: solid 0px;
@@ -204,6 +219,7 @@ th {
 td {
   text-align: center;
   font-family: sans-serif;
+  height: 90px;
 }
 
 /* estilo del boton editar*/
@@ -264,6 +280,7 @@ td {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .margin-5 {

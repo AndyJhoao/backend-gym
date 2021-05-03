@@ -17,175 +17,185 @@
             </div>
 
             <div class="b-add">
-              <button type="submit" class="btn-add">Agregar Cliente</button>
+              <button type="button" class="btn-add" v-on:click="newUser">
+                Agregar Cliente
+              </button>
             </div>
           </form>
+          <div class="container-table">
+            <table class="tabla">
+              <thead class="head">
+                <tr class="head_row">
+                  <th>Clave</th>
+                  <th>Nombre</th>
+                  <th>Apellidos</th>
+                  <th>Membresia</th>
+                  <th>plan</th>
+                  <th>Telefono</th>
+                  <th>Genero</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
 
-          <table class="tabla">
-            <thead>
-              <tr>
-                <th>Clave</th>
-                <th>Nombre</th>
-                <th>Apellidos</th>
-                <th>Membresia</th>
-                <th>plan</th>
-                <th>Telefono</th>
-                <th>Genero</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr>
-                <td>001</td>
-                <td>Mark</td>
-                <td>Town Down hill climb</td>
-                <td>Activa</td>
-                <td>Mensual</td>
-                <td>7351804623</td>
-                <td>H</td>
-                <td>
-                  <button type="button" class="b-eliminar">mas info...</button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>001</td>
-                <td>Mark</td>
-                <td>Town Down hill climb</td>
-                <td>Activa</td>
-                <td>Mensual</td>
-                <td>7351804623</td>
-                <td>H</td>
-                <td>
-                  <button type="button" class="b-eliminar">mas info...</button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>001</td>
-                <td>Mark</td>
-                <td>Town Down hill climb</td>
-                <td>Activa</td>
-                <td>Mensual</td>
-                <td>7351804623</td>
-                <td>H</td>
-                <td>
-                  <button type="button" class="b-eliminar">mas info...</button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>001</td>
-                <td>Mark</td>
-                <td>Town Down hill climb</td>
-                <td>Activa</td>
-                <td>Mensual</td>
-                <td>7351804623</td>
-                <td>H</td>
-                <td>
-                  <button type="button" class="b-eliminar">mas info...</button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>001</td>
-                <td>Mark</td>
-                <td>Town Down hill climb</td>
-                <td>Activa</td>
-                <td>Mensual</td>
-                <td>7351804623</td>
-                <td>H</td>
-                <td>
-                  <button type="button" class="b-eliminar">mas info...</button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>001</td>
-                <td>Mark</td>
-                <td>Town Down hill climb</td>
-                <td>Activa</td>
-                <td>Mensual</td>
-                <td>7351804623</td>
-                <td>H</td>
-                <td>
-                  <button type="button" class="b-eliminar">mas info...</button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>001</td>
-                <td>Mark</td>
-                <td>Town Down hill climb</td>
-                <td>Activa</td>
-                <td>Mensual</td>
-                <td>7351804623</td>
-                <td>H</td>
-                <td>
-                  <button type="button" class="b-eliminar">mas info...</button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>001</td>
-                <td>Mark</td>
-                <td>Town Down hill climb</td>
-                <td>Activa</td>
-                <td>Mensual</td>
-                <td>7351804623</td>
-                <td>H</td>
-                <td>
-                  <button type="button" class="b-eliminar">mas info...</button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>001</td>
-                <td>Mark</td>
-                <td>Town Down hill climb</td>
-                <td>Activa</td>
-                <td>Mensual</td>
-                <td>7351804623</td>
-                <td>H</td>
-                <td>
-                  <button type="button" class="b-eliminar">mas info...</button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>001</td>
-                <td>Mark</td>
-                <td>Town Down hill climb</td>
-                <td>Activa</td>
-                <td>Mensual</td>
-                <td>7351804623</td>
-                <td>H</td>
-                <td>
-                  <button type="button" class="b-eliminar">mas info...</button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>001</td>
-                <td>Mark</td>
-                <td>Town Down hill climb</td>
-                <td>Activa</td>
-                <td>Mensual</td>
-                <td>7351804623</td>
-                <td>H</td>
-                <td>
-                  <button type="button" class="b-eliminar">mas info...</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+              <tbody class="body">
+                <tr>
+                  <td>001</td>
+                  <td>Mark</td>
+                  <td>Town Down hill climb</td>
+                  <td>Activa</td>
+                  <td>Mensual</td>
+                  <td>7351804623</td>
+                  <td>H</td>
+                  <td>
+                    <button type="button" class="b-eliminar">
+                      mas info...
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
     </main>
   </div>
 </template>
-
+<script>
+export default {
+  name: "body-client",
+  methods: {
+    newUser() {
+      this.$swal({
+        title: "Agregar Nuevo Usuario",
+        text: "Nombre :",
+        content: "input",
+        buttons: {
+          continue: "Continuar",
+          abort: {
+            text: "Cancelar",
+            closeModal: true,
+          },
+        },
+      })
+        .then((name) => {
+          if (!name) {
+            console.log("Ingresa un nombre");
+          } else {
+            this.$swal({
+              title: "Agregar Nuevo Usuario",
+              text: "Apellidos :",
+              content: "input",
+              buttons: {
+                continue: "Continuar",
+                abort: {
+                  text: "Cancelar",
+                  closeModal: true,
+                },
+              },
+            })
+              .then((name) => {
+                if (!name) {
+                  console.log("Ingresa un nombre");
+                } else {
+                  this.$swal({
+                    title: "Membresia?",
+                    text: "",
+                    buttons: {
+                      active: "Activa",
+                      noactive: "No Activa",
+                    },
+                  }).then((value) => {
+                    switch (value) {
+                      case "active":
+                        // this.$swal({
+                        //   title: "Plan?",
+                        //   content: {
+                        //     element: "input",
+                        //     attributes: {
+                        //       type: "range",
+                        //       min: 1,
+                        //       max: 12,
+                        //     },
+                        //   },
+                        // })
+                        //   .then((result) => {
+                        //     console.log(result);
+                        //   })
+                        //   .catch((err) => {
+                        //     console.log(err);
+                        //   });
+                        this.$swal({
+                          title: "Plan?",
+                          buttons: {
+                            mes: "Mensual",
+                            año: "Anual",
+                          },
+                        })
+                          .then((result) => {
+                            switch (result) {
+                              case "mes":
+                                this.$swal({
+                                  title: "Numero de teléfono",
+                                  text: "Para contactarnos por emergencias",
+                                  content: {
+                                    element: "input",
+                                    attributes: {
+                                      type: "number",
+                                    },
+                                  },
+                                  buttons: {
+                                    continue: "Continuar",
+                                    abort: {
+                                      text: "Cancelar",
+                                      closeModal: true,
+                                    },
+                                  },
+                                })
+                                  .then((result) => {
+                                    if (result) {
+                                      this.$swal({
+                                        title: "Sexo?",
+                                        buttons: {
+                                          h: "Hombre",
+                                          m: "Mujer",
+                                        },
+                                      }).then(() => {
+                                        this.$swal(
+                                          "Usuario agregado correctamente",
+                                          "",
+                                          "success"
+                                        );
+                                      });
+                                    }
+                                  })
+                                  .catch((err) => {
+                                    console.log(err);
+                                  });
+                                break;
+                            }
+                          })
+                          .catch((err) => {
+                            console.log(err);
+                          });
+                        break;
+                      case "noactive":
+                        break;
+                    }
+                  });
+                }
+              })
+              .catch((err) => {
+                this.$swal("Error", err);
+              });
+          }
+        })
+        .catch((err) => {
+          this.$swal("Error", err);
+        });
+    },
+  },
+};
+</script>
 <style scoped>
 body {
   margin: 0;
@@ -313,13 +323,27 @@ body {
 /* estilos de la tabla */
 
 /* estilo del cuerpo de la tabla */
+.container-table {
+  overflow-y: auto;
+  height: 400px;
+}
 .tabla {
   width: 100%;
+  min-height: 100px;
+  max-height: 400px;
   padding: 10px;
   border-radius: 5px;
   border: solid 1px gainsboro;
 }
-
+.head {
+  height: 90px;
+}
+.body {
+  height: calc(100% - 90px);
+}
+.head_row {
+  height: 90px;
+}
 /* encabezado de la tabla  */
 th {
   border: solid 0px;
@@ -333,6 +357,7 @@ th {
 td {
   text-align: center;
   font-family: sans-serif;
+  height: 90px;
 }
 
 /* estilo del boton editar*/

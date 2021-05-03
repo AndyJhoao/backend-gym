@@ -22,31 +22,32 @@
               <button type="submit" class="btn-b">Buscar</button>
             </div>
           </form>
+          <div class="container-table">
+            <table class="tabla">
+              <thead class="head">
+                <tr class="head_row">
+                  <th class="a-cel15">Clave</th>
+                  <th class="a-cel20">Tipo</th>
+                  <th class="a-cel25">Descripcion</th>
+                  <th class="a-cel20">Fecha</th>
+                  <th class="a-cel20">Boton</th>
+                </tr>
+              </thead>
 
-          <table class="tabla">
-            <thead>
-              <tr>
-                <th class="a-cel15">Clave</th>
-                <th class="a-cel20">Tipo</th>
-                <th class="a-cel25">Descripcion</th>
-                <th class="a-cel20">Fecha</th>
-                <th class="a-cel20">Boton</th>
-              </tr>
-            </thead>
+              <tbody class="body">
+                <tr>
+                  <td>1</td>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
 
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-
-                <td>
-                  <button type="button" class="b-editar">Imprimir</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                  <td>
+                    <button type="button" class="b-editar">Imprimir</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
     </main>
@@ -183,13 +184,27 @@ body {
 /* estilos de la tabla */
 
 /* estilo del cuerpo de la tabla */
+.container-table {
+  overflow-y: auto;
+  height: 400px;
+}
 .tabla {
   width: 100%;
+  min-height: 100px;
+  max-height: 400px;
   padding: 10px;
   border-radius: 5px;
   border: solid 1px gainsboro;
 }
-
+.head {
+  height: 90px;
+}
+.body {
+  height: calc(100% - 90px);
+}
+.head_row {
+  height: 90px;
+}
 /* encabezado de la tabla  */
 th {
   border: solid 0px;
@@ -201,6 +216,7 @@ th {
 
 /* celdas de la tabla  */
 td {
+  height: 90px;
   text-align: center;
   font-family: sans-serif;
 }

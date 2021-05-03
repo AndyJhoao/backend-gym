@@ -8,26 +8,27 @@
           Inventario
         </h2>
         <div class="contenedor">
-          <table class="tabla">
-            <thead>
-              <tr>
-                <th class="a-cel">Clave</th>
-                <th class="a-cel">Nombre</th>
-                <th class="a-cel">Cantidad</th>
-                <th class="a-cel">Precio compra</th>
-              </tr>
-            </thead>
+          <div class="container-table">
+            <table class="tabla">
+              <thead class="head">
+                <tr class="head_row">
+                  <th class="a-cel">Clave</th>
+                  <th class="a-cel">Nombre</th>
+                  <th class="a-cel">Cantidad</th>
+                  <th class="a-cel">Precio compra</th>
+                </tr>
+              </thead>
 
-            <tbody>
-              <tr>
-                <td>001</td>
-                <td>Mark</td>
-                <td>Town Down hill climb</td>
-                <td>Activa</td>
-              </tr>
-            </tbody>
-          </table>
-
+              <tbody class="body">
+                <tr>
+                  <td>001</td>
+                  <td>Mark</td>
+                  <td>Town Down hill climb</td>
+                  <td>Activa</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
           <form class="form-search margint-10">
             <div class="izquierda">
               <input
@@ -183,11 +184,26 @@ body {
 /* estilos de la tabla */
 
 /* estilo del cuerpo de la tabla */
+.container-table {
+  overflow-y: auto;
+  height: 400px;
+}
 .tabla {
   width: 100%;
+  min-height: 100px;
+  max-height: 400px;
   padding: 10px;
   border-radius: 5px;
   border: solid 1px gainsboro;
+}
+.head {
+  height: 90px;
+}
+.body {
+  height: calc(100% - 90px);
+}
+.head_row {
+  height: 90px;
 }
 
 /* encabezado de la tabla  */
@@ -203,6 +219,7 @@ th {
 td {
   text-align: center;
   font-family: sans-serif;
+  height: 90px;
 }
 
 /* estilo del boton editar*/
@@ -281,7 +298,7 @@ td {
 
 /*Estilos extra de la pagina inventario*/
 .margint-10 {
-  margin-top: 400px;
+  margin-top: 20px;
 }
 
 .a-cel {

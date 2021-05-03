@@ -8,30 +8,58 @@
           Venta
         </h2>
         <div class="contenedor">
-          <table class="tabla">
-            <thead>
-              <tr>
-                <th class="a-cel15">Cantidad</th>
-                <th class="a-cel25">Nombre del producto</th>
-                <th class="a-cel15">Precio</th>
-                <th class="a-cel25">Descripcion</th>
-                <th class="a-cel20">Acciones</th>
-              </tr>
-            </thead>
+          <div class="container-table">
+            <table class="tabla">
+              <thead class="head">
+                <tr class="head_row">
+                  <th class="a-cel15">Cantidad</th>
+                  <th class="a-cel25">Nombre del producto</th>
+                  <th class="a-cel15">Precio</th>
+                  <th class="a-cel25">Descripcion</th>
+                  <th class="a-cel20">Acciones</th>
+                </tr>
+              </thead>
 
-            <tbody>
-              <tr>
-                <td>001</td>
-                <td>Mark</td>
-                <td>Town Down hill climb</td>
-                <td>Activa</td>
-                <td>
-                  <button type="submit" class="b-eliminar">Retirar</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
+              <tbody class="body">
+                <tr>
+                  <td>001</td>
+                  <td>Mark</td>
+                  <td>Town Down hill climb</td>
+                  <td>Activa</td>
+                  <td>
+                    <button type="submit" class="b-eliminar">Retirar</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>001</td>
+                  <td>Mark</td>
+                  <td>Town Down hill climb</td>
+                  <td>Activa</td>
+                  <td>
+                    <button type="submit" class="b-eliminar">Retirar</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>001</td>
+                  <td>Mark</td>
+                  <td>Town Down hill climb</td>
+                  <td>Activa</td>
+                  <td>
+                    <button type="submit" class="b-eliminar">Retirar</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>001</td>
+                  <td>Mark</td>
+                  <td>Town Down hill climb</td>
+                  <td>Activa</td>
+                  <td>
+                    <button type="submit" class="b-eliminar">Retirar</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
           <form class="form-search margint-10">
             <div class="align-left">
               <input
@@ -179,13 +207,27 @@ body {
 /* estilos de la tabla */
 
 /* estilo del cuerpo de la tabla */
+.container-table {
+  overflow-y: auto;
+  height: 400px;
+}
 .tabla {
   width: 100%;
+  min-height: 100px;
+  max-height: 400px;
   padding: 10px;
   border-radius: 5px;
   border: solid 1px gainsboro;
 }
-
+.head {
+  height: 90px;
+}
+.body {
+  height: calc(100% - 90px);
+}
+.head_row {
+  height: 90px;
+}
 /* encabezado de la tabla  */
 th {
   border: solid 0px;
@@ -199,6 +241,7 @@ th {
 td {
   text-align: center;
   font-family: sans-serif;
+  height: 90px;
 }
 
 /* estilo del boton editar*/
@@ -277,7 +320,7 @@ td {
 
 /*Estilos extra de la pagina inventario*/
 .margint-10 {
-  margin-top: 400px;
+  margin-top: 20px;
 }
 
 .a-cel {

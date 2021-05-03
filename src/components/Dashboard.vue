@@ -19,7 +19,7 @@
           <router-link to="/home/machines"> Maquinas </router-link>
         </li>
         <li class="header-nav__item">
-          <router-link to="/home/clients"> Clientes2 </router-link>
+          <router-link to="/home/clients"> Clientes </router-link>
         </li>
         <li class="header-nav__item">
           <router-link to="/home/products"> Productos </router-link>
