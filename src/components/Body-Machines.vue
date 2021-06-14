@@ -19,7 +19,7 @@
             </div>
 
             <div class="caja-maquina">
-              <router-link to="/home/machines/bicicleta">
+              <router-link to="/home/machines/bicicletas">
                 <img
                   class="imagen"
                   src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/bicycle.png?alt=media&token=c1f63916-d5b9-4369-a730-019fbe1ce9ed"
@@ -32,7 +32,7 @@
             </div>
 
             <div class="caja-maquina">
-              <router-link to="/home/machines/prensa-pierna">
+              <router-link to="/home/machines/PrensaPierna">
                 <img
                   class="imagen"
                   src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/prensa-pierna.jpg?alt=media&token=7c8b2882-b61a-4b5a-83c7-3b711395bd46"
@@ -45,7 +45,7 @@
             </div>
 
             <div class="caja-maquina">
-              <router-link to="/home/machines/banco-pesas">
+              <router-link to="/home/machines/BancoPesas">
                 <img
                   class="imagen"
                   src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/banco-pesas.jpg?alt=media&token=63063c8b-a659-4af5-ae48-ddf996029adb"
@@ -73,7 +73,7 @@
             </div>
 
             <div class="caja-maquina">
-              <router-link to="/home/machines/eliptica">
+              <router-link to="/home/machines/elipticas">
                 <img
                   class="imagen"
                   src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/eliptica.jpg?alt=media&token=c5e67941-660f-4884-b5fc-e1b4662ba308"

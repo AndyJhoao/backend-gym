@@ -4,8 +4,8 @@
       <section class="padre">
         <h2>
           <router-link to="/home/"> Home </router-link> //
-          <router-link to="/home/products"> Productos </router-link> // Punto de
-          Venta
+          <router-link to="/home/products"> Productos </router-link> // Agregar
+          Producto
         </h2>
         <div class="contenedor">
           <form>
@@ -15,37 +15,87 @@
 
             <div class="descripcion">
               <label>Nombre del Producto: </label>
-              <input type="text" class="nomb" /> <br />
+              <input type="text" class="nomb" v-model="name_product" /> <br />
             </div>
 
             <div class="descripcion">
-              <label>Descripcion: </label> <input type="text" class="nomb" />
+              <label>Descripcion: </label>
+              <input type="text" class="nomb" v-model="descripcion" />
               <br />
             </div>
 
             <p>Precio</p>
             <div class="descripcion">
               <label>Precio Compra: </label
-              ><input type="number" class="precio" /><br />
+              ><input
+                type="number"
+                class="precio"
+                v-model="precio_compra"
+              /><br />
             </div>
             <div class="descripcion">
               <label>Precio Venta: </label
-              ><input type="number" class="precio" /> <br />
+              ><input type="number" class="precio" v-model="precio_venta" />
+              <br />
             </div>
 
             <div class="descripcion">
-              <label>RFC Proveedor: </label> <input type="text" class="nomb" />
+              <label>RFC Proveedor: </label>
+              <input type="text" class="nomb" v-model="proveedor" />
               <br />
             </div>
-            <div class="titulo">
-              <button>Guardar</button>
-            </div>
           </form>
+          <div class="titulo">
+            <button @click="createProduct">Guardar</button>
+          </div>
         </div>
       </section>
     </main>
   </div>
 </template>
+<script>
+import axios from "axios";
+export default {
+  name: "AgregarProducto",
+  data() {
+    return {
+      name_product: "",
+      precio_compra: 0,
+      precio_venta: 0,
+      descripcion: "",
+      proveedor: "",
+    };
+  },
+  methods: {
+    createProduct() {
+      let product = {
+        name_product: this.name_product,
+        precio_compra: this.precio_compra,
+        precio_venta: this.precio_venta,
+        descripcion: this.descripcion,
+        proveedor: this.proveedor,
+      };
+      axios
+        .post("http://localhost:5000/home/products/agregar-producto", product)
+        .then(() => {
+          this.$swal({
+            title: "Producto creado correctamente.!",
+            timer: 2000,
+            icon: "success",
+          });
+          this.name_product = "";
+          this.precio_compra = 0;
+          this.precio_venta = 0;
+          this.descripcion = "";
+          this.proveedor = "";
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
+};
+</script>
 
 <style scoped>
 .contenedor {

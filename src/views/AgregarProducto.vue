@@ -1,18 +1,20 @@
 <template>
   <div class="contenedor">
-    <dashboard />
     <agregarproducto />
   </div>
 </template>
 
 <script>
-import dashboard from "@/components/Dashboard.vue";
 import agregarproducto from "@/components/AgregarProducto.vue";
 export default {
   name: "AgregarProducto",
   components: {
-    dashboard,
     agregarproducto,
+  },
+  created() {
+    if (localStorage.getItem("token") === null) {
+      this.$router.push("/login");
+    }
   },
 };
 </script>

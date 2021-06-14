@@ -1,23 +1,22 @@
 <template>
   <div class="contenedor">
-    <dashboard />
-    <body_machine />
+    <machine />
   </div>
 </template>
-
 <script>
-import body_machine from "@/components/Body-Machines.vue";
-import dashboard from "@/components/Dashboard.vue";
-
+import machine from "@/components/Machine.vue";
 export default {
-  name: "view Machine",
+  name: "machines",
   components: {
-    dashboard,
-    body_machine,
+    machine,
+  },
+  created() {
+    if (localStorage.getItem("token") === null) {
+      this.$router.push("/login");
+    }
   },
 };
 </script>
-
 <style>
 .contenedor {
   width: 100%;

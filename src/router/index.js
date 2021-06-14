@@ -1,21 +1,16 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+
 import Login from "../views/Login.vue";
 import Home from "../views/Home.vue";
+// import homeinfo from "../views/homeinfo.vue";
+import Machines from "../views/HomeMachines.vue";
 import Machine from "../views/Machines.vue";
-import Eliptica from "../views/Eliptica.vue";
-import BancoPesas from "../views/BancoPesas.vue";
-import Bicicleta from "../views/Bicicleta.vue";
-import Caminadora from "../views/Caminadora.vue";
-import Crossfit from "../views/Crossfit.vue";
-import Poleas from "../views/Poleas.vue";
-import PrensaPierna from "../views/PrensaPierna.vue";
-import Remo from "../views/Remo.vue";
-
 import Clients from "../views/Clients.vue";
 import Reports from "../views/Reports.vue";
 import Products from "../views/Products.vue";
 import PuntoVenta from "../views/PuntoVenta.vue";
+import Empleados from "../views/empleados/Empleados.vue";
 import AgregarProducto from "../views/AgregarProducto.vue";
 
 import ActualizarProducto from "../views/ActualizarProducto.vue";
@@ -26,8 +21,16 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    name: "Login",
+    redirect: "/login",
+    name: "homeinfo",
     component: Login,
+    children: [
+      {
+        path: "login",
+        name: "login",
+        component: Login,
+      },
+    ],
   },
   {
     path: "/home",
@@ -37,7 +40,7 @@ const routes = [
   {
     path: "/home/machines",
     name: "machines",
-    component: Machine,
+    component: Machines,
   },
   {
     path: "/home/clients",
@@ -55,44 +58,14 @@ const routes = [
     component: Products,
   },
   {
-    path: "/home/machines/eliptica",
-    name: "elipticas",
-    component: Eliptica,
+    path: "/home/empleados",
+    name: "empleados",
+    component: Empleados,
   },
   {
-    path: "/home/machines/banco-pesas",
-    name: "banco-pesas",
-    component: BancoPesas,
-  },
-  {
-    path: "/home/machines/bicicleta",
-    name: "bicicleta",
-    component: Bicicleta,
-  },
-  {
-    path: "/home/machines/crossfit",
-    name: "crossfit",
-    component: Crossfit,
-  },
-  {
-    path: "/home/machines/poleas",
-    name: "poleas",
-    component: Poleas,
-  },
-  {
-    path: "/home/machines/prensa-pierna",
-    name: "prensa-pierna",
-    component: PrensaPierna,
-  },
-  {
-    path: "/home/machines/remo",
-    name: "remo",
-    component: Remo,
-  },
-  {
-    path: "/home/machines/caminadoras",
-    name: "caminadoras",
-    component: Caminadora,
+    path: "/home/machines/:id",
+    name: "MachineView",
+    component: Machine,
   },
   {
     path: "/home/products/punto-de-venta",
@@ -127,15 +100,6 @@ const routes = [
     beforeEnter() {
       window.open("https://www.instagram.com", "_blank");
     },
-  },
-  {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
 ];
 

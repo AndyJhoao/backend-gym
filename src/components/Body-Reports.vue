@@ -4,13 +4,15 @@
       <section class="padre">
         <h2><router-link to="/home/"> Home </router-link> // Reportes //</h2>
         <div class="contenedor">
-          <form class="form-search">
+          <div class="form-search">
             <div class="menu-op">
-              <select name="" class="menu">
-                <option value="1">Productos</option>
-                <option value="2">Usuarios</option>
-                <option value="3">Mensualidades</option>
-                <option value="4">Proveedores</option>
+              <select name="type_selected" class="menu" v-model="type_reports">
+                <option value="" selected disabled hidden>Productos</option>
+                <option value="products" selected="selected">Productos</option>
+                <option value="clientes">Clientes</option>
+                <option value="ventas">Ventas</option>
+                <option value="proveedores">Proveedores</option>
+                <option value="maquinas">Maquinas</option>
               </select>
             </div>
 
@@ -19,10 +21,13 @@
             </div>
 
             <div class="b-search">
-              <button type="submit" class="btn-b">Buscar</button>
+              <button class="btn-b" @click="getReportsSelector(type_reports)">
+                Buscar
+              </button>
             </div>
-          </form>
-          <div class="container-table">
+          </div>
+          <spinner-loader v-if="isLoading" :loading="isLoading" />
+          <div class="container-table" v-if="!isLoading">
             <table class="tabla">
               <thead class="head">
                 <tr class="head_row">
@@ -34,15 +39,19 @@
                 </tr>
               </thead>
 
-              <tbody class="body">
+              <tbody
+                class="body"
+                v-for="reports in arrayReports"
+                :key="reports._id"
+              >
                 <tr>
-                  <td>1</td>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
+                  <td>{{ reports._id }}</td>
+                  <td>{{ reports.type }}</td>
+                  <td>{{ reports.description }}</td>
+                  <td>{{ reports.fecha_reporte }}</td>
 
                   <td>
-                    <button type="button" class="b-editar">Imprimir</button>
+                    <button class="b-editar">Imprimir</button>
                   </td>
                 </tr>
               </tbody>
@@ -53,6 +62,50 @@
     </main>
   </div>
 </template>
+<script>
+import axios from "axios";
+import spinnerLoader from "./SpinnerLoader.vue";
+export default {
+  name: "BodyReports",
+  components: { spinnerLoader },
+  data() {
+    return {
+      arrayReports: {},
+      type_reports: "",
+      isLoading: false,
+    };
+  },
+  created() {
+    this.getReports();
+  },
+  methods: {
+    getReports() {
+      this.isLoading = true;
+      axios
+        .get("http://localhost:5000/home/reports/products")
+        .then((data) => {
+          this.arrayReports = data.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => (this.isLoading = false));
+    },
+    getReportsSelector(type) {
+      this.isLoading = true;
+      axios
+        .get("http://localhost:5000/home/reports/" + type)
+        .then((data) => {
+          this.arrayReports = data.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => (this.isLoading = false));
+    },
+  },
+};
+</script>
 
 <style scoped>
 h2 {

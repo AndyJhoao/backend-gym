@@ -1,16 +1,16 @@
 <template>
   <div class="contenedor">
-    <body_reports />
+    <body_machine />
   </div>
 </template>
 
 <script>
-import body_reports from "@/components/Body-Reports.vue";
+import body_machine from "@/components/Body-Machines.vue";
 
 export default {
-  name: "viewReports",
+  name: "MachineView",
   components: {
-    body_reports,
+    body_machine,
   },
   created() {
     if (localStorage.getItem("token") === null) {

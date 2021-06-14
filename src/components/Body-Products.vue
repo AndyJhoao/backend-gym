@@ -16,38 +16,44 @@
               <p>Punto de Venta</p>
             </div>
           </router-link>
-          <article class="card">
+          <article class="card" v-if="lvlpermisos == 2">
             <img
               class="img"
               src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/registro.jpg?alt=media&token=2bc9c2b1-829b-40c1-8c64-314384d77aa2"
               alt="registro"
             />
           </article>
-          <router-link to="/home/products/agregar-producto">
+          <router-link
+            to="/home/products/agregar-producto"
+            v-if="lvlpermisos == 2"
+          >
             <div class="sombra">
               <p>Agregar Producto</p>
             </div>
           </router-link>
-          <article class="card">
+          <article class="card" v-if="lvlpermisos == 2">
             <img
               class="img"
               src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/update.jpeg?alt=media&token=383afc95-2def-49d8-9de1-2ed4bdb5a98d"
               alt="Update"
             />
           </article>
-          <router-link to="/home/products/actualizar-producto">
+          <router-link
+            to="/home/products/actualizar-producto"
+            v-if="lvlpermisos == 2"
+          >
             <div class="sombra">
               <p>Editar Productos</p>
             </div>
           </router-link>
-          <article class="card">
+          <article class="card" v-if="lvlpermisos == 2">
             <img
               class="img"
               src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/inventario2.png?alt=media&token=8f8dc05f-9842-451d-9e6a-7107617ea904"
               alt="Inventario"
             />
           </article>
-          <router-link to="/home/products/inventario">
+          <router-link to="/home/products/inventario" v-if="lvlpermisos == 2">
             <div class="sombra">
               <p>Inventario</p>
             </div>
@@ -57,6 +63,12 @@
     </main>
   </div>
 </template>
+<script>
+export default {
+  name: "BodyProducts",
+  props: ["lvlpermisos"],
+};
+</script>
 
 <style scoped>
 h2 {

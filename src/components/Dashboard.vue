@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header v-show="lvlpermisos >= 1">
     <nav>
       <ul class="header-nav-logo">
         <li>
@@ -24,15 +24,31 @@
         <li class="header-nav__item">
           <router-link to="/home/products"> Productos </router-link>
         </li>
-        <li v-if="levelPermisos == 2" class="header-nav__item">
+        <li v-if="lvlpermisos == 2" class="header-nav__item">
           <router-link to="/home/reports"> Reportes </router-link>
         </li>
         <li class="header-nav__item margin-top">
-          <p>{{ userName }}</p>
+          <p>{{ username }}</p>
           <div class="triangulo"></div>
           <div class="container-menu">
             <div class="container-user-data">
-              <button class="button-logout">Cerrar sesion</button>
+              <button
+                v-if="lvlpermisos == 2"
+                class="button-logout"
+                @click="toEmpleados"
+              >
+                Empleados
+              </button>
+              <button
+                v-if="lvlpermisos == 2"
+                class="button-logout"
+                @click="toMaquinas"
+              >
+                Maquinas
+              </button>
+              <button class="button-logout" @click="logout">
+                Cerrar sesion
+              </button>
             </div>
           </div>
         </li>
@@ -44,15 +60,32 @@
 <script>
 export default {
   name: "Dashboard",
-  data() {
-    return {
-      levelPermisos: 0,
-      userName: "",
-    };
+  props: {
+    lvlpermisos: Number,
+    username: String,
   },
   created() {
-    this.levelPermisos = this.$route.query.levelPermisos;
-    this.userName = this.$route.query.userName;
+    if (!localStorage.getItem("token") === null) {
+      console.log("hay token");
+    }
+  },
+  mounted() {
+    if (!localStorage.getItem("token") === null) {
+      console.log("hay token mounted");
+    }
+  },
+  methods: {
+    logout() {
+      this.$emit("logout");
+      localStorage.clear();
+      this.$router.push("/login");
+    },
+    toEmpleados() {
+      this.$router.push("/home/empleados");
+    },
+    toMaquinas() {
+      this.$router.push("/home");
+    },
   },
 };
 </script>
@@ -61,6 +94,7 @@ export default {
 header {
   background-color: #f08a5d;
   margin: 0;
+  width: 100%;
 }
 ul {
   list-style: none;
@@ -103,7 +137,7 @@ nav {
   top: 100px;
 }
 .margin-top:hover .container-menu {
-  height: 100px;
+  height: 190px;
 }
 .margin-top:hover .triangulo {
   border-bottom: 10px solid #fbe8d3;
@@ -125,10 +159,11 @@ nav {
   transition: all 0.5s ease;
 }
 .container-user-data {
-  height: 100%;
+  height: 95%;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   padding-top: 10px;
 }
 .button-logout {
@@ -140,6 +175,7 @@ nav {
   cursor: pointer;
   transition: all 0.5s;
   font-size: 1.1rem;
+  margin: 10px 0px;
 }
 .button-logout:hover {
   background-color: #ffd460;

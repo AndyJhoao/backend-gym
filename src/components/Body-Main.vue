@@ -28,14 +28,14 @@
               <p>Clientes</p>
             </div>
           </router-link>
-          <article class="card">
+          <article class="card" v-if="lvlpermisos == 2">
             <img
               class="img"
               src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/reportes.jpg?alt=media&token=aeafe8dd-8ec7-43ad-a8e7-1134efe28352"
               alt="reportes"
             />
           </article>
-          <router-link to="/home/reports">
+          <router-link to="/home/reports" v-if="lvlpermisos == 2">
             <div class="sombra">
               <p>Reportes</p>
             </div>
@@ -57,7 +57,12 @@
     </main>
   </div>
 </template>
-
+<script>
+export default {
+  name: "BodyMain",
+  props: ["lvlpermisos"],
+};
+</script>
 <style scoped>
 h1 {
   font-size: 2em;

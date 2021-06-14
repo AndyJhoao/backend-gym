@@ -10,7 +10,8 @@
       />
       <figcaption>GYM Spartans</figcaption>
     </figure>
-    <formLogin v-on:signUp="signIn" @userName="userName" @permisos="permisos" />
+    <formLogin v-on:signUp="signIn" />
+    {{ error }}
   </div>
 </template>
 
@@ -18,6 +19,7 @@
 // @ is an alias to /src
 import formLogin from "@/components/formLogin.vue";
 import axios from "axios";
+// import axios from "axios";
 
 export default {
   name: "Login",
@@ -29,19 +31,37 @@ export default {
       name: "",
       password: "",
       levelpermisos: 0,
+      error: "",
     };
   },
   methods: {
-    userName(user_Name) {
-      this.name = user_Name;
-    },
-    permisos(levelpermisos) {
-      this.levelpermisos = levelpermisos;
-    },
     signIn(data) {
-      this.$emit("levelPermisos", this.levelpermisos);
-      this.$emit("userName", this.name);
-      axios.post("http://localhost:5000/signin", data);
+      this.name = data.name;
+      this.password = data.password;
+      let user = {
+        name: this.name,
+        password: this.password,
+      };
+      axios
+        .post("http://localhost:5000/login", user)
+        .then((res) => {
+          if (res.status === 200) {
+            localStorage.setItem("token", res.data.token);
+
+            this.$router.push("/home");
+            this.levelpermisos = res.data.permisos;
+            this.$emit("autorizado", {
+              name: this.name,
+              permisos: this.levelpermisos,
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err.response);
+          this.error = err.response.data.error;
+        });
+
+      // axios.post("http://localhost:5000/login", data);
     },
   },
 };

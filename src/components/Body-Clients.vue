@@ -3,6 +3,12 @@
     <main>
       <section>
         <h2><router-link to="/home/"> Home </router-link> // Clientes //</h2>
+        <masInfoModal
+          v-if="showModalInfo"
+          @close="showModalInfo = false"
+          :data="dataClient"
+        />
+        <agregar-usuario-modal v-if="showModal" @close="cerrarModalUser" />
         <div class="contenedor">
           <form class="form-search">
             <div class="menu-op">
@@ -10,19 +16,24 @@
                 type="text"
                 class="menu input-search"
                 placeholder="Buscar"
+                name="filter"
+                v-model="filter"
               />
-            </div>
-            <div class="b-search">
-              <button type="submit" class="btn-b">Buscar</button>
             </div>
 
             <div class="b-add">
-              <button type="button" class="btn-add" v-on:click="newUser">
+              <button
+                id="show-modal"
+                type="button"
+                class="btn-add"
+                @click="showModal = true"
+              >
                 Agregar Cliente
               </button>
             </div>
           </form>
-          <div class="container-table">
+          <spinner-loader :loading="isLoading" v-if="isLoading" />
+          <div class="container-table" v-if="!isLoading">
             <table class="tabla">
               <thead class="head">
                 <tr class="head_row">
@@ -38,16 +49,16 @@
               </thead>
 
               <tbody class="body">
-                <tr>
-                  <td>001</td>
-                  <td>Mark</td>
-                  <td>Town Down hill climb</td>
-                  <td>Activa</td>
-                  <td>Mensual</td>
-                  <td>7351804623</td>
-                  <td>H</td>
+                <tr v-for="clientes in Clients" :key="clientes._id">
+                  <td>{{ clientes.registro }}</td>
+                  <td>{{ clientes.nombre }}</td>
+                  <td>{{ clientes.apellidos }}</td>
+                  <td>{{ clientes.membresia }}</td>
+                  <td>{{ clientes.tipo_suscripcion }}</td>
+                  <td>{{ clientes.telefono }}</td>
+                  <td>{{ clientes.genero }}</td>
                   <td>
-                    <button type="button" class="b-eliminar">
+                    <button class="b-eliminar" @click="showInfo(clientes._id)">
                       mas info...
                     </button>
                   </td>
@@ -61,137 +72,61 @@
   </div>
 </template>
 <script>
+import AgregarUsuarioModal from "./AgregarUsuarioModal.vue";
+import masInfoModal from "./MasInfoUsuarioModal.vue";
+import spinnerLoader from "./SpinnerLoader.vue";
+import axios from "axios";
 export default {
+  components: { AgregarUsuarioModal, spinnerLoader, masInfoModal },
   name: "body-client",
+  data() {
+    return {
+      showModal: false,
+      showModalInfo: false,
+      isLoading: false,
+      arrayClients: [],
+      filter: "",
+      dataClient: {},
+    };
+  },
+  created() {
+    this.getClientes();
+  },
   methods: {
-    newUser() {
-      this.$swal({
-        title: "Agregar Nuevo Usuario",
-        text: "Nombre :",
-        content: "input",
-        buttons: {
-          continue: "Continuar",
-          abort: {
-            text: "Cancelar",
-            closeModal: true,
-          },
-        },
-      })
-        .then((name) => {
-          if (!name) {
-            console.log("Ingresa un nombre");
-          } else {
-            this.$swal({
-              title: "Agregar Nuevo Usuario",
-              text: "Apellidos :",
-              content: "input",
-              buttons: {
-                continue: "Continuar",
-                abort: {
-                  text: "Cancelar",
-                  closeModal: true,
-                },
-              },
-            })
-              .then((name) => {
-                if (!name) {
-                  console.log("Ingresa un nombre");
-                } else {
-                  this.$swal({
-                    title: "Membresia?",
-                    text: "",
-                    buttons: {
-                      active: "Activa",
-                      noactive: "No Activa",
-                    },
-                  }).then((value) => {
-                    switch (value) {
-                      case "active":
-                        // this.$swal({
-                        //   title: "Plan?",
-                        //   content: {
-                        //     element: "input",
-                        //     attributes: {
-                        //       type: "range",
-                        //       min: 1,
-                        //       max: 12,
-                        //     },
-                        //   },
-                        // })
-                        //   .then((result) => {
-                        //     console.log(result);
-                        //   })
-                        //   .catch((err) => {
-                        //     console.log(err);
-                        //   });
-                        this.$swal({
-                          title: "Plan?",
-                          buttons: {
-                            mes: "Mensual",
-                            año: "Anual",
-                          },
-                        })
-                          .then((result) => {
-                            switch (result) {
-                              case "mes":
-                                this.$swal({
-                                  title: "Numero de teléfono",
-                                  text: "Para contactarnos por emergencias",
-                                  content: {
-                                    element: "input",
-                                    attributes: {
-                                      type: "number",
-                                    },
-                                  },
-                                  buttons: {
-                                    continue: "Continuar",
-                                    abort: {
-                                      text: "Cancelar",
-                                      closeModal: true,
-                                    },
-                                  },
-                                })
-                                  .then((result) => {
-                                    if (result) {
-                                      this.$swal({
-                                        title: "Sexo?",
-                                        buttons: {
-                                          h: "Hombre",
-                                          m: "Mujer",
-                                        },
-                                      }).then(() => {
-                                        this.$swal(
-                                          "Usuario agregado correctamente",
-                                          "",
-                                          "success"
-                                        );
-                                      });
-                                    }
-                                  })
-                                  .catch((err) => {
-                                    console.log(err);
-                                  });
-                                break;
-                            }
-                          })
-                          .catch((err) => {
-                            console.log(err);
-                          });
-                        break;
-                      case "noactive":
-                        break;
-                    }
-                  });
-                }
-              })
-              .catch((err) => {
-                this.$swal("Error", err);
-              });
-          }
+    getClientes() {
+      this.isLoading = true;
+      axios
+        .get("http://localhost:5000/home/clients")
+        .then((data) => {
+          this.arrayClients = data.data;
         })
         .catch((err) => {
-          this.$swal("Error", err);
+          console.log(err);
+        })
+        .finally(() => (this.isLoading = false));
+    },
+    showInfo(id) {
+      axios
+        .get("http://localhost:5000/home/clients/" + id)
+        .then((data) => {
+          this.dataClient = data.data;
+          this.showModalInfo = true;
+        })
+        .catch((err) => {
+          console.log(err);
         });
+    },
+    cerrarModalUser() {
+      this.showModal = false;
+      console.log("aaaaaa");
+      this.getClientes();
+    },
+  },
+  computed: {
+    Clients() {
+      return this.arrayClients.filter((a) =>
+        a.nombre.toLowerCase().includes(this.filter.toLowerCase())
+      );
     },
   },
 };
@@ -397,6 +332,7 @@ td {
   border-radius: 5px;
   color: #ec1207;
   border: solid 1px #ec1207;
+  padding: 5px;
 }
 
 .b-eliminar:hover {

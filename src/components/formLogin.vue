@@ -89,54 +89,54 @@ export default {
   },
   methods: {
     callSign() {
-      if (this.name == "" && this.password == "") {
-        this.$swal(
-          "Favor de llenar los campos",
-          "Ingresa tu usuario y contraseña",
-          "error"
-        );
-      } else if (this.name == "admin" && this.password == "1234") {
-        this.$router.push({
-          path: "/home",
-          query: { userName: this.name, levelPermisos: 2 },
-        });
-      } else if (this.name == "andy" && this.password == "1234") {
-        this.$router.push({
-          path: "/home",
-          query: { userName: this.name, levelPermisos: 1 },
-        });
-      } else {
-        this.$swal(
-          "USUARIO O CONTRASEÑA INCORRECTOS",
-          "Verifica tus credenciales.!",
-          "error"
-        );
-      }
+      // if (this.name == "" && this.password == "") {
+      //   this.$swal(
+      //     "Favor de llenar los campos",
+      //     "Ingresa tu usuario y contraseña",
+      //     "error"
+      //   );
+      // } else if (this.name == "admin" && this.password == "1234") {
+      //   this.$router.push({
+      //     path: "/home",
+      //     query: { userName: this.name, levelPermisos: 2 },
+      //   });
+      // } else if (this.name == "andy" && this.password == "1234") {
+      //   this.$router.push({
+      //     path: "/home",
+      //     query: { userName: this.name, levelPermisos: 1 },
+      //   });
+      // } else {
+      //   this.$swal(
+      //     "USUARIO O CONTRASEÑA INCORRECTOS",
+      //     "Verifica tus credenciales.!",
+      //     "error"
+      //   );
+      // }
       this.$emit("signUp", { name: this.name, password: this.password });
     },
     forgottPassword() {
-      this.$swal({
-        text: "Ingresa tu correo electronico",
-        content: "input",
-        button: {
-          text: "Enviar",
-          closeModal: false,
-        },
-      })
-        .then((email) => {
-          if (!email) throw null;
-          return this.$swal({
-            title: "Enviado correctamente.!",
-            text: "Se envio un link para restablecer la contraseña",
-          });
-        })
-        .catch((err) => {
-          return this.$swal(
-            "No se ah podido enviar al correo.!",
-            "No se pudo enviar al correo electronico proporcionado.",
-            err
-          );
-        });
+      // this.$swal({
+      //   text: "Ingresa tu correo electronico",
+      //   content: "input",
+      //   button: {
+      //     text: "Enviar",
+      //     closeModal: false,
+      //   },
+      // })
+      //   .then((email) => {
+      //     if (!email) throw null;
+      //     return this.$swal({
+      //       title: "Enviado correctamente.!",
+      //       text: "Se envio un link para restablecer la contraseña",
+      //     });
+      //   })
+      //   .catch((err) => {
+      //     return this.$swal(
+      //       "No se ah podido enviar al correo.!",
+      //       "No se pudo enviar al correo electronico proporcionado.",
+      //       err
+      //     );
+      //   });
     },
   },
 };

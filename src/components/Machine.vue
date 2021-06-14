@@ -3,23 +3,28 @@
     <section>
       <h2>
         <router-link to="/home"> Home </router-link> //
-        <router-link to="/home/machines"> Maquinas </router-link> // Eliptica
+        <router-link to="/home/machines"> Maquinas </router-link> //
+        {{ machine.title }}
       </h2>
 
       <article class="Container">
         <div class="Container-Image">
-          <img class="size-image" :src="`${Image}`" alt="Eliptica" />
+          <img
+            class="size-image"
+            :src="`${machine.image}`"
+            :alt="machine.title"
+          />
         </div>
 
         <div class="Container-Description">
-          <div class="subtitulo">Eliptica</div>
+          <div class="subtitulo">{{ machine.title }}</div>
 
           <div class="Container-Eliptica">
             <img
-              v-for="i in 7"
+              v-for="i in 10"
               :key="`${i}`"
-              :src="`${Image}`"
-              alt="Eliptica"
+              :src="`${machine.image}`"
+              alt="Poleas"
               width="120px"
               height="110px"
             />
@@ -31,13 +36,22 @@
 </template>
 
 <script>
+import { getMachine } from "@/fetchMachines";
 export default {
-  name: "Mach-eliptica",
+  name: "MachineView",
   data() {
     return {
-      Image:
-        "https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/eliptica.jpg?alt=media&token=c5e67941-660f-4884-b5fc-e1b4662ba308",
+      machine: {},
     };
+  },
+  created() {
+    this.machineGET();
+  },
+  methods: {
+    machineGET() {
+      const idmachine = this.$route.params.id;
+      this.machine = getMachine(idmachine);
+    },
   },
 };
 </script>

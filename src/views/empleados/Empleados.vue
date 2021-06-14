@@ -1,68 +1,66 @@
 <template>
-  <div>
+  <div class="contenedor-prin">
     <main>
-      <section class="padre">
-        <h2>
-          <router-link to="/home/"> Home </router-link> //
-          <router-link to="/home/products"> Productos </router-link> //
-          Actualizar Producto
-        </h2>
+      <section>
+        <h2><router-link to="/home/"> Home </router-link> // Personal //</h2>
+        <infoPersonal
+          v-if="showPersonalInfo"
+          @closePersonalInfo="showPersonalInfo = false"
+          :data="personal"
+        />
+        <agregarPersonal
+          v-if="showModalEmpleado"
+          @cerrarModalEmpleado="showModalEmpleado = false"
+        />
         <div class="contenedor">
           <form class="form-search">
-            <div class="centrar">
+            <div class="menu-op">
               <input
                 type="text"
-                class="menu input-search search-width"
+                class="menu input-search"
                 placeholder="Buscar"
                 name="filter"
                 v-model="filter"
               />
             </div>
+
+            <div class="b-add">
+              <button
+                id="show-modal"
+                type="button"
+                class="btn-add"
+                @click="showModalEmpleado = true"
+              >
+                Agregar Empleado
+              </button>
+            </div>
           </form>
-          <editarProductoModal
-            :productInfo="productInfo"
-            v-if="showEditInfo"
-            @close="showEditInfo = false"
-          />
-          <spinnerLoader v-if="isLoading" />
+          <spinner-loader :loading="isLoading" v-if="isLoading" />
           <div class="container-table" v-if="!isLoading">
             <table class="tabla">
               <thead class="head">
                 <tr class="head_row">
                   <th>Clave</th>
                   <th>Nombre</th>
-                  <th>Descripcion</th>
-                  <th>Precio venta</th>
-                  <th>Precio compra</th>
-                  <th>RFC proveedor</th>
+                  <th>Apellidos</th>
+                  <th>Puesto</th>
+                  <th>Nombre de Usuario</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
 
               <tbody class="body">
-                <tr v-for="product in ProductosFilter" :key="product._id">
-                  <td>{{ product._id }}</td>
-                  <td>{{ product.nom_producto }}</td>
-                  <td>{{ product.descripcion }}</td>
-                  <td>${{ product.precio_venta.$numberDecimal }}</td>
-                  <td>${{ product.precio_compra.$numberDecimal }}</td>
-                  <td>{{ product.id_proveedor }}</td>
-                  <td class="botones">
-                    <button
-                      type="button"
-                      class="b-eliminar margin-5"
-                      @click="deleteUser(product._id)"
-                    >
-                      <!--  subir uno arriba-->
-                      > Eliminar
+                <tr v-for="person in Personal" :key="person._id">
+                  <td>{{ person._id }}</td>
+                  <td>{{ person.nombre }}</td>
+                  <td>{{ person.apellidos }}</td>
+                  <td>{{ person.puesto }}</td>
+                  <td>{{ person.n_usuario }}</td>
+                  <td>
+                    <button class="b-eliminar" @click="showInfo(person._id)">
+                      mas info...
                     </button>
-                    <button
-                      class="b-editar margin-5"
-                      @click="editarProducto(product._id)"
-                    >
-                      <!--  subir uno arriba-->
-                      > Editar
-                    </button>
+                    <button class="b-eliminar">editar</button>
                   </td>
                 </tr>
               </tbody>
@@ -74,89 +72,74 @@
   </div>
 </template>
 <script>
-import axios from "axios";
 import spinnerLoader from "@/components/SpinnerLoader.vue";
-import editarProductoModal from "@/components/editarProductoModal.vue";
+import agregarPersonal from "@/components/empleados/agregarPersonal.vue";
+import infoPersonal from "@/components/empleados/infoPersonal.vue";
+import axios from "axios";
 export default {
-  name: "ActualizarProducto",
-  components: { spinnerLoader, editarProductoModal },
+  name: "empleados",
+  components: { spinnerLoader, agregarPersonal, infoPersonal },
   data() {
     return {
-      productos: {},
-      productInfo: {},
       isLoading: false,
-      showEditInfo: false,
+      showModalEmpleado: false,
+      showPersonalInfo: false,
+      arrayPersonal: [],
       filter: "",
+      personal: {},
     };
   },
   created() {
-    this.getProductos();
+    this.getPersonal();
   },
   methods: {
-    getProductos() {
+    getPersonal() {
       this.isLoading = true;
       axios
-        .get("http://localhost:5000/home/products/actualizar-producto")
+        .get("http://localhost:5000/home/personal")
         .then((data) => {
-          this.productos = data.data;
+          this.arrayPersonal = data.data;
         })
         .catch((err) => {
           console.log(err);
         })
         .finally(() => (this.isLoading = false));
     },
-    deleteUser(id) {
-      this.$swal("¿Seguro que deseas eliminar este producto?", {
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-      }).then((isDelete) => {
-        if (isDelete) {
-          axios
-            .post(
-              "http://localhost:5000/home/products/actualizar-producto/" + id
-            )
-            .then(() => {
-              this.$swal("Producto Eliminado.!", { icon: "success" });
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        }
-      });
-    },
-    editarProducto(id) {
+    showInfo(id) {
       axios
-        .get("http://localhost:5000/home/products/actualizar-producto/" + id)
+        .get("http://localhost:5000/home/personal/" + id)
         .then((data) => {
-          this.productInfo = data.data;
-          this.showEditInfo = true;
+          this.personal = data.data;
+          this.showPersonalInfo = true;
         })
         .catch((err) => {
           console.log(err);
         });
     },
+    cerrarModalEmpleado() {
+      this.showModal = false;
+      this.getPersonal();
+    },
   },
   computed: {
-    ProductosFilter() {
-      return this.productos.filter(
-        (a) =>
-          a.nom_producto.toLowerCase().includes(this.filter.toLowerCase()) ||
-          a.descripcion.toLowerCase().includes(this.filter.toLowerCase()) ||
-          a.precio_venta.$numberDecimal.includes(this.filter)
+    Personal() {
+      return this.arrayPersonal.filter((a) =>
+        a.nombre.toLowerCase().includes(this.filter.toLowerCase())
       );
     },
   },
 };
 </script>
-
 <style scoped>
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
+.contenedor-prin {
+  width: 100%;
+  height: 100%;
+}
 /* contenedor principal */
 .contenedor {
   margin: auto;
@@ -351,6 +334,7 @@ td {
   border-radius: 5px;
   color: #ec1207;
   border: solid 1px #ec1207;
+  padding: 5px;
 }
 
 .b-eliminar:hover {
@@ -372,7 +356,6 @@ td {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
 
 .margin-5 {

@@ -71,7 +71,7 @@
             </div>
 
             <div class="align-right">
-              <button type="submit" class="b-editar">Buscar</button>
+              <button type="submit" class="b-editar">Venta</button>
             </div>
           </form>
         </div>

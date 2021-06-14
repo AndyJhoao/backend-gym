@@ -1,18 +1,20 @@
 <template>
   <div class="contenedor">
-    <dashboard />
     <inventario />
   </div>
 </template>
 
 <script>
-import dashboard from "@/components/Dashboard.vue";
 import Inventario from "@/components/Inventario.vue";
 export default {
   name: "AgregarProducto",
   components: {
-    dashboard,
     Inventario,
+  },
+  created() {
+    if (localStorage.getItem("token") === null) {
+      this.$router.push("/login");
+    }
   },
 };
 </script>
