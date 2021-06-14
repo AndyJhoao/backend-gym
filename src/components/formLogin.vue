@@ -22,7 +22,7 @@
           </div>
           <div class="user__password--field font_size-24">
             <input
-              type="text"
+              type="password"
               name="password__login"
               id="password__login"
               v-model="password"
@@ -36,7 +36,9 @@
             </button>
           </div>
           <div class="user__button--forgot">
-            <a class="font_size-20" href="#"><u>Olvidaste tu contraseña?</u></a>
+            <button class="font_size-20 bg-none" v-on:click="forgottPassword">
+              <u>Olvidaste tu contraseña?</u>
+            </button>
           </div>
         </div>
       </div>
@@ -45,7 +47,7 @@
         <div class="body__social--redes">
           <div class="social__redes--facebook spacingV-5">
             <img
-              src="../assets/facebook-brands.svg"
+              src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/facebook-brands.svg?alt=media&token=6986bffb-b6ed-4d6a-944c-8f53e8e09409"
               alt="facebook-logo"
               width="40px"
               height="40px"
@@ -56,7 +58,7 @@
           </div>
           <div class="social__redes--instagram spacingV-5">
             <img
-              src="../assets/instagram-brands.svg"
+              src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/instagram-brands.svg?alt=media&token=632e88f7-9e66-4520-b9fb-7e3d96c6a7d0"
               alt="instagram-logo"
               width="40px"
               height="40px"
@@ -68,8 +70,8 @@
           </div>
         </div>
         <div class="body__social--register">
-          No tienes cuenta?
-          <a class="style-none" href="#"><u>Registrate aquí</u></a>
+          <p>Todos los derechos reservados</p>
+          <p>GYM Spartans &copy;</p>
         </div>
       </div>
     </div>
@@ -87,13 +89,65 @@ export default {
   },
   methods: {
     callSign() {
+      // if (this.name == "" && this.password == "") {
+      //   this.$swal(
+      //     "Favor de llenar los campos",
+      //     "Ingresa tu usuario y contraseña",
+      //     "error"
+      //   );
+      // } else if (this.name == "admin" && this.password == "1234") {
+      //   this.$router.push({
+      //     path: "/home",
+      //     query: { userName: this.name, levelPermisos: 2 },
+      //   });
+      // } else if (this.name == "andy" && this.password == "1234") {
+      //   this.$router.push({
+      //     path: "/home",
+      //     query: { userName: this.name, levelPermisos: 1 },
+      //   });
+      // } else {
+      //   this.$swal(
+      //     "USUARIO O CONTRASEÑA INCORRECTOS",
+      //     "Verifica tus credenciales.!",
+      //     "error"
+      //   );
+      // }
       this.$emit("signUp", { name: this.name, password: this.password });
+    },
+    forgottPassword() {
+      // this.$swal({
+      //   text: "Ingresa tu correo electronico",
+      //   content: "input",
+      //   button: {
+      //     text: "Enviar",
+      //     closeModal: false,
+      //   },
+      // })
+      //   .then((email) => {
+      //     if (!email) throw null;
+      //     return this.$swal({
+      //       title: "Enviado correctamente.!",
+      //       text: "Se envio un link para restablecer la contraseña",
+      //     });
+      //   })
+      //   .catch((err) => {
+      //     return this.$swal(
+      //       "No se ah podido enviar al correo.!",
+      //       "No se pudo enviar al correo electronico proporcionado.",
+      //       err
+      //     );
+      //   });
     },
   },
 };
 </script>
 
 <style scoped>
+.bg-none {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
 .font_size-24 {
   font-size: 22px;
 }
@@ -116,7 +170,7 @@ export default {
 .container__form--login {
   height: 385px;
   width: 944px;
-  background-color: rgba(255, 229, 194, 0.82);
+  background-color: rgba(240, 138, 93, 0.95);
   border-radius: 10px;
 }
 .form__login--tittle {
@@ -160,6 +214,9 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.body__social--register {
+  text-align: center;
 }
 .social__redes--facebook {
   height: 30%;
@@ -252,7 +309,7 @@ export default {
   height: 70%;
   width: 60%;
   border-radius: 5px;
-  background-color: #ff8b07;
+  background-color: #ffd460;
   border: 2px #000000 solid;
   cursor: pointer;
 }

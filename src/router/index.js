@@ -1,14 +1,91 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+
+import Login from "../views/Login.vue";
 import Home from "../views/Home.vue";
+// import homeinfo from "../views/homeinfo.vue";
+import Machines from "../views/HomeMachines.vue";
+import Machine from "../views/Machines.vue";
+import Clients from "../views/Clients.vue";
+import Reports from "../views/Reports.vue";
+import Products from "../views/Products.vue";
+import PuntoVenta from "../views/PuntoVenta.vue";
+import Empleados from "../views/empleados/Empleados.vue";
+import AgregarProducto from "../views/AgregarProducto.vue";
+
+import ActualizarProducto from "../views/ActualizarProducto.vue";
+import Inventario from "../views/Inventario.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "Home",
+    redirect: "/login",
+    name: "homeinfo",
+    component: Login,
+    children: [
+      {
+        path: "login",
+        name: "login",
+        component: Login,
+      },
+    ],
+  },
+  {
+    path: "/home",
+    name: "home",
     component: Home,
+  },
+  {
+    path: "/home/machines",
+    name: "machines",
+    component: Machines,
+  },
+  {
+    path: "/home/clients",
+    name: "clients",
+    component: Clients,
+  },
+  {
+    path: "/home/reports",
+    name: "reports",
+    component: Reports,
+  },
+  {
+    path: "/home/products",
+    name: "products",
+    component: Products,
+  },
+  {
+    path: "/home/empleados",
+    name: "empleados",
+    component: Empleados,
+  },
+  {
+    path: "/home/machines/:id",
+    name: "MachineView",
+    component: Machine,
+  },
+  {
+    path: "/home/products/punto-de-venta",
+    name: "punto-de-venta",
+    component: PuntoVenta,
+  },
+  {
+    path: "/home/products/agregar-producto",
+    name: "agregar-producto",
+    component: AgregarProducto,
+  },
+  {
+    path: "/home/products/actualizar-producto",
+    name: "actualizar-producto",
+    component: ActualizarProducto,
+  },
+  {
+    path: "/home/products/inventario",
+    name: "inventario",
+    component: Inventario,
   },
   {
     path: "/facebook",
@@ -24,19 +101,11 @@ const routes = [
       window.open("https://www.instagram.com", "_blank");
     },
   },
-  {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
-  },
 ];
 
 const router = new VueRouter({
   routes,
+  mode: "history",
 });
 
 export default router;

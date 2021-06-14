@@ -1,14 +1,34 @@
 <template>
   <div id="app">
-    <!-- <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div> -->
-    <router-view />
+    <dashboard :lvlpermisos="permisos" :username="name" v-on:logout="logout" />
+    <router-view v-on:autorizado="autorizar" :lvlpermisos="permisos" />
   </div>
 </template>
-
+<script>
+import Dashboard from "./components/Dashboard.vue";
+export default {
+  components: { Dashboard },
+  name: "app",
+  data() {
+    return {
+      name: "",
+      permisos: 0,
+    };
+  },
+  methods: {
+    autorizar(data) {
+      this.name = data.name;
+      this.permisos = data.permisos;
+    },
+    logout() {
+      this.name = "";
+      this.permisos = 0;
+    },
+  },
+};
+</script>
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Oswald&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -18,23 +38,8 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 100%;
   height: 100vh;
-  background-image: url("C:/Users/Andy_/Desktop/8voSemestre/SENSORES/PRACTICA1/ProyectoGym/ProyectoGYM/project-gym/src/assets/background-gym.jpg");
-  background-size: cover;
-}
-
-#nav {
-  padding: 30px;
-  background-color: #666666;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/fondo-1(1).png?alt=media&token=8dab756a-1c1e-4ff3-893e-1193808ec142");
+  object-fit: cover;
 }
 </style>
