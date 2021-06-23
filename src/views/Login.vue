@@ -11,7 +11,6 @@
       <figcaption>GYM Spartans</figcaption>
     </figure>
     <formLogin v-on:signUp="signIn" />
-    {{ error }}
   </div>
 </template>
 
@@ -57,8 +56,21 @@ export default {
           }
         })
         .catch((err) => {
-          console.log(err.response);
+          console.log(err.response.status);
           this.error = err.response.data.error;
+          if (err.response.status === 500) {
+            this.$swal(
+              "Sin conexion",
+              "Verifica tu conexion a internet",
+              "error"
+            );
+          } else {
+            this.$swal(
+              "USUARIO O CONTRASEÑA INCORRECTOS",
+              "Verifica tus credenciales.!",
+              "error"
+            );
+          }
         });
 
       // axios.post("http://localhost:5000/login", data);

@@ -6,6 +6,7 @@ import Home from "../views/Home.vue";
 // import homeinfo from "../views/homeinfo.vue";
 import Machines from "../views/HomeMachines.vue";
 import Machine from "../views/Machines.vue";
+import Maquinas from "../views/machines/Machine.vue";
 import Clients from "../views/Clients.vue";
 import Reports from "../views/Reports.vue";
 import Products from "../views/Products.vue";
@@ -41,6 +42,11 @@ const routes = [
     path: "/home/machines",
     name: "machines",
     component: Machines,
+  },
+  {
+    path: "/home/maquinas",
+    name: "maquinas",
+    component: Maquinas,
   },
   {
     path: "/home/clients",

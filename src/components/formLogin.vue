@@ -106,11 +106,11 @@ export default {
       //     query: { userName: this.name, levelPermisos: 1 },
       //   });
       // } else {
-      //   this.$swal(
-      //     "USUARIO O CONTRASEÑA INCORRECTOS",
-      //     "Verifica tus credenciales.!",
-      //     "error"
-      //   );
+      // this.$swal(
+      //   "USUARIO O CONTRASEÑA INCORRECTOS",
+      //   "Verifica tus credenciales.!",
+      //   "error"
+      // );
       // }
       this.$emit("signUp", { name: this.name, password: this.password });
     },

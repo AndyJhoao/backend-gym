@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const maquinaSchema = new Schema({
   _id: mongoose.Schema.Types.ObjectId,
   nombre: String,
+  imagen: Buffer,
   descripcion: String,
   fecha: {
     type: Date,

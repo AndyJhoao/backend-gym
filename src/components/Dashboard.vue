@@ -84,7 +84,7 @@ export default {
       this.$router.push("/home/empleados");
     },
     toMaquinas() {
-      this.$router.push("/home");
+      this.$router.push("/home/maquinas");
     },
   },
 };

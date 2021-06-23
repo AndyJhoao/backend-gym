@@ -12,7 +12,12 @@ const Report_Proveedores = require("./models/Reporte_proveedores");
 const Report_Maquinas = require("./models/Reporte_maquinas");
 const Personal = require("./models/Personal");
 const Producto = require("./models/Producto");
+const Maquina = require("./models/Maquina");
+
 const jwt = require("jsonwebtoken");
+const moment = require("moment");
+moment.locale("es");
+moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
 
 const port = process.env.port || 5000;
 mongoose
@@ -59,7 +64,7 @@ app.post("/home/products/agregar-producto", (req, res) => {
   });
 });
 
-app.post("/login", (req, res, next) => {
+app.post("/login", (req, res) => {
   Personal.findOne({ n_usuario: req.body.name }, (err, personal) => {
     if (err)
       return res.status(500).json({
@@ -87,9 +92,11 @@ app.post("/login", (req, res, next) => {
 });
 
 app.post("/home/clients", (req, res) => {
-  console.log(req.body);
+  let suscripcion;
+  if (req.body.suscripcion == "mes") suscripcion = moment().add(1, "M");
+  else suscripcion = moment().add(1, "y");
+
   const client = new Cliente({
-    registro: "1",
     nombre: req.body.nombre,
     genero: req.body.sexo,
     telefono: req.body.telefono,
@@ -101,6 +108,12 @@ app.post("/home/clients", (req, res) => {
     membresia: true,
     tipo_pago: req.body.tipopago,
     cuota: req.body.precio,
+    renovar: true,
+    estado_suscripcion: {
+      horario: moment(),
+      ini_suscripcion: moment(),
+      exp_suscripcion: suscripcion,
+    },
   });
   client.save((err) => {
     if (err) {
@@ -125,14 +138,17 @@ app.post("/home/clients/:id", (req, res) => {
     .catch((err) => console.log(err));
 });
 app.post("/home/personal", (req, res) => {
-  console.log(req.body);
+  let permisosPersonal = 1;
+  if (req.body.permisos.toLowerCase() == "administrador") {
+    permisosPersonal = 2;
+  }
   const personal = new Personal({
     nombre: req.body.nombre,
     apellidos: req.body.apellidos,
     puesto: req.body.puesto,
     n_usuario: req.body.username,
     contraseña: req.body.password,
-    permisos: 1,
+    permisos: permisosPersonal,
     fecha: Date.now(),
   });
   personal.save((err) => {
@@ -146,6 +162,37 @@ app.post("/home/personal", (req, res) => {
     }
   });
 });
+app.post("/home/crear-maquina", (request, response) => {
+  console.log(request.files);
+  const maquina = new Maquina({
+    nombre: request.body.nombre,
+    descripcion: request.body.descripcion,
+    imagen: request.body.imagen,
+    estado: false,
+  });
+  maquina.save((err) => {
+    if (err) {
+      return response.status(400).json({
+        title: "Error",
+        error: err,
+      });
+    } else {
+      return response
+        .status(200)
+        .json({ title: "Maquina creada correctamente" });
+    }
+  });
+});
+app.get("/home/maquina", (request, response) => {
+  Maquina.find({})
+    .then((data) => {
+      return response.send(data);
+    })
+    .catch((err) => {
+      return response.send(err);
+    });
+});
+
 app.post("/home/personal/:id", (req, res) => {
   const id = req.params.id;
   console.log(id);
@@ -314,7 +361,6 @@ app.get("/home/personal/:id", (req, res) => {
 });
 app.get("/home/reports/:type", (req, res) => {
   let type_report = req.params.type;
-  console.log(req.params.type);
   switch (type_report) {
     case "products":
       Report_Products.find({})
@@ -372,15 +418,15 @@ app.get("/home/reports/:type", (req, res) => {
       break;
   }
 });
-app.get("/home/signup", (req, res) => {
-  Personal.find({})
-    .then((data) => {
-      console.log(data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
+// app.get("/home/signup", (req, res) => {
+//   Personal.find({})
+//     .then((data) => {
+//       console.log(data);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// });
 
 app.post("/home/products/actualizar-producto/:id", (req, res) => {
   Producto.deleteOne({ _id: req.params.id }).then(() => {

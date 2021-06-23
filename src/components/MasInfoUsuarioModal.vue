@@ -9,6 +9,8 @@
         <div class="modal-body">
           <spinnerLoader :loading="isLoading" v-if="isLoading" />
           <div v-if="!isLoading">
+            <p>Registro : {{ data.registro }}</p>
+            <br />
             <p>Nombre : {{ data.nombre }}</p>
             <br />
             <p>Apellidos : {{ data.apellidos }}</p>
@@ -19,30 +21,40 @@
             <br />
             <p>Telefono : {{ data.telefono }}</p>
             <br />
-            <p>Observaciones : {{ data.Observaciones }}</p>
+            <p>Observaciones : {{ data.observaciones }}</p>
             <br />
-            <p>Membresia : {{ data.membresia }}</p>
+            <p>Membresia : {{ data.membresia | membresia }}</p>
             <br />
             <p>Tipo de pago : {{ data.tipo_pago }}</p>
             <br />
             <p>Tipo de suscripcion : {{ data.tipo_suscripcion }}</p>
             <br />
 
-            <p>Cuota : {{ data.cuota.$numberDecimal }}</p>
+            <p>Cuota : {{ data.cuota.$numberDecimal | money }}</p>
             <br />
             <p>
               Fecha de inscripcion :
-              {{ data.estado_suscripcion.ini_suscripcion }}
+              {{ data.estado_suscripcion.ini_suscripcion | date }}
             </p>
             <br />
             <p>
               Fecha de expiracion :
-              {{ data.estado_suscripcion.exp_suscripcion }}
+              {{ data.estado_suscripcion.exp_suscripcion | date }}
             </p>
             <br />
           </div>
           <slot name="footer" v-if="!isLoading">
-            GYM Spartans
+            <div class="logo__footer">
+              <figure>
+                <img
+                  src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/logosvg.svg?alt=media&token=43e848cf-f8d8-4000-9fa1-ccf9b8acffa5"
+                  alt="logo"
+                  height="70px"
+                  width="auto"
+                />
+              </figure>
+              GYM Spartans
+            </div>
             <div class="buttonsCont">
               <button class="modal-default-button" @click="$emit('close')">
                 Volver
@@ -209,5 +221,9 @@ select {
   padding: 5px;
   margin: 10px;
   font-size: 1.2rem;
+}
+.logo__footer {
+  width: 200px;
+  text-align: center;
 }
 </style>

@@ -1,14 +1,17 @@
 <template>
-  <div>
+  <div class="contenedor-prin">
     <main>
       <section>
-        <h2><router-link to="/home/"> Home </router-link> // Clientes //</h2>
-        <masInfoModal
-          v-if="showModalInfo"
-          @close="showModalInfo = false"
-          :data="dataClient"
+        <h2><router-link to="/home/"> Home </router-link> // Maquinas //</h2>
+        <infoMachine
+          v-if="showMachineInfo"
+          @closeMachineInfo="showMachineInfo = false"
+          :data="machines"
         />
-        <agregar-usuario-modal v-if="showModal" @close="cerrarModalUser" />
+        <agregarMachine
+          v-if="showModalMachine"
+          @cerrarModalMachine="showModalMachine = false"
+        />
         <div class="contenedor">
           <form class="form-search">
             <div class="menu-op">
@@ -26,9 +29,9 @@
                 id="show-modal"
                 type="button"
                 class="btn-add"
-                @click="showModal = true"
+                @click="showModalMachine = true"
               >
-                Agregar Cliente
+                Agregar Maquina
               </button>
             </div>
           </form>
@@ -38,29 +41,26 @@
               <thead class="head">
                 <tr class="head_row">
                   <th>Clave</th>
+                  <th>Imagen</th>
                   <th>Nombre</th>
-                  <th>Apellidos</th>
-                  <th>Membresia</th>
-                  <th>plan</th>
-                  <th>Telefono</th>
-                  <th>Genero</th>
+                  <th>Descripcion</th>
+                  <th>Estado</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
 
               <tbody class="body">
-                <tr v-for="clientes in Clients" :key="clientes._id">
-                  <td>{{ clientes.registro }}</td>
-                  <td>{{ clientes.nombre }}</td>
-                  <td>{{ clientes.apellidos }}</td>
-                  <td>{{ clientes.membresia | membresia }}</td>
-                  <td>{{ clientes.tipo_suscripcion }}</td>
-                  <td>{{ clientes.telefono }}</td>
-                  <td>{{ clientes.genero }}</td>
+                <tr v-for="maquina in MachineComputed" :key="maquina._id">
+                  <td>{{ maquina._id }}</td>
+                  <td>{{ maquina.imagen }}</td>
+                  <td>{{ maquina.nombre }}</td>
+                  <td>{{ maquina.descripcion }}</td>
+                  <td>{{ maquina.estado }}</td>
                   <td>
-                    <button class="b-eliminar" @click="showInfo(clientes._id)">
+                    <button class="b-eliminar" @click="showInfo(maquina._id)">
                       mas info...
                     </button>
+                    <button class="b-eliminar">editar</button>
                   </td>
                 </tr>
               </tbody>
@@ -72,33 +72,33 @@
   </div>
 </template>
 <script>
-import AgregarUsuarioModal from "./AgregarUsuarioModal.vue";
-import masInfoModal from "./MasInfoUsuarioModal.vue";
-import spinnerLoader from "./SpinnerLoader.vue";
+import spinnerLoader from "@/components/SpinnerLoader.vue";
+import agregarMachine from "@/components/machines/agregarMachine.vue";
+import infoMachine from "@/components/machines/infoMachine.vue";
 import axios from "axios";
 export default {
-  components: { AgregarUsuarioModal, spinnerLoader, masInfoModal },
-  name: "body-client",
+  name: "machines",
+  components: { spinnerLoader, agregarMachine, infoMachine },
   data() {
     return {
-      showModal: false,
-      showModalInfo: false,
       isLoading: false,
-      arrayClients: [],
+      showModalMachine: false,
+      showMachineInfo: false,
+      arrayMachines: [],
       filter: "",
-      dataClient: {},
+      machines: {},
     };
   },
   created() {
-    this.getClientes();
+    this.getMachines();
   },
   methods: {
-    getClientes() {
+    getMachines() {
       this.isLoading = true;
       axios
-        .get("http://localhost:5000/home/clients")
+        .get("http://localhost:5000/home/maquina")
         .then((data) => {
-          this.arrayClients = data.data;
+          this.arrayMachines = data.data;
         })
         .catch((err) => {
           console.log(err);
@@ -107,24 +107,23 @@ export default {
     },
     showInfo(id) {
       axios
-        .get("http://localhost:5000/home/clients/" + id)
+        .get("http://localhost:5000/home/machine/" + id)
         .then((data) => {
-          this.dataClient = data.data;
-          this.showModalInfo = true;
+          this.machines = data.data;
+          this.showMachineInfo = true;
         })
         .catch((err) => {
           console.log(err);
         });
     },
-    cerrarModalUser() {
-      this.showModal = false;
-      // console.log("aaaaaa");
-      this.getClientes();
+    cerrarModalMachine() {
+      this.showModalMachine = false;
+      this.getMachines();
     },
   },
   computed: {
-    Clients() {
-      return this.arrayClients.filter((a) =>
+    MachineComputed() {
+      return this.arrayMachines.filter((a) =>
         a.nombre.toLowerCase().includes(this.filter.toLowerCase())
       );
     },
@@ -137,7 +136,10 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
-
+.contenedor-prin {
+  width: 100%;
+  height: 100%;
+}
 /* contenedor principal */
 .contenedor {
   margin: auto;

@@ -3,63 +3,37 @@
     <div class="modal-wrapper">
       <div class="modal-container">
         <div class="modal-header">
-          <h3>Agregar Nuevo Personal</h3>
+          <h3>Agregar Nueva Maquina</h3>
         </div>
 
         <div class="modal-body">
           <div class="container-form">
             <div class="form-flex-column">
-              <input type="text" placeholder="Nombre(s)" v-model="nombre" />
+              <input type="file" @change="seleccionarImagen" />
+              <input type="text" placeholder="Nombre" v-model="nombre" />
+
               <input
                 type="text"
-                placeholder="Apellido(s)"
-                v-model="apellidos"
-              />
-              <input type="text" placeholder="Puesto" v-model="puesto" />
-            </div>
-            <div class="form-flex-column">
-              <select name="permisos" id="permisos" v-model="permisos">
-                <option disabled value="">Permisos</option>
-                <option value="vendedor">Vendedor</option>
-                <option value="administrador">Administrador</option>
-              </select>
-              <input
-                type="text"
-                placeholder="Nombre de Usuario"
-                v-model="username"
-              />
-              <input
-                type="password"
-                placeholder="Contraseña"
-                v-model="contraseña"
+                placeholder="Descripcion"
+                v-model="descripcion"
               />
             </div>
           </div>
         </div>
         <div class="modal-footer">
           <slot name="footer">
-            <div class="logo__footer">
-              <figure>
-                <img
-                  src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/logosvg.svg?alt=media&token=43e848cf-f8d8-4000-9fa1-ccf9b8acffa5"
-                  alt="logo"
-                  height="70px"
-                  width="auto"
-                />
-              </figure>
-              GYM Spartans
-            </div>
+            GYM Spartans
             <div>
               <button
                 class="modal-default-button"
-                @click="$emit('cerrarModalEmpleado')"
-                v-on:click="createPersonal"
+                @click="$emit('cerrarModalMachine')"
+                v-on:click="createMachine"
               >
                 Guardar
               </button>
               <button
                 class="modal-default-button"
-                @click="$emit('cerrarModalEmpleado')"
+                @click="$emit('cerrarModalMachine')"
               >
                 Cancelar
               </button>
@@ -73,36 +47,40 @@
 <script>
 import axios from "axios";
 export default {
-  name: "agregarPersonal",
+  name: "agregarMaquina",
   data() {
     return {
       nombre: "",
-      apellidos: "",
-      username: "",
-      puesto: "",
-      contraseña: "",
-      permisos: "",
+      imagen: null,
+      descripcion: "",
+      estado: false,
     };
   },
   methods: {
-    createPersonal() {
-      let personal = {
+    createMachine() {
+      // const image = new FormData();
+      // image.append("imagen", this.imagen, this.imagen.name);
+      let maquina = {
         nombre: this.nombre,
-        apellidos: this.apellidos,
-        username: this.username,
-        puesto: this.puesto,
-        password: this.contraseña,
-        permisos: this.permisos,
+        imagen: this.imagen,
+        descripcion: this.descripcion,
+        estado: this.estado,
       };
-      axios.post("http://localhost:5000/home/personal", personal).then(() => {
-        this.$swal({
-          title: "Personal creado correctamente.!",
-          timer: 2000,
-          icon: "success",
+      console.log(maquina);
+      axios
+        .post("http://localhost:5000/home/crear-maquina", maquina)
+        .then(() => {
+          this.$swal({
+            title: "Maquina creada correctamente.!",
+            timer: 2000,
+            icon: "success",
+          });
         });
-      });
       // axios.post("http://localhost:5000/home/signup");
       // axios.get("http://localhost:5000/home/signup");
+    },
+    seleccionarImagen(event) {
+      this.imagen = event.target.files[0];
     },
   },
 };
@@ -198,10 +176,10 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 50%;
+  width: 100%;
 }
 input {
-  width: 320px;
+  width: 400px;
   padding: 5px;
   height: 40px;
   margin: 10px;
@@ -213,9 +191,5 @@ select {
   padding: 5px;
   margin: 10px;
   font-size: 1.2rem;
-}
-.logo__footer {
-  width: 200px;
-  text-align: center;
 }
 </style>

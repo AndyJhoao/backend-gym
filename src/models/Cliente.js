@@ -2,9 +2,16 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const autoincrement = Schema({
+  _id: { type: String, required: true },
+  seq: { type: Number, default: 0 },
+});
+
+var counter = mongoose.model("counter", autoincrement);
+
 //Creación de esquema
 const clienteSchema = new Schema({
-  registro: Number,
+  registro: { type: String },
   nombre: String,
   apellidos: String,
   genero: String,
@@ -36,7 +43,24 @@ const clienteSchema = new Schema({
     renovar: Boolean,
   },
 });
-
+clienteSchema.pre("save", function (next) {
+  var doc = this;
+  counter
+    .findByIdAndUpdate(
+      { _id: "entityId" },
+      { $inc: { seq: 1 } },
+      { new: true, upsert: true }
+    )
+    .then(function (res) {
+      // console.log("...count" + JSON.stringify(res));
+      doc.registro = res.seq;
+      next();
+    })
+    .catch((err) => {
+      console.log(err);
+      throw err;
+    });
+});
 //Crear el modelo
 const Cliente = mongoose.model("Cliente", clienteSchema);
 

@@ -51,7 +51,7 @@
 
               <tbody class="body">
                 <tr v-for="person in Personal" :key="person._id">
-                  <td>{{ person._id }}</td>
+                  <td>{{ person.registro }}</td>
                   <td>{{ person.nombre }}</td>
                   <td>{{ person.apellidos }}</td>
                   <td>{{ person.puesto }}</td>

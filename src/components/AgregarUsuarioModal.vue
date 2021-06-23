@@ -52,7 +52,17 @@
         </div>
         <div class="modal-footer">
           <slot name="footer">
-            GYM Spartans
+            <div class="logo__footer">
+              <figure>
+                <img
+                  src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/logosvg.svg?alt=media&token=43e848cf-f8d8-4000-9fa1-ccf9b8acffa5"
+                  alt="logo"
+                  height="70px"
+                  width="auto"
+                />
+              </figure>
+              GYM Spartans
+            </div>
             <div>
               <button
                 class="modal-default-button"
@@ -112,7 +122,7 @@ export default {
         })
         .finally(() => {
           this.updateTable();
-          console.log("alo");
+          // console.log("alo");
         });
       // axios.post("http://localhost:5000/home/signup");
       // axios.get("http://localhost:5000/home/signup");
@@ -229,5 +239,9 @@ select {
   padding: 5px;
   margin: 10px;
   font-size: 1.2rem;
+}
+.logo__footer {
+  width: 200px;
+  text-align: center;
 }
 </style>

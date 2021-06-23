@@ -9,7 +9,7 @@
         <div class="modal-body">
           <spinnerLoader :loading="isLoading" v-if="isLoading" />
           <div v-if="!isLoading">
-            <p>Registro : {{ data.registro }}</p>
+            <p>Registro : {{ data._id }}</p>
             <br />
             <p>Nombre : {{ data.nombre }}</p>
             <br />
@@ -21,32 +21,22 @@
             <br />
             <p>Permisos : {{ data.permisos }}</p>
             <br />
-            <p>Fecha : {{ data.fecha | date }}</p>
+            <p>Fecha : {{ data.fecha }}</p>
             <br />
           </div>
           <slot name="footer" v-if="!isLoading">
-            <div class="logo__footer">
-              <figure>
-                <img
-                  src="https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/logosvg.svg?alt=media&token=43e848cf-f8d8-4000-9fa1-ccf9b8acffa5"
-                  alt="logo"
-                  height="70px"
-                  width="auto"
-                />
-              </figure>
-              GYM Spartans
-            </div>
+            GYM Spartans
             <div class="buttonsCont">
               <button
                 class="modal-default-button"
-                @click="$emit('closePersonalInfo')"
+                @click="$emit('closeMachineInfo')"
               >
                 Volver
               </button>
               <button
                 class="modal-default-button"
                 v-on:click="deleteUser(data._id)"
-                @click="$emit('closePersonalInfo')"
+                @click="$emit('closeMachineInfo')"
               >
                 Eliminar
               </button>
@@ -205,9 +195,5 @@ select {
   padding: 5px;
   margin: 10px;
   font-size: 1.2rem;
-}
-.logo__footer {
-  width: 200px;
-  text-align: center;
 }
 </style>
