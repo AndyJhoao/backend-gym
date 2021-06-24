@@ -51,15 +51,28 @@
               <tbody class="body">
                 <tr v-for="clientes in Clients" :key="clientes._id">
                   <td>{{ clientes.registro }}</td>
-                  <td>{{ clientes.nombre }}</td>
-                  <td>{{ clientes.apellidos }}</td>
+                  <td>{{ clientes.nombre | capitalize }}</td>
+                  <td>{{ clientes.apellidos | capitalize }}</td>
                   <td>{{ clientes.membresia | membresia }}</td>
-                  <td>{{ clientes.tipo_suscripcion }}</td>
-                  <td>{{ clientes.telefono }}</td>
-                  <td>{{ clientes.genero }}</td>
                   <td>
-                    <button class="b-eliminar" @click="showInfo(clientes._id)">
-                      mas info...
+                    {{ clientes.tipo_suscripcion | capitalize }}
+                  </td>
+                  <td>{{ clientes.telefono }}</td>
+                  <td>
+                    {{ clientes.genero | capitalize }}
+                  </td>
+                  <td>
+                    <button
+                      class="b-eliminar"
+                      @click="getDataClient(clientes._id)"
+                    >
+                      más info...
+                    </button>
+                    <button
+                      class="b-editar"
+                      @click="getDataClient(clientes._id)"
+                    >
+                      editar
                     </button>
                   </td>
                 </tr>
@@ -105,7 +118,7 @@ export default {
         })
         .finally(() => (this.isLoading = false));
     },
-    showInfo(id) {
+    getDataClient(id) {
       axios
         .get("http://localhost:5000/home/clients/" + id)
         .then((data) => {
@@ -231,7 +244,7 @@ body {
 
 /* boton agregar */
 .btn-add {
-  width: 40%;
+  width: 30%;
   height: auto;
   font-family: sans-serif;
   font-weight: bold;
@@ -243,7 +256,7 @@ body {
 }
 
 .btn-add:hover {
-  width: 40%;
+  width: 30%;
   height: auto;
   font-family: sans-serif;
   font-weight: bold;
@@ -306,6 +319,8 @@ td {
   border-radius: 5px;
   color: #60db22;
   border: solid 1px #60db22;
+  outline: none;
+  padding: 5px;
 }
 
 .b-editar:hover {
@@ -318,7 +333,6 @@ td {
   color: white;
   border-color: #60db22;
   border-radius: 5px;
-  outline: none;
 }
 
 /* estilo del boton eliminar*/

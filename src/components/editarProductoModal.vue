@@ -44,7 +44,11 @@
           <slot name="footer">
             GYM Spartans
             <div>
-              <button class="modal-default-button" @click="$emit('close')">
+              <button
+                class="modal-default-button"
+                @click="$emit('close')"
+                v-on:click="updateProduct"
+              >
                 Guardar
               </button>
               <button class="modal-default-button" @click="$emit('close')">
@@ -58,7 +62,7 @@
   </div>
 </template>
 <script>
-// import axios from "axios";
+import axios from "axios";
 import spinnerLoader from "@/components/SpinnerLoader.vue";
 export default {
   name: "editarProductoModal",
@@ -86,6 +90,30 @@ export default {
       this.id_proveedor = this.productInfo.id_proveedor;
       this.precio_compra = this.productInfo.precio_compra.$numberDecimal;
       this.precio_venta = this.productInfo.precio_venta.$numberDecimal;
+    },
+    updateProduct() {
+      let product = {
+        nom_producto: this.nom_producto,
+        descripcion: this.descripcion,
+        id_proveedor: this.id_proveedor,
+        precio_compra: this.precio_compra,
+        precio_venta: this.precio_venta,
+      };
+      console.log(this.productInfo);
+      console.log(product);
+      axios
+        .post(
+          "http://localhost:5000/home/products/editar-producto/" +
+            this.productInfo._id,
+          product
+        )
+        .then(() => {
+          this.$swal({
+            title: "Producto actualizado correctamente.!",
+            timer: 2000,
+            icon: "success",
+          });
+        });
     },
   },
 };

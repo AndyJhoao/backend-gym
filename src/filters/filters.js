@@ -15,4 +15,12 @@ const date_Format = function (date) {
 const money_Format = function (money) {
   return `${"$" + money}`;
 };
-export { activeMembership, date_Format, money_Format };
+
+const capitalize = function (data) {
+  if (data) {
+    return data[0].toUpperCase() + data.substring(1);
+  } else {
+    return "";
+  }
+};
+export { activeMembership, date_Format, money_Format, capitalize };

@@ -1,7 +1,15 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const autoincrementProduct = Schema({
+  _id: { type: String, required: true },
+  seq: { type: Number, default: 0 },
+});
+
+var counterProduct = mongoose.model("counterproduct", autoincrementProduct);
+
 const productoSchema = new Schema({
+  registro: Number,
   nom_producto: String,
   precio_compra: mongoose.Types.Decimal128,
   precio_venta: mongoose.Types.Decimal128,
@@ -18,31 +26,26 @@ const productoSchema = new Schema({
   },
 });
 
-//Crear el modelo
-
-const Producto = mongoose.model("Producto", productoSchema);
-
-var SchemaEntity = mongoose.Schema({
-  testvalue: {
-    type: String,
-  },
-});
-
-SchemaEntity.pre("save", function (next) {
+productoSchema.pre("save", function (next) {
   var doc = this;
-  Producto.findByIdAndUpdate(
-    { _id: "entityId" },
-    { $inc: { seq: 1 } },
-    { new: true, upsert: true }
-  )
+  counterProduct
+    .findByIdAndUpdate(
+      { _id: "entityId" },
+      { $inc: { seq: 1 } },
+      { new: true, upsert: true }
+    )
     .then(function (count) {
       console.log("...count: " + JSON.stringify(count));
-      doc.sort = count.seq;
+      doc.registro = count.seq;
       next();
     })
     .catch((err) => {
       console.log(err);
     });
 });
+
+//Crear el modelo
+
+const Producto = mongoose.model("Producto", productoSchema);
 
 module.exports = Producto;

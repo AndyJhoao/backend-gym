@@ -11,11 +11,11 @@
           <div v-if="!isLoading">
             <p>Registro : {{ data.registro }}</p>
             <br />
-            <p>Nombre : {{ data.nombre }}</p>
+            <p>Nombre : {{ data.nombre | capitalize }}</p>
             <br />
-            <p>Apellidos : {{ data.apellidos }}</p>
+            <p>Apellidos : {{ data.apellidos | capitalize }}</p>
             <br />
-            <p>Puesto : {{ data.puesto }}</p>
+            <p>Puesto : {{ data.puesto | capitalize }}</p>
             <br />
             <p>Nombre de Usuario : {{ data.n_usuario }}</p>
             <br />

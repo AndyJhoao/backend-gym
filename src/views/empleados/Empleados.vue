@@ -12,6 +12,11 @@
           v-if="showModalEmpleado"
           @cerrarModalEmpleado="showModalEmpleado = false"
         />
+        <editarPersonal
+          v-if="showEditPersonal"
+          @cerrarPersonalEdit="showEditPersonal = false"
+          :infoPersonal="personal"
+        />
         <div class="contenedor">
           <form class="form-search">
             <div class="menu-op">
@@ -52,15 +57,23 @@
               <tbody class="body">
                 <tr v-for="person in Personal" :key="person._id">
                   <td>{{ person.registro }}</td>
-                  <td>{{ person.nombre }}</td>
-                  <td>{{ person.apellidos }}</td>
-                  <td>{{ person.puesto }}</td>
+                  <td>{{ person.nombre | capitalize }}</td>
+                  <td>{{ person.apellidos | capitalize }}</td>
+                  <td>{{ person.puesto | capitalize }}</td>
                   <td>{{ person.n_usuario }}</td>
                   <td>
-                    <button class="b-eliminar" @click="showInfo(person._id)">
+                    <button
+                      class="b-eliminar"
+                      @click="getDataPersonal(person._id)"
+                    >
                       mas info...
                     </button>
-                    <button class="b-eliminar">editar</button>
+                    <button
+                      class="b-editar"
+                      @click="editDataPersonal(person._id)"
+                    >
+                      editar
+                    </button>
                   </td>
                 </tr>
               </tbody>
@@ -75,15 +88,17 @@
 import spinnerLoader from "@/components/SpinnerLoader.vue";
 import agregarPersonal from "@/components/empleados/agregarPersonal.vue";
 import infoPersonal from "@/components/empleados/infoPersonal.vue";
+import editarPersonal from "@/components/empleados/editarPersonal.vue";
 import axios from "axios";
 export default {
   name: "empleados",
-  components: { spinnerLoader, agregarPersonal, infoPersonal },
+  components: { spinnerLoader, agregarPersonal, infoPersonal, editarPersonal },
   data() {
     return {
       isLoading: false,
       showModalEmpleado: false,
       showPersonalInfo: false,
+      showEditPersonal: false,
       arrayPersonal: [],
       filter: "",
       personal: {},
@@ -105,12 +120,23 @@ export default {
         })
         .finally(() => (this.isLoading = false));
     },
-    showInfo(id) {
+    getDataPersonal(id) {
       axios
         .get("http://localhost:5000/home/personal/" + id)
         .then((data) => {
           this.personal = data.data;
           this.showPersonalInfo = true;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    editDataPersonal(id) {
+      axios
+        .get("http://localhost:5000/home/personal/" + id)
+        .then((data) => {
+          this.personal = data.data;
+          this.showEditPersonal = true;
         })
         .catch((err) => {
           console.log(err);
@@ -308,6 +334,7 @@ td {
   border-radius: 5px;
   color: #60db22;
   border: solid 1px #60db22;
+  padding: 5px;
 }
 
 .b-editar:hover {

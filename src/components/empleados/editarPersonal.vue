@@ -3,18 +3,14 @@
     <div class="modal-wrapper">
       <div class="modal-container">
         <div class="modal-header">
-          <h3>Agregar Nuevo Personal</h3>
+          <h3>Editar Personal {{ infoPersonal.nombre }}</h3>
         </div>
 
         <div class="modal-body">
           <div class="container-form">
             <div class="form-flex-column">
-              <input type="text" placeholder="Nombre(s)" v-model="nombre" />
-              <input
-                type="text"
-                placeholder="Apellido(s)"
-                v-model="apellidos"
-              />
+              <input type="text" placeholder="Nombre" v-model="nombre" />
+              <input type="text" placeholder="Apellidos" v-model="apellidos" />
               <input type="text" placeholder="Puesto" v-model="puesto" />
             </div>
             <div class="form-flex-column">
@@ -25,14 +21,15 @@
               </select>
               <input
                 type="text"
-                placeholder="Nombre de Usuario"
+                placeholder="Nombre de usuario"
                 v-model="username"
               />
               <input
                 type="password"
-                placeholder="Contraseña"
                 v-model="contraseña"
+                placeholder="Contraseña"
               />
+              <button class="info" @click="infoEdit">i</button>
             </div>
           </div>
         </div>
@@ -52,14 +49,14 @@
             <div>
               <button
                 class="modal-default-button"
-                @click="$emit('cerrarModalEmpleado')"
-                v-on:click="createPersonal"
+                @click="$emit('cerrarPersonalEdit')"
+                v-on:click="editPersonal"
               >
                 Guardar
               </button>
               <button
                 class="modal-default-button"
-                @click="$emit('cerrarModalEmpleado')"
+                @click="$emit('cerrarPersonalEdit')"
               >
                 Cancelar
               </button>
@@ -73,19 +70,20 @@
 <script>
 import axios from "axios";
 export default {
-  name: "agregarPersonal",
+  name: "editarPersonal",
+  props: ["infoPersonal"],
   data() {
     return {
-      nombre: "",
-      apellidos: "",
-      username: "",
-      puesto: "",
-      contraseña: "",
-      permisos: "",
+      nombre: this.infoPersonal.nombre,
+      apellidos: this.infoPersonal.apellidos,
+      puesto: this.infoPersonal.puesto,
+      username: this.infoPersonal.n_usuario,
+      contraseña: this.infoPersonal.contraseña,
+      permisos: this.infoPersonal.permisos,
     };
   },
   methods: {
-    createPersonal() {
+    editPersonal() {
       let personal = {
         nombre: this.nombre,
         apellidos: this.apellidos,
@@ -94,15 +92,46 @@ export default {
         password: this.contraseña,
         permisos: this.permisos,
       };
-      axios.post("http://localhost:5000/home/personal", personal).then(() => {
-        this.$swal({
-          title: "Personal creado correctamente.!",
-          timer: 2000,
-          icon: "success",
+      console.log(this.infoPersonal);
+      console.log(personal);
+      if (personal.nombre == "") {
+        personal.nombre = this.infoPersonal.nombre;
+      }
+      if (personal.apellidos == "") {
+        personal.apellidos = this.infoPersonal.apellidos;
+      }
+      if (personal.username == "") {
+        personal.username = this.infoPersonal.n_usuario;
+      }
+      if (personal.puesto == "") {
+        personal.puesto = this.infoPersonal.puesto;
+      }
+      if (personal.password == "") {
+        personal.password = this.infoPersonal.contraseña;
+      }
+      if (personal.permisos == "") {
+        personal.permisos = this.infoPersonal.permisos;
+      }
+      axios
+        .post(
+          "http://localhost:5000/home/personal/edit-personal/" +
+            this.infoPersonal._id,
+          personal
+        )
+        .then(() => {
+          this.$swal({
+            title: "Personal actualizado correctamente.!",
+            timer: 2000,
+            icon: "success",
+          });
         });
-      });
-      // axios.post("http://localhost:5000/home/signup");
-      // axios.get("http://localhost:5000/home/signup");
+      //   axios.post("http://localhost:5000/home/signup");
+      //   axios.get("http://localhost:5000/home/signup");
+    },
+    infoEdit() {
+      alert(
+        "Para mantener la misma contraseña dejar el campo vacio.\nPara mantener los permisos iguales dejar vacio el campo."
+      );
     },
   },
 };
@@ -218,5 +247,8 @@ select {
 .logo__footer {
   width: 200px;
   text-align: center;
+}
+.info {
+  width: 20px;
 }
 </style>

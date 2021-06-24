@@ -9,37 +9,40 @@
         <div class="modal-body">
           <spinnerLoader :loading="isLoading" v-if="isLoading" />
           <div v-if="!isLoading">
-            <p>Registro : {{ data.registro }}</p>
+            <p><b>Registro : </b>{{ data.registro }}</p>
             <br />
-            <p>Nombre : {{ data.nombre }}</p>
+            <p><b>Nombre : </b>{{ data.nombre | capitalize }}</p>
             <br />
-            <p>Apellidos : {{ data.apellidos }}</p>
+            <p><b>Apellidos : </b>{{ data.apellidos | capitalize }}</p>
             <br />
-            <p>Direccion : {{ data.direccion }}</p>
+            <p><b>Direccion : </b>{{ data.direccion | capitalize }}</p>
             <br />
-            <p>Genero : {{ data.genero }}</p>
+            <p><b>Genero : </b>{{ data.genero | capitalize }}</p>
             <br />
-            <p>Telefono : {{ data.telefono }}</p>
+            <p><b>Telefono : </b>{{ data.telefono }}</p>
             <br />
-            <p>Observaciones : {{ data.observaciones }}</p>
+            <p><b>Observaciones : </b>{{ data.observaciones | capitalize }}</p>
             <br />
-            <p>Membresia : {{ data.membresia | membresia }}</p>
+            <p><b>Membresia : </b>{{ data.membresia | membresia }}</p>
             <br />
-            <p>Tipo de pago : {{ data.tipo_pago }}</p>
-            <br />
-            <p>Tipo de suscripcion : {{ data.tipo_suscripcion }}</p>
-            <br />
-
-            <p>Cuota : {{ data.cuota.$numberDecimal | money }}</p>
+            <p><b>Tipo de pago : </b>{{ data.tipo_pago | capitalize }}</p>
             <br />
             <p>
-              Fecha de inscripcion :
-              {{ data.estado_suscripcion.ini_suscripcion | date }}
+              <b>Tipo de suscripcion : </b
+              >{{ data.tipo_suscripcion | capitalize }}
+            </p>
+            <br />
+
+            <p><b>Cuota : </b>{{ data.cuota.$numberDecimal | money }}</p>
+            <br />
+            <p>
+              <b> Fecha de inscripcion : </b
+              >{{ data.estado_suscripcion.ini_suscripcion | date }}
             </p>
             <br />
             <p>
-              Fecha de expiracion :
-              {{ data.estado_suscripcion.exp_suscripcion | date }}
+              <b> Fecha de expiracion : </b
+              >{{ data.estado_suscripcion.exp_suscripcion | date }}
             </p>
             <br />
           </div>
@@ -53,7 +56,7 @@
                   width="auto"
                 />
               </figure>
-              GYM Spartans
+              <b> GYM Spartans</b>
             </div>
             <div class="buttonsCont">
               <button class="modal-default-button" @click="$emit('close')">
@@ -138,6 +141,7 @@ export default {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
   transition: all 0.3s ease;
   font-family: Helvetica, Arial, sans-serif;
+  font-size: 1.2rem;
 }
 
 .modal-header h3 {

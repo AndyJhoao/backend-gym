@@ -139,7 +139,7 @@ app.post("/home/clients/:id", (req, res) => {
 });
 app.post("/home/personal", (req, res) => {
   let permisosPersonal = 1;
-  if (req.body.permisos.toLowerCase() == "administrador") {
+  if (req.body.permisos == "administrador" || req.body.permisos == 2) {
     permisosPersonal = 2;
   }
   const personal = new Personal({
@@ -162,6 +162,27 @@ app.post("/home/personal", (req, res) => {
     }
   });
 });
+app.post("/home/personal/edit-personal/:id", (request, response) => {
+  const id = request.params.id;
+  const data = request.body;
+  console.log(id);
+  console.log(data);
+  if (request.body.permisos == "administrador" || request.body.permisos == 2) {
+    request.body.permisos = 2;
+  } else {
+    request.body.permisos = 1;
+  }
+  Personal.findByIdAndUpdate(id, data, { new: true })
+    .then(() => {
+      return response.status(200).json({
+        title: "Personal actualizado correctamente",
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 app.post("/home/crear-maquina", (request, response) => {
   console.log(request.files);
   const maquina = new Maquina({
@@ -318,6 +339,19 @@ app.get("/home/products/actualizar-producto/:id", (req, res) => {
   Producto.findOne({ _id: req.params.id })
     .then((data) => {
       return res.send(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+app.post("/home/products/editar-producto/:id", (request, response) => {
+  const id = request.params.id;
+  const data = request.body;
+  Producto.findByIdAndUpdate(id, data, { new: true })
+    .then(() => {
+      return response.status(200).json({
+        title: "Producto actualizado correctamente",
+      });
     })
     .catch((err) => {
       console.log(err);
