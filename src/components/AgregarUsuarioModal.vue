@@ -153,6 +153,7 @@ export default {
 
 .modal-container {
   width: 900px;
+  height: 530px;
   margin: 0px auto;
   padding: 20px 30px;
   background-color: #fff;
@@ -242,6 +243,7 @@ select {
 }
 .logo__footer {
   width: 200px;
+  margin-top: 20px;
   text-align: center;
 }
 </style>

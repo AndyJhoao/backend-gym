@@ -40,10 +40,14 @@
               </thead>
 
               <tbody class="body">
-                <tr v-for="product in ProductosFilter" :key="product._id">
-                  <td>{{ product._id }}</td>
-                  <td>{{ product.nom_producto }}</td>
-                  <td>{{ product.descripcion }}</td>
+                <tr
+                  class="line_bottom"
+                  v-for="product in ProductosFilter"
+                  :key="product._id"
+                >
+                  <td>{{ product.registro }}</td>
+                  <td>{{ product.nom_producto | capitalize }}</td>
+                  <td>{{ product.descripcion | capitalize }}</td>
                   <td>${{ product.precio_venta.$numberDecimal }}</td>
                   <td>${{ product.precio_compra.$numberDecimal }}</td>
                   <td>{{ product.id_proveedor }}</td>
@@ -54,14 +58,14 @@
                       @click="deleteUser(product._id)"
                     >
                       <!--  subir uno arriba-->
-                      > Eliminar
+                      Eliminar
                     </button>
                     <button
                       class="b-editar margin-5"
                       @click="editarProducto(product._id)"
                     >
                       <!--  subir uno arriba-->
-                      > Editar
+                      Editar
                     </button>
                   </td>
                 </tr>
@@ -288,6 +292,7 @@ body {
   padding: 10px;
   border-radius: 5px;
   border: solid 1px gainsboro;
+  border-collapse: collapse;
 }
 .head {
   height: 90px;
@@ -312,6 +317,15 @@ td {
   text-align: center;
   font-family: sans-serif;
   height: 90px;
+}
+tr:nth-child(odd) {
+  background-color: rgba(240, 138, 93, 0.2);
+}
+tr:nth-child(even) {
+  background-color: rgb(228, 222, 222, 0.2);
+}
+.line_bottom td {
+  border-bottom: 1px rgb(216, 212, 212) solid;
 }
 
 /* estilo del boton editar*/

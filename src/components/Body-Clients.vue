@@ -9,6 +9,12 @@
           :data="dataClient"
         />
         <agregar-usuario-modal v-if="showModal" @close="cerrarModalUser" />
+        <editClients
+          v-if="showEditClient"
+          @close="closeEditClient"
+          @createNewUser="getClientes"
+          :dataClient="dataClient"
+        />
         <div class="contenedor">
           <form class="form-search">
             <div class="menu-op">
@@ -70,7 +76,7 @@
                     </button>
                     <button
                       class="b-editar"
-                      @click="getDataClient(clientes._id)"
+                      @click="editDataClient(clientes._id)"
                     >
                       editar
                     </button>
@@ -87,15 +93,17 @@
 <script>
 import AgregarUsuarioModal from "./AgregarUsuarioModal.vue";
 import masInfoModal from "./MasInfoUsuarioModal.vue";
+import editClients from "./clients/editClients.vue";
 import spinnerLoader from "./SpinnerLoader.vue";
 import axios from "axios";
 export default {
-  components: { AgregarUsuarioModal, spinnerLoader, masInfoModal },
+  components: { AgregarUsuarioModal, spinnerLoader, masInfoModal, editClients },
   name: "body-client",
   data() {
     return {
       showModal: false,
       showModalInfo: false,
+      showEditClient: false,
       isLoading: false,
       arrayClients: [],
       filter: "",
@@ -128,6 +136,21 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+    },
+    editDataClient(id) {
+      axios
+        .get("http://localhost:5000/home/clients/" + id)
+        .then((data) => {
+          this.dataClient = data.data;
+          this.showEditClient = true;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    closeEditClient() {
+      this.showEditClient = false;
+      this.getClientes();
     },
     cerrarModalUser() {
       this.showModal = false;

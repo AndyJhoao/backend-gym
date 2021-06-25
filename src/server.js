@@ -137,6 +137,21 @@ app.post("/home/clients/:id", (req, res) => {
     })
     .catch((err) => console.log(err));
 });
+app.post("/home/clients/edit-clients/:id", (request, response) => {
+  const id = request.params.id;
+  const data = request.body;
+  data.cuota = data.cuota.$numberDecimal;
+  console.log(data);
+  Cliente.findByIdAndUpdate(id, data, { new: true })
+    .then(() => {
+      return response.status(200).json({
+        title: "Cliente actualizado correctamente",
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 app.post("/home/personal", (req, res) => {
   let permisosPersonal = 1;
   if (req.body.permisos == "administrador" || req.body.permisos == 2) {

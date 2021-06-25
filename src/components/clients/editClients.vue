@@ -3,33 +3,33 @@
     <div class="modal-wrapper">
       <div class="modal-container">
         <div class="modal-header">
-          <h3>Editar Personal {{ infoPersonal.nombre }}</h3>
+          <h3>Editar Cliente {{ dataClient.nombre }}</h3>
         </div>
 
         <div class="modal-body">
           <div class="container-form">
             <div class="form-flex-column">
-              <input type="text" placeholder="Nombre" v-model="nombre" />
-              <input type="text" placeholder="Apellidos" v-model="apellidos" />
-              <input type="text" placeholder="Puesto" v-model="puesto" />
+              <input type="text" placeholder="Nombre(s)" v-model="nombre" />
+
+              <!-- <select name="genero" id="genero" v-model="sexo">
+                <option disabled value="">Sexo :</option>
+                <option value="hombre">Hombre</option>
+                <option value="mujer">Mujer</option>
+              </select> -->
+              <input type="text" placeholder="Dirección" v-model="direccion" />
             </div>
             <div class="form-flex-column">
-              <select name="permisos" id="permisos" v-model="permisos">
-                <option disabled value="">Permisos</option>
-                <option value="vendedor">Vendedor</option>
-                <option value="administrador">Administrador</option>
-              </select>
               <input
                 type="text"
-                placeholder="Nombre de usuario"
-                v-model="username"
+                placeholder="Apellido(s)"
+                v-model="apellidos"
               />
+              <input type="number" placeholder="Teléfono" v-model="telefono" />
               <input
-                type="password"
-                v-model="contraseña"
-                placeholder="Contraseña"
+                type="text"
+                placeholder="Observaciones"
+                v-model="observaciones"
               />
-              <button class="info" @click="infoEdit">i</button>
             </div>
           </div>
         </div>
@@ -49,14 +49,15 @@
             <div>
               <button
                 class="modal-default-button"
-                @click="$emit('cerrarPersonalEdit')"
-                v-on:click="editPersonal"
+                @click="$emit('close')"
+                v-on:click="createUser"
               >
                 Guardar
               </button>
               <button
                 class="modal-default-button"
-                @click="$emit('cerrarPersonalEdit')"
+                @click="$emit('close')"
+                v-on:click="log"
               >
                 Cancelar
               </button>
@@ -69,69 +70,62 @@
 </template>
 <script>
 import axios from "axios";
+require("promise.prototype.finally").shim();
 export default {
-  name: "editarPersonal",
-  props: ["infoPersonal"],
+  name: "editarCliente",
+  props: ["dataClient"],
   data() {
     return {
-      nombre: this.infoPersonal.nombre,
-      apellidos: this.infoPersonal.apellidos,
-      puesto: this.infoPersonal.puesto,
-      username: this.infoPersonal.n_usuario,
-      contraseña: this.infoPersonal.contraseña,
-      permisos: this.infoPersonal.permisos,
+      selected: "",
+      nombre: this.dataClient.nombre,
+      apellidos: this.dataClient.apellidos,
+      sexo: this.dataClient.sexo,
+      telefono: this.dataClient.telefono,
+      direccion: this.dataClient.direccion,
+      observaciones: this.dataClient.observaciones,
+      suscripcion: this.dataClient.suscripcion,
+      tipopago: this.dataClient.tipopago,
+      cuota: this.dataClient.cuota,
     };
   },
   methods: {
-    editPersonal() {
-      let personal = {
+    createUser() {
+      let user = {
         nombre: this.nombre,
         apellidos: this.apellidos,
-        n_usuario: this.username,
-        puesto: this.puesto,
-        password: this.contraseña,
-        permisos: this.permisos,
+        sexo: this.sexo,
+        telefono: this.telefono,
+        direccion: this.direccion,
+        observaciones: this.observaciones,
+        suscripcion: this.suscripcion,
+        tipopago: this.tipopago,
+        cuota: this.cuota,
       };
-      console.log(this.infoPersonal);
-      console.log(personal);
-      if (personal.nombre == "") {
-        personal.nombre = this.infoPersonal.nombre;
-      }
-      if (personal.apellidos == "") {
-        personal.apellidos = this.infoPersonal.apellidos;
-      }
-      if (personal.username == "") {
-        personal.n_usuario = this.infoPersonal.n_usuario;
-      }
-      if (personal.puesto == "") {
-        personal.puesto = this.infoPersonal.puesto;
-      }
-      if (personal.password == "") {
-        personal.password = this.infoPersonal.contraseña;
-      }
-      if (personal.permisos == "") {
-        personal.permisos = this.infoPersonal.permisos;
-      }
       axios
         .post(
-          "http://localhost:5000/home/personal/edit-personal/" +
-            this.infoPersonal._id,
-          personal
+          "http://localhost:5000/home/clients/edit-clients/" +
+            this.dataClient._id,
+          user
         )
         .then(() => {
           this.$swal({
-            title: "Personal actualizado correctamente.!",
+            title: "Usuario actualizado correctamente.!",
             timer: 2000,
             icon: "success",
           });
+        })
+        .finally(() => {
+          this.updateTable();
         });
-      //   axios.post("http://localhost:5000/home/signup");
-      //   axios.get("http://localhost:5000/home/signup");
+      // .finally(() => {
+      //   this.updateTable();
+      //   // console.log("alo");
+      // });
+      // axios.post("http://localhost:5000/home/signup");
+      // axios.get("http://localhost:5000/home/signup");
     },
-    infoEdit() {
-      alert(
-        "Para mantener la misma contraseña dejar el campo vacio.\nPara mantener los permisos iguales dejar vacio el campo."
-      );
+    updateTable() {
+      this.$emit("createNewUser");
     },
   },
 };
@@ -156,7 +150,7 @@ export default {
 
 .modal-container {
   width: 900px;
-  height: 350px;
+  height: 370px;
   margin: 0px auto;
   padding: 20px 30px;
   background-color: #fff;
@@ -246,9 +240,7 @@ select {
 }
 .logo__footer {
   width: 200px;
+  margin-top: 20px;
   text-align: center;
-}
-.info {
-  width: 20px;
 }
 </style>

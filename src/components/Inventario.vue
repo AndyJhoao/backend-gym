@@ -7,6 +7,11 @@
           <router-link to="/home/products"> Productos </router-link> //
           Inventario
         </h2>
+        <selectProduct
+          v-if="showSelectProduct"
+          @close="closeListProducts"
+          :listProducts="products"
+        />
         <div class="contenedor">
           <div class="container-table">
             <table class="tabla">
@@ -20,11 +25,11 @@
               </thead>
 
               <tbody class="body">
-                <tr>
-                  <td>001</td>
-                  <td>Mark</td>
-                  <td>Town Down hill climb</td>
-                  <td>Activa</td>
+                <tr v-for="productos in listProducts" :key="productos._id">
+                  <td>{{ productos._id }}</td>
+                  <td>{{ productos.nom_producto }}</td>
+                  <td>{{ productos.cant_existencia }}</td>
+                  <td>{{ productos.precio_compra }}</td>
                 </tr>
               </tbody>
             </table>
@@ -35,20 +40,25 @@
                 type="text"
                 class="menu input-search search-width"
                 placeholder="Buscar"
+                v-model="search"
               />
-              <button type="submit" class="btn-b">Buscar</button>
+              <button type="button" class="btn-b" @click="selectProduct">
+                Buscar
+              </button>
             </div>
             <div class="centro">
               <input
                 type="text"
                 class="menu input-search search-width margin-left"
                 placeholder="Agregar Cantidad"
+                v-model="quantity"
               />
-              <button type="submit" class="b-editar">Agregar</button>
+
+              <button type="button" class="b-editar">Agregar</button>
             </div>
 
             <div class="derecha">
-              <button type="submit" class="b-eliminar">Finalizar</button>
+              <button type="button" class="b-eliminar">Finalizar</button>
             </div>
           </form>
         </div>
@@ -56,6 +66,46 @@
     </main>
   </div>
 </template>
+<script>
+import axios from "axios";
+import selectProduct from "./invetory/selectProduct.vue";
+require("promise.prototype.finally").shim();
+export default {
+  name: "Inventory",
+  components: { selectProduct },
+  data() {
+    return {
+      products: [],
+      listProducts: [],
+      search: "",
+      quantity: "",
+      showSelectProduct: false,
+    };
+  },
+  created() {
+    this.getProducts();
+  },
+  methods: {
+    getProducts() {
+      axios
+        .get("http://localhost:5000/home/products/actualizar-producto")
+        .then((data) => {
+          this.products = data.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => (this.isLoading = false));
+    },
+    selectProduct() {
+      this.showSelectProduct = true;
+    },
+    closeListProducts() {
+      this.showSelectProduct = false;
+    },
+  },
+};
+</script>
 
 <style scoped>
 body {
