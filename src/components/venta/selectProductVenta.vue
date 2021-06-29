@@ -14,6 +14,7 @@
                   <th>NOMBRE</th>
                   <th>DESCRIPCION</th>
                   <th>EXISTENCIA</th>
+                  <th>PRECIO</th>
                 </tr>
               </thead>
               <tbody class="body">
@@ -28,6 +29,9 @@
                   <td>{{ productsSelect.nom_producto }}</td>
                   <td>{{ productsSelect.descripcion }}</td>
                   <td>{{ productsSelect.cant_existencia }}</td>
+                  <td>
+                    {{ productsSelect.precio_venta.$numberDecimal | money }}
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -66,6 +70,12 @@
               <button class="modal-default-button" @click="$emit('close')">
                 Cerrar
               </button>
+              <input
+                type="number"
+                placeholder="Cantidad"
+                class="inputSearch"
+                v-model="cantidad"
+              />
             </div>
           </slot>
         </div>
@@ -75,7 +85,7 @@
 </template>
 <script>
 export default {
-  name: "selectProduct",
+  name: "selectProductVenta",
   props: ["listProducts"],
   data() {
     return {
@@ -83,6 +93,7 @@ export default {
       product: [],
       productSelect: false,
       products: [],
+      cantidad: 0,
     };
   },
   created() {
@@ -101,7 +112,7 @@ export default {
           },
         });
       } else {
-        this.$emit("openProduct", this.product);
+        this.$emit("openProduct", this.product, this.cantidad);
       }
     },
     productSelected(select, id) {

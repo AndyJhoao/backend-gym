@@ -341,6 +341,24 @@ app.post("/home/signup", (req, res) => {
     }
   });
 });
+app.post("/home/products/update-all-products", (request, response) => {
+  const listProducts = request.body;
+  listProducts.forEach((product) =>
+    Producto.findByIdAndUpdate(
+      product.id,
+      {
+        $inc: { cant_existencia: product.cant_existencia },
+      },
+      {
+        new: true,
+      }
+    ).then(() => {
+      return response.status(200).json({
+        title: "Producto actualizado " + product.nom_producto,
+      });
+    })
+  );
+});
 app.get("/home/products/actualizar-producto", (req, res) => {
   Producto.find({})
     .then((data) => {

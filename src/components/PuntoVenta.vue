@@ -7,6 +7,12 @@
           <router-link to="/home/products"> Productos </router-link> // Punto de
           Venta
         </h2>
+        <venta
+          v-if="listProductsModal"
+          :listProducts="listProducts"
+          @close="closeList"
+          @openProduct="addListVenta"
+        />
         <div class="contenedor">
           <div class="container-table">
             <table class="tabla">
@@ -14,47 +20,34 @@
                 <tr class="head_row">
                   <th class="a-cel15">Cantidad</th>
                   <th class="a-cel25">Nombre del producto</th>
-                  <th class="a-cel15">Precio</th>
                   <th class="a-cel25">Descripcion</th>
+                  <th class="a-cel15">Precio</th>
+                  <th class="a-cel15">Subtotal</th>
                   <th class="a-cel20">Acciones</th>
                 </tr>
               </thead>
 
               <tbody class="body">
-                <tr>
-                  <td>001</td>
-                  <td>Mark</td>
-                  <td>Town Down hill climb</td>
-                  <td>Activa</td>
+                <tr v-for="product in listSellTable" :key="product._id">
+                  <td>{{ product.cant_existencia }}</td>
+                  <td>{{ product.nom_producto }}</td>
+                  <td>{{ product.descripcion }}</td>
+                  <td>{{ product.precio_venta.$numberDecimal | money }}</td>
                   <td>
-                    <button type="submit" class="b-eliminar">Retirar</button>
+                    {{
+                      (product.precio_venta.$numberDecimal *
+                        product.cant_existencia)
+                        | money
+                    }}
                   </td>
-                </tr>
-                <tr>
-                  <td>001</td>
-                  <td>Mark</td>
-                  <td>Town Down hill climb</td>
-                  <td>Activa</td>
                   <td>
-                    <button type="submit" class="b-eliminar">Retirar</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>001</td>
-                  <td>Mark</td>
-                  <td>Town Down hill climb</td>
-                  <td>Activa</td>
-                  <td>
-                    <button type="submit" class="b-eliminar">Retirar</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>001</td>
-                  <td>Mark</td>
-                  <td>Town Down hill climb</td>
-                  <td>Activa</td>
-                  <td>
-                    <button type="submit" class="b-eliminar">Retirar</button>
+                    <button
+                      type="button"
+                      class="b-eliminar"
+                      @click="deleteProductList(product._id)"
+                    >
+                      Retirar
+                    </button>
                   </td>
                 </tr>
               </tbody>
@@ -67,11 +60,14 @@
                 class="menu input-search search-width"
                 placeholder="Buscar"
               />
-              <button type="submit" class="btn-b">Buscar</button>
+              <button type="button" class="btn-b" @click="openList">
+                Buscar
+              </button>
             </div>
 
             <div class="align-right">
-              <button type="submit" class="b-editar">Venta</button>
+              <p>Total ${{ precioTotal }}</p>
+              <button type="button" class="b-editar">Venta</button>
             </div>
           </form>
         </div>
@@ -79,6 +75,83 @@
     </main>
   </div>
 </template>
+<script>
+import axios from "axios";
+import venta from "./venta/selectProductVenta.vue";
+export default {
+  name: "PuntoDeVenta",
+  components: { venta },
+  data() {
+    return {
+      listProducts: [],
+      listSellTable: [],
+      listProductsModal: false,
+      isLoading: true,
+      filter: "",
+    };
+  },
+  created() {
+    this.getProducts();
+  },
+  methods: {
+    getProducts() {
+      axios
+        .get("http://localhost:5000/home/products/actualizar-producto")
+        .then((data) => {
+          this.listProducts = data.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => (this.isLoading = false));
+    },
+    closeList() {
+      this.listProductsModal = false;
+    },
+    openList() {
+      this.listProductsModal = true;
+    },
+    addListVenta(product, cantidad) {
+      let productUpdated = product;
+      productUpdated.cant_existencia = cantidad;
+      this.listSellTable.push(productUpdated);
+    },
+    deleteProductList(id) {
+      const index = this.listSellTable.findIndex(
+        (arrayItemProduct) => arrayItemProduct._id === id
+      );
+      if (index > -1) {
+        this.listSellTable.splice(index, 1);
+
+        this.$swal({
+          title: "Producto eliminado",
+          text: "Producto eliminado de la lista",
+          timer: 2000,
+          icon: "success",
+        });
+      } else {
+        this.$swal({
+          title: "No se encontró",
+          text: "No se encontró el producto a eliminar",
+          timer: 2000,
+          icon: "warning",
+        });
+      }
+    },
+  },
+  computed: {
+    precioTotal() {
+      let precioTotal = 0;
+      this.listSellTable.forEach(
+        (product) =>
+          (precioTotal +=
+            product.precio_venta.$numberDecimal * product.cant_existencia)
+      );
+      return precioTotal;
+    },
+  },
+};
+</script>
 
 <style scoped>
 body {

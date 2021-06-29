@@ -11,6 +11,7 @@
           v-if="showSelectProduct"
           @close="closeListProducts"
           :listProducts="products"
+          @openProduct="addProductData"
         />
         <div class="contenedor">
           <div class="container-table">
@@ -19,17 +20,33 @@
                 <tr class="head_row">
                   <th class="a-cel">Clave</th>
                   <th class="a-cel">Nombre</th>
+                  <th class="a-cel">Descripcion</th>
                   <th class="a-cel">Cantidad</th>
                   <th class="a-cel">Precio compra</th>
+                  <th class="a-cel">Acciones</th>
                 </tr>
               </thead>
 
               <tbody class="body">
-                <tr v-for="productos in listProducts" :key="productos._id">
-                  <td>{{ productos._id }}</td>
+                <tr
+                  v-for="productos in listProducts"
+                  :key="productos._id"
+                  class="deleteProduct"
+                >
+                  <td>{{ productos.id }}</td>
                   <td>{{ productos.nom_producto }}</td>
+                  <td>{{ productos.descripcion }}</td>
                   <td>{{ productos.cant_existencia }}</td>
-                  <td>{{ productos.precio_compra }}</td>
+                  <td>{{ productos.precio_compra | money }}</td>
+                  <td>
+                    <button
+                      type="button"
+                      class="btn-delete"
+                      @click="deleteProduct(productos.id)"
+                    >
+                      Eliminar
+                    </button>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -50,15 +67,38 @@
               <input
                 type="text"
                 class="menu input-search search-width margin-left"
-                placeholder="Agregar Cantidad"
-                v-model="quantity"
+                placeholder="Nombre"
+                disabled
+                v-model="nom_producto"
               />
-
-              <button type="button" class="b-editar">Agregar</button>
+              <input
+                type="text"
+                class="menu input-search search-width margin-left"
+                placeholder="Descripcion"
+                disabled
+                v-model="descripcion"
+              />
+              <input
+                type="number"
+                class="menu input-search search-width-number margin-left"
+                placeholder="Cantidad"
+                v-model="cant_existencia"
+              />
+              <input
+                type="number"
+                class="menu input-search search-width-number margin-left"
+                placeholder="Precio Compra"
+                v-model="precio_compra"
+              />
             </div>
 
             <div class="derecha">
-              <button type="button" class="b-eliminar">Finalizar</button>
+              <button type="button" class="btn-b" @click="addProductTable">
+                Agregar
+              </button>
+              <button type="button" class="b-eliminar" @click="updateAll">
+                Finalizar
+              </button>
             </div>
           </form>
         </div>
@@ -78,7 +118,11 @@ export default {
       products: [],
       listProducts: [],
       search: "",
-      quantity: "",
+      id: "",
+      cant_existencia: 0,
+      nom_producto: "",
+      descripcion: "",
+      precio_compra: 0,
       showSelectProduct: false,
     };
   },
@@ -102,6 +146,119 @@ export default {
     },
     closeListProducts() {
       this.showSelectProduct = false;
+    },
+    addProductData(product) {
+      this.id = product._id;
+      this.nom_producto = product.nom_producto;
+      this.descripcion = product.descripcion;
+      this.cant_existencia = product.cant_existencia;
+      this.precio_compra = product.precio_compra.$numberDecimal;
+    },
+    addProductTable() {
+      if (this.id != null) {
+        if (this.cant_existencia > 0) {
+          if (this.precio_compra > 0) {
+            if (this.listProducts.filter((e) => e.id === this.id).length > 0) {
+              this.$swal({
+                title: "Ya existe.!",
+                text:
+                  "El producto que deseas agregar ya se enecuentra dentro de la tabla. ¿Deseas actualizar la cantidad y el precio por los actuales?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+              }).then((updateQuantity) => {
+                if (updateQuantity) {
+                  const indexProduct = this.listProducts.findIndex(
+                    (e) => e.id === this.id
+                  );
+                  const productToUpdate = this.listProducts[indexProduct];
+                  productToUpdate.cant_existencia = this.cant_existencia;
+                  productToUpdate.precio_compra = this.precio_compra;
+                } else {
+                  this.id = "";
+                  this.nom_producto = "";
+                  this.descripcion = "";
+                  this.cant_existencia = "";
+                  this.precio_compra = "";
+                }
+              });
+            } else {
+              let productoTable = {
+                id: this.id,
+                cant_existencia: this.cant_existencia,
+                nom_producto: this.nom_producto,
+                descripcion: this.descripcion,
+                precio_compra: this.precio_compra,
+              };
+              this.listProducts.push(productoTable);
+            }
+          } else {
+            this.$swal({
+              title: "Precio de compra invalido",
+              text: "El valor del precio de compra es invalido",
+              icon: "warning",
+              timer: 2000,
+            });
+          }
+        } else {
+          this.$swal({
+            title: "Cantidad no aceptada",
+            text: "La cantidad a ingresar no es correcta",
+            icon: "warning",
+            timer: 2000,
+          });
+        }
+      } else {
+        this.$swal({
+          title: "Favor de buscar un producto y seleccionarlo",
+          timer: 2000,
+          icon: "warning",
+        });
+      }
+    },
+    deleteProduct(id) {
+      const index = this.listProducts.findIndex(
+        (arrayItem) => arrayItem.id === id
+      );
+      if (index > -1) {
+        this.listProducts.splice(index, 1);
+        this.$swal({
+          title: "Producto eliminado",
+          text: "Producto eliminado de la lista",
+          timer: 2000,
+          icon: "success",
+        });
+      } else {
+        this.$swal({
+          title: "No se encontró",
+          text: "No se encontró el producto a eliminar",
+          timer: 2000,
+          icon: "warning",
+        });
+      }
+    },
+    updateAll() {
+      axios
+        .post(
+          "http://localhost:5000/home/products/update-all-products",
+          this.listProducts
+        )
+        .then(() => {
+          this.$swal({
+            title: "Cantidades agregadas correctamente",
+            text: "Las cantidades de cada producto fueron añadidas con exito",
+            icon: "success",
+            timer: 3000,
+          });
+        })
+        .catch((err) => {
+          this.$swal({
+            title: "Error",
+            text: err,
+            icon: "error",
+            timer: 2000,
+          });
+        });
     },
   },
 };
@@ -230,7 +387,28 @@ body {
   border-radius: 5px;
   outline: none;
 }
-
+.btn-delete {
+  width: 100px;
+  height: auto;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  background-color: white;
+  border-radius: 5px;
+  color: yellowgreen;
+  border: solid 1px yellowgreen;
+  cursor: pointer;
+}
+.btn-delete:hover {
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  background-color: yellowgreen;
+  color: white;
+  border-color: yellowgreen;
+  border-radius: 5px;
+  outline: none;
+}
 /* estilos de la tabla */
 
 /* estilo del cuerpo de la tabla */
@@ -245,6 +423,7 @@ body {
   padding: 10px;
   border-radius: 5px;
   border: solid 1px gainsboro;
+  border-collapse: collapse;
 }
 .head {
   height: 90px;
@@ -343,7 +522,10 @@ td {
 }
 
 .search-width {
-  width: 250px;
+  width: 200px;
+}
+.search-width-number {
+  width: 140px;
 }
 
 /*Estilos extra de la pagina inventario*/
@@ -352,7 +534,7 @@ td {
 }
 
 .a-cel {
-  width: 25%;
+  width: 18%;
 }
 
 .izquierda {
@@ -364,12 +546,12 @@ td {
 .centro {
   display: flex;
   flex-direction: row;
-  margin-right: 120px;
 }
 
 .derecha {
   display: flex;
-  flex-direction: row;
+  justify-content: space-around;
+  width: 360px;
 }
 /*estilos extra de la tabla punto de venta*/
 .a-cel35 {
@@ -402,5 +584,17 @@ td {
   flex-direction: row;
   justify-content: flex-end;
   flex: 1;
+}
+tr:nth-child(odd) {
+  background-color: rgba(113, 165, 135, 0.3);
+}
+tr:nth-child(even) {
+  background-color: rgba(86, 146, 113, 0.3);
+  border-bottom: 1px solid;
+  border-top: 1px solid;
+}
+.deleteProduct:hover {
+  background-color: rgba(68, 173, 99, 0.479);
+  cursor: pointer;
 }
 </style>
