@@ -11,6 +11,7 @@
           v-if="showSelectProduct"
           @close="closeListProducts"
           :listProducts="products"
+          :search="search"
           @openProduct="addProductData"
         />
         <div class="contenedor">
@@ -50,6 +51,9 @@
                 </tr>
               </tbody>
             </table>
+            <p class="centerTextNotFound" v-if="listProducts.length < 1">
+              <i>No se encontraron coincidencias</i>
+            </p>
           </div>
           <form class="form-search margint-10">
             <div class="izquierda">
@@ -146,6 +150,7 @@ export default {
     },
     closeListProducts() {
       this.showSelectProduct = false;
+      this.search = "";
     },
     addProductData(product) {
       this.id = product._id;
@@ -259,6 +264,7 @@ export default {
             timer: 2000,
           });
         });
+      this.listProducts = [];
     },
   },
 };
@@ -596,5 +602,12 @@ tr:nth-child(even) {
 .deleteProduct:hover {
   background-color: rgba(68, 173, 99, 0.479);
   cursor: pointer;
+}
+.centerTextNotFound {
+  text-align: center;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1.3rem;
+  opacity: 0.5;
+  padding-top: 30px;
 }
 </style>

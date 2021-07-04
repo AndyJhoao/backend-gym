@@ -2,6 +2,7 @@
 const express = require("express");
 const path = require("path");
 const app = express();
+const fileUpload = require("express-fileupload");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const Cliente = require("./models/Cliente");
@@ -35,6 +36,8 @@ mongoose
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
+
+app.use(fileUpload());
 
 app.use(cors());
 
@@ -87,7 +90,84 @@ app.post("/login", (req, res) => {
       title: "Usuario autenticado",
       token: token,
       permisos: personal.permisos,
+      name: req.body.name,
     });
+  });
+});
+
+app.post("/home/products/punto-de-venta/:total", (request, response) => {
+  const venta_data = request.body;
+  let ventas_array = new Report_Ventas({
+    type: "Venta",
+    description: "Ventas del dia " + moment(),
+    fecha_venta: moment(),
+    total: request.params.total,
+    ventas: [
+      {
+        nom_producto: venta_data[0].nom_producto,
+        description: venta_data[0].descripcion,
+        subtotal: venta_data[0].subtotal,
+        cantidad: venta_data[0].cant_existencia,
+      },
+    ],
+  });
+  ventas_array.save((err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      return response.status(200).json({
+        title: "Venta realizada exitosamente",
+        id: ventas_array._id,
+      });
+    }
+  });
+});
+
+app.post("/home/products/punto-de-venta/update/:id", (request) => {
+  let venta_data = request.body;
+  let id = request.params.id;
+  venta_data.forEach((venta_dinamico) => {
+    if (venta_dinamico.total) {
+      console.log("nothi");
+    } else {
+      Report_Ventas.findByIdAndUpdate(
+        id,
+        {
+          $push: {
+            ventas: {
+              nom_producto: venta_dinamico.nom_producto,
+              description: venta_dinamico.descripcion,
+              subtotal: venta_dinamico.subtotal,
+              cantidad: venta_dinamico.cant_existencia,
+            },
+          },
+        },
+        { new: true }
+      )
+        .then((updated) => {
+          console.log(updated);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  });
+});
+
+app.post("/home/products/update/existencias", (request) => {
+  let data_products = request.body;
+  data_products.forEach((product) => {
+    let negativeRest = product.cant_existencia * -1;
+    Producto.findByIdAndUpdate(product._id, {
+      $inc: { cant_existencia: negativeRest },
+      new: true,
+    })
+      .then((updated) => {
+        console.log(updated);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   });
 });
 
@@ -199,19 +279,18 @@ app.post("/home/personal/edit-personal/:id", (request, response) => {
 });
 
 app.post("/home/crear-maquina", (request, response) => {
-  console.log(request.files);
   const maquina = new Maquina({
     nombre: request.body.nombre,
     descripcion: request.body.descripcion,
     imagen: request.body.imagen,
-    estado: false,
+    cantidad: request.body.cantidad,
+    estado: request.body.estado,
+    fecha: moment(),
   });
+  console.log(maquina);
   maquina.save((err) => {
     if (err) {
-      return response.status(400).json({
-        title: "Error",
-        error: err,
-      });
+      console.log(err);
     } else {
       return response
         .status(200)
@@ -227,6 +306,24 @@ app.get("/home/maquina", (request, response) => {
     .catch((err) => {
       return response.send(err);
     });
+});
+
+app.get("/home/machine/:id", (request, response) => {
+  let id = request.params.id;
+  Maquina.findOne({ _id: id })
+    .then((data) => {
+      return response.send(data);
+    })
+    .catch((err) => console.log(err));
+});
+
+app.post("/home/machine/:id", (request, response) => {
+  const id = request.params.id;
+  Maquina.deleteOne({ _id: id }).then(() => {
+    return response.status(200).json({
+      title: "Maquina eliminada correctamente",
+    });
+  });
 });
 
 app.post("/home/personal/:id", (req, res) => {
@@ -341,7 +438,7 @@ app.post("/home/signup", (req, res) => {
     }
   });
 });
-app.post("/home/products/update-all-products", (request, response) => {
+app.post("/home/products/update-all-products", (request) => {
   const listProducts = request.body;
   listProducts.forEach((product) =>
     Producto.findByIdAndUpdate(
@@ -352,10 +449,8 @@ app.post("/home/products/update-all-products", (request, response) => {
       {
         new: true,
       }
-    ).then(() => {
-      return response.status(200).json({
-        title: "Producto actualizado " + product.nom_producto,
-      });
+    ).then((updated) => {
+      console.log(updated);
     })
   );
 });

@@ -15,6 +15,16 @@ export default {
       permisos: 0,
     };
   },
+  created() {
+    if (localStorage.getItem("token") === null) {
+      // console.log("no hay token");
+      this.name = "";
+      this.permisos = 0;
+    } else {
+      this.name = localStorage.getItem("user");
+      this.permisos = parseInt(localStorage.getItem("permisos"));
+    }
+  },
   methods: {
     autorizar(data) {
       this.name = data.name;

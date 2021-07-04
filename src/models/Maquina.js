@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const maquinaSchema = new Schema({
-  _id: mongoose.Schema.Types.ObjectId,
   nombre: String,
-  imagen: Buffer,
+  imagen: String,
   descripcion: String,
+  cantidad: Number,
   fecha: {
     type: Date,
     default: Date.now,

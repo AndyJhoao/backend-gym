@@ -46,7 +46,8 @@ export default {
         .then((res) => {
           if (res.status === 200) {
             localStorage.setItem("token", res.data.token);
-
+            localStorage.setItem("user", res.data.name);
+            localStorage.setItem("permisos", res.data.permisos);
             this.$router.push("/home");
             this.levelpermisos = res.data.permisos;
             this.$emit("autorizado", {

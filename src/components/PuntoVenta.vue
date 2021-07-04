@@ -9,7 +9,6 @@
         </h2>
         <venta
           v-if="listProductsModal"
-          :listProducts="listProducts"
           @close="closeList"
           @openProduct="addListVenta"
         />
@@ -34,11 +33,7 @@
                   <td>{{ product.descripcion }}</td>
                   <td>{{ product.precio_venta.$numberDecimal | money }}</td>
                   <td>
-                    {{
-                      (product.precio_venta.$numberDecimal *
-                        product.cant_existencia)
-                        | money
-                    }}
+                    {{ product.subtotal | money }}
                   </td>
                   <td>
                     <button
@@ -52,6 +47,9 @@
                 </tr>
               </tbody>
             </table>
+            <p class="centerTextNotFound" v-if="listSellTable.length < 1">
+              <i>No se encontraron coincidencias</i>
+            </p>
           </div>
           <form class="form-search margint-10">
             <div class="align-left">
@@ -66,8 +64,10 @@
             </div>
 
             <div class="align-right">
-              <p>Total ${{ precioTotal }}</p>
-              <button type="button" class="b-editar">Venta</button>
+              <p class="totalSell">Total ${{ precioTotal }}</p>
+              <button type="button" class="b-editar" @click="sellList">
+                Venta
+              </button>
             </div>
           </form>
         </div>
@@ -88,6 +88,7 @@ export default {
       listProductsModal: false,
       isLoading: true,
       filter: "",
+      subtotal: 0,
     };
   },
   created() {
@@ -112,9 +113,41 @@ export default {
       this.listProductsModal = true;
     },
     addListVenta(product, cantidad) {
-      let productUpdated = product;
-      productUpdated.cant_existencia = cantidad;
-      this.listSellTable.push(productUpdated);
+      if (product._id != null) {
+        if (cantidad > 0) {
+          if (
+            this.listSellTable.filter((e) => e._id === product._id).length > 0
+          ) {
+            let indexProduct = this.listSellTable.findIndex(
+              (e) => e._id === product._id
+            );
+            const productToUpdate = this.listSellTable[indexProduct];
+            productToUpdate.cant_existencia =
+              parseInt(productToUpdate.cant_existencia) + parseInt(cantidad);
+          } else {
+            let productUpdated = product;
+            productUpdated.cant_existencia = cantidad;
+            productUpdated.subtotal =
+              parseInt(cantidad) *
+              parseInt(productUpdated.precio_venta.$numberDecimal);
+            this.listSellTable.push(productUpdated);
+          }
+        } else {
+          this.$swal({
+            title: "Favor de ingresar una cantidad mayor a cero",
+            text: "Se necesita ingresar una cantidad mayor a cero",
+            icon: "warning",
+            timer: 2000,
+          });
+        }
+      } else {
+        this.$swal({
+          title: "Favor de seleccionar un producto",
+          text: "Se debe seleccionar un producto de la lista",
+          icon: "warning",
+          timer: 2000,
+        });
+      }
     },
     deleteProductList(id) {
       const index = this.listSellTable.findIndex(
@@ -137,6 +170,35 @@ export default {
           icon: "warning",
         });
       }
+    },
+    sellList() {
+      let datafull = this.listSellTable;
+      axios
+        .post(
+          "http://localhost:5000/home/products/punto-de-venta/" +
+            this.precioTotal,
+          this.listSellTable
+        )
+        .then((response) => {
+          this.listSellTable.splice(0, 1);
+          axios.post(
+            "http://localhost:5000/home/products/punto-de-venta/update/" +
+              response.data.id,
+            this.listSellTable
+          );
+          this.$swal({
+            title: "Venta generada correctamente",
+            text: "Venta almacenada en reporte por fecha",
+            icon: "success",
+            timer: 2000,
+          });
+          this.listSellTable = [];
+        });
+      console.log(datafull);
+      axios.post(
+        "http://localhost:5000/home/products/update/existencias",
+        datafull
+      );
     },
   },
   computed: {
@@ -447,5 +509,17 @@ td {
   flex-direction: row;
   justify-content: flex-end;
   flex: 1;
+}
+.totalSell {
+  padding: 10px;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1.4rem;
+}
+.centerTextNotFound {
+  text-align: center;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1.3rem;
+  opacity: 0.5;
+  padding-top: 30px;
 }
 </style>

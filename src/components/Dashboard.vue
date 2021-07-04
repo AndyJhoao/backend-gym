@@ -39,11 +39,7 @@
               >
                 Empleados
               </button>
-              <button
-                v-if="lvlpermisos == 2"
-                class="button-logout"
-                @click="toMaquinas"
-              >
+              <button class="button-logout" @click="toMaquinas">
                 Maquinas
               </button>
               <button class="button-logout" @click="logout">
@@ -65,14 +61,11 @@ export default {
     username: String,
   },
   created() {
-    if (!localStorage.getItem("token") === null) {
-      console.log("hay token");
-    }
-  },
-  mounted() {
-    if (!localStorage.getItem("token") === null) {
-      console.log("hay token mounted");
-    }
+    // if (!localStorage.getItem("token") === null) {
+    //   console.log("no hay token");
+    // } else {
+    //   console.log("hay token");
+    // }
   },
   methods: {
     logout() {

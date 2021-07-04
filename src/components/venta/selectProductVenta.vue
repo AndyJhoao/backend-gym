@@ -35,6 +35,9 @@
                 </tr>
               </tbody>
             </table>
+            <p v-if="listProductsSearch.length < 1" class="centerTextNotFound">
+              <i>No se encontraron coincidencias</i>
+            </p>
           </div>
         </div>
         <div class="modal-footer">
@@ -84,6 +87,7 @@
   </div>
 </template>
 <script>
+import axios from "axios";
 export default {
   name: "selectProductVenta",
   props: ["listProducts"],
@@ -97,22 +101,40 @@ export default {
     };
   },
   created() {
-    this.products = this.listProducts;
+    this.getProducts();
   },
   methods: {
+    async getProducts() {
+      try {
+        this.products = await axios.get(
+          "http://localhost:5000/home/products/actualizar-producto"
+        );
+        this.products = this.products.data;
+      } catch (err) {
+        console.log(err);
+      }
+    },
     openProduct() {
-      if (this.product.length == 0) {
-        this.$emit("openProduct", {
-          id: "",
-          cant_existencia: 0,
-          nom_producto: "",
-          descripcion: "",
-          precio_compra: {
-            $numberDecimal: 0,
-          },
-        });
-      } else {
-        this.$emit("openProduct", this.product, this.cantidad);
+      try {
+        if (this.product.length == 0) {
+          this.$emit(
+            "openProduct",
+            {
+              id: "",
+              cant_existencia: 0,
+              nom_producto: "",
+              descripcion: "",
+              precio_venta: {
+                $numberDecimal: 0,
+              },
+            },
+            this.cantidad
+          );
+        } else {
+          this.$emit("openProduct", this.product, this.cantidad);
+        }
+      } catch (err) {
+        console.log(err);
       }
     },
     productSelected(select, id) {
@@ -122,9 +144,13 @@ export default {
   },
   computed: {
     listProductsSearch() {
-      return this.products.filter((a) =>
-        a.nom_producto.toLowerCase().includes(this.filter.toLowerCase())
-      );
+      if (this.products.length < 1) {
+        return "No hubo coincidencias :)";
+      } else {
+        return this.products.filter((a) =>
+          a.nom_producto.toLowerCase().includes(this.filter.toLowerCase())
+        );
+      }
     },
   },
 };
@@ -283,5 +309,12 @@ tr:nth-child(odd) {
   border-radius: 5px;
   outline: none;
   padding: 5px;
+}
+.centerTextNotFound {
+  text-align: center;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1.3rem;
+  opacity: 0.5;
+  padding-top: 30px;
 }
 </style>

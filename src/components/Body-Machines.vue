@@ -5,7 +5,25 @@
         <h2><router-link to="/home/"> Home </router-link> // Maquinas //</h2>
         <div class="contenedor-2">
           <div class="imagenes-maquinas">
-            <div class="caja-maquina">
+            <div
+              class="caja-maquina"
+              v-for="machine in arrayMachines"
+              :key="machine._id"
+            >
+              <router-link
+                :to="{
+                  path: '/home/machine/Caminadora',
+                }"
+              >
+                <img
+                  class="imagen"
+                  :src="machine.imagen"
+                  :alt="machine.nombre"
+                />
+                <h2>{{ machine.nombre }}</h2>
+              </router-link>
+            </div>
+            <!-- <div class="caja-maquina">
               <router-link to="/home/machines/caminadoras">
                 <img
                   class="imagen"
@@ -109,14 +127,34 @@
                 />
                 <h2>Area de Crossfit</h2>
               </router-link>
-            </div>
+            </div> -->
           </div>
         </div>
       </section>
     </main>
   </div>
 </template>
-
+<script>
+import axios from "axios";
+export default {
+  name: "Body-machines",
+  data() {
+    return {
+      arrayMachines: [],
+    };
+  },
+  created() {
+    this.getMachines();
+  },
+  methods: {
+    getMachines() {
+      axios.get("http://localhost:5000/home/maquina").then((data) => {
+        this.arrayMachines = data.data;
+      });
+    },
+  },
+};
+</script>
 <style>
 .contenedor-2 {
   /*background-color: blue;*/
@@ -133,6 +171,8 @@
   justify-content: center;
 }
 .imagen {
+  width: 200px;
+  height: 200px;
   border: 1px solid black;
   border-radius: 50px;
 }

@@ -17,6 +17,8 @@
                 placeholder="Descripcion"
                 v-model="descripcion"
               />
+              <input type="number" placeholder="Cantidad" v-model="cantidad" />
+              <progress :value="uploadValue" max="100" />
             </div>
           </div>
         </div>
@@ -24,11 +26,7 @@
           <slot name="footer">
             GYM Spartans
             <div>
-              <button
-                class="modal-default-button"
-                @click="$emit('cerrarModalMachine')"
-                v-on:click="createMachine"
-              >
+              <button class="modal-default-button" v-on:click="createMachine">
                 Guardar
               </button>
               <button
@@ -46,38 +44,63 @@
 </template>
 <script>
 import axios from "axios";
+import firebase from "firebase";
 export default {
   name: "agregarMaquina",
   data() {
     return {
       nombre: "",
-      imagen: null,
       descripcion: "",
-      estado: false,
+      estado: true,
+      cantidad: 0,
+
+      imagen: null,
+      uploadValue: 0,
+      picture: null,
     };
   },
   methods: {
     createMachine() {
-      // const image = new FormData();
-      // image.append("imagen", this.imagen, this.imagen.name);
-      let maquina = {
-        nombre: this.nombre,
-        imagen: this.imagen,
-        descripcion: this.descripcion,
-        estado: this.estado,
-      };
-      console.log(maquina);
-      axios
-        .post("http://localhost:5000/home/crear-maquina", maquina)
-        .then(() => {
-          this.$swal({
-            title: "Maquina creada correctamente.!",
-            timer: 2000,
-            icon: "success",
+      const storageRef = firebase.storage().ref(`/${this.imagen.name}`);
+      const task = storageRef.put(this.imagen);
+      task.on(
+        "state_changed",
+        (snapshot) => {
+          let percentage =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          this.uploadValue = percentage;
+        },
+        (error) => {
+          console.log(error.message);
+        },
+        () => {
+          this.uploadValue = 100;
+          task.snapshot.ref.getDownloadURL().then((url) => {
+            this.picture = url;
+            console.log(this.picture);
+            let maquina = {
+              nombre: this.nombre,
+              imagen: this.picture,
+              descripcion: this.descripcion,
+              estado: this.estado,
+              cantidad: this.cantidad,
+            };
+            console.log(maquina);
+            axios
+              .post("http://localhost:5000/home/crear-maquina", maquina)
+              .then(() => {
+                this.$swal({
+                  title: "Maquina creada correctamente.!",
+                  timer: 2000,
+                  icon: "success",
+                });
+              });
+            this.$emit("cerrarModalMachine");
           });
-        });
-      // axios.post("http://localhost:5000/home/signup");
-      // axios.get("http://localhost:5000/home/signup");
+        }
+      );
+
+      // console.log(image);
     },
     seleccionarImagen(event) {
       this.imagen = event.target.files[0];

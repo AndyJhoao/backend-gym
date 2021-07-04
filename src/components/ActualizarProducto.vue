@@ -71,6 +71,9 @@
                 </tr>
               </tbody>
             </table>
+            <p v-if="ProductosFilter.length < 1" class="centerTextNotFound">
+              <i>No se encontraron coincidencias</i>
+            </p>
           </div>
         </div>
       </section>
@@ -459,5 +462,12 @@ tr:nth-child(even) {
   flex-direction: row;
   justify-content: flex-end;
   flex: 1;
+}
+.centerTextNotFound {
+  text-align: center;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1.3rem;
+  opacity: 0.5;
+  padding-top: 30px;
 }
 </style>

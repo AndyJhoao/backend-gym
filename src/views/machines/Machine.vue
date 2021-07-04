@@ -40,10 +40,10 @@
             <table class="tabla">
               <thead class="head">
                 <tr class="head_row">
-                  <th>Clave</th>
                   <th>Imagen</th>
                   <th>Nombre</th>
                   <th>Descripcion</th>
+                  <th>Cantidad</th>
                   <th>Estado</th>
                   <th>Acciones</th>
                 </tr>
@@ -51,20 +51,34 @@
 
               <tbody class="body">
                 <tr v-for="maquina in MachineComputed" :key="maquina._id">
-                  <td>{{ maquina._id }}</td>
-                  <td>{{ maquina.imagen }}</td>
+                  <td>
+                    <img
+                      :src="maquina.imagen"
+                      :alt="maquina.nombre"
+                      class="imageTable"
+                    />
+                  </td>
                   <td>{{ maquina.nombre }}</td>
                   <td>{{ maquina.descripcion }}</td>
-                  <td>{{ maquina.estado }}</td>
+                  <td>{{ maquina.cantidad }}</td>
+                  <td>{{ maquina.estado | membresia }}</td>
                   <td>
                     <button class="b-eliminar" @click="showInfo(maquina._id)">
                       mas info...
                     </button>
-                    <button class="b-eliminar">editar</button>
+                    <button
+                      class="b-eliminar"
+                      @click="deleteMachine(maquina._id)"
+                    >
+                      eliminar
+                    </button>
                   </td>
                 </tr>
               </tbody>
             </table>
+            <p v-if="MachineComputed.length < 1" class="centerTextNotFound">
+              <i>No se encontraron coincidencias</i>
+            </p>
           </div>
         </div>
       </section>
@@ -119,6 +133,11 @@ export default {
     cerrarModalMachine() {
       this.showModalMachine = false;
       this.getMachines();
+    },
+    deleteMachine(id) {
+      console.log(id);
+      let indexMachine = this.arrayMachines.findIndex((e) => e._id === id);
+      console.log(indexMachine);
     },
   },
   computed: {
@@ -428,5 +447,16 @@ td {
   flex-direction: row;
   justify-content: flex-end;
   flex: 1;
+}
+.centerTextNotFound {
+  text-align: center;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1.3rem;
+  opacity: 0.5;
+  padding-top: 30px;
+}
+.imageTable {
+  width: 70px;
+  height: 70px;
 }
 </style>

@@ -13,15 +13,16 @@
             <br />
             <p>Nombre : {{ data.nombre }}</p>
             <br />
-            <p>Apellidos : {{ data.apellidos }}</p>
+            <p>Descripcion : {{ data.descripcion }}</p>
             <br />
-            <p>Puesto : {{ data.puesto }}</p>
+            <p>Estado : {{ data.estado | membresia }}</p>
             <br />
-            <p>Nombre de Usuario : {{ data.n_usuario }}</p>
+            <p>Fecha : {{ data.fecha | date }}</p>
             <br />
-            <p>Permisos : {{ data.permisos }}</p>
-            <br />
-            <p>Fecha : {{ data.fecha }}</p>
+            <p>
+              Imagen :
+              <img class="imageInfo" :src="data.imagen" :alt="data.nombre" />
+            </p>
             <br />
           </div>
           <slot name="footer" v-if="!isLoading">
@@ -35,7 +36,7 @@
               </button>
               <button
                 class="modal-default-button"
-                v-on:click="deleteUser(data._id)"
+                v-on:click="deleteMachine(data._id)"
                 @click="$emit('closeMachineInfo')"
               >
                 Eliminar
@@ -51,7 +52,7 @@
 import axios from "axios";
 import spinnerLoader from "@/components/SpinnerLoader.vue";
 export default {
-  name: "masInfoPersonal",
+  name: "masInfoMaquina",
   components: { spinnerLoader },
   props: ["data"],
   data() {
@@ -64,7 +65,7 @@ export default {
     setTimeout(() => (this.isLoading = false), 1000);
   },
   methods: {
-    deleteUser(id) {
+    deleteMachine(id) {
       this.$swal("¿Seguro que deseas eliminar este registro?", {
         icon: "warning",
         buttons: true,
@@ -72,9 +73,9 @@ export default {
       }).then((isDelete) => {
         if (isDelete) {
           axios
-            .post("http://localhost:5000/home/personal/" + id)
+            .post("http://localhost:5000/home/machine/" + id)
             .then(() => {
-              this.$swal("Empleado Eliminado.!", { icon: "success" });
+              this.$swal("Maquina Eliminada.!", { icon: "success" });
             })
             .catch((err) => {
               console.log(err);
@@ -195,5 +196,9 @@ select {
   padding: 5px;
   margin: 10px;
   font-size: 1.2rem;
+}
+.imageInfo {
+  width: 300px;
+  height: 300px;
 }
 </style>

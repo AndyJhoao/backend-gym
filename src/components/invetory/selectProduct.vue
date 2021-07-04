@@ -31,6 +31,9 @@
                 </tr>
               </tbody>
             </table>
+            <p v-if="listProductsSearch.length < 1" class="centerTextNotFound">
+              <i>No se encontraron coincidencias</i>
+            </p>
           </div>
         </div>
         <div class="modal-footer">
@@ -76,7 +79,7 @@
 <script>
 export default {
   name: "selectProduct",
-  props: ["listProducts"],
+  props: ["listProducts", "search"],
   data() {
     return {
       filter: "",
@@ -86,6 +89,7 @@ export default {
     };
   },
   created() {
+    this.filter = this.search;
     this.products = this.listProducts;
   },
   methods: {
@@ -111,9 +115,13 @@ export default {
   },
   computed: {
     listProductsSearch() {
-      return this.products.filter((a) =>
-        a.nom_producto.toLowerCase().includes(this.filter.toLowerCase())
-      );
+      if (this.products.length < 1) {
+        return "nothing";
+      } else {
+        return this.products.filter((a) =>
+          a.nom_producto.toLowerCase().includes(this.filter.toLowerCase())
+        );
+      }
     },
   },
 };
@@ -272,5 +280,12 @@ tr:nth-child(odd) {
   border-radius: 5px;
   outline: none;
   padding: 5px;
+}
+.centerTextNotFound {
+  text-align: center;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1.3rem;
+  opacity: 0.5;
+  padding-top: 30px;
 }
 </style>
