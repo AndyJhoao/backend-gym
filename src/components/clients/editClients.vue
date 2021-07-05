@@ -10,12 +10,6 @@
           <div class="container-form">
             <div class="form-flex-column">
               <input type="text" placeholder="Nombre(s)" v-model="nombre" />
-
-              <!-- <select name="genero" id="genero" v-model="sexo">
-                <option disabled value="">Sexo :</option>
-                <option value="hombre">Hombre</option>
-                <option value="mujer">Mujer</option>
-              </select> -->
               <input type="text" placeholder="Dirección" v-model="direccion" />
             </div>
             <div class="form-flex-column">
@@ -54,11 +48,7 @@
               >
                 Guardar
               </button>
-              <button
-                class="modal-default-button"
-                @click="$emit('close')"
-                v-on:click="log"
-              >
+              <button class="modal-default-button" @click="$emit('close')">
                 Cancelar
               </button>
             </div>
@@ -110,12 +100,13 @@ export default {
         .then(() => {
           this.$swal({
             title: "Usuario actualizado correctamente.!",
-            timer: 2000,
             icon: "success",
+          }).then((data) => {
+            if (data) {
+              console.log(data);
+              this.$emit("update");
+            }
           });
-        })
-        .finally(() => {
-          this.updateTable();
         });
       // .finally(() => {
       //   this.updateTable();
@@ -123,9 +114,6 @@ export default {
       // });
       // axios.post("http://localhost:5000/home/signup");
       // axios.get("http://localhost:5000/home/signup");
-    },
-    updateTable() {
-      this.$emit("createNewUser");
     },
   },
 };

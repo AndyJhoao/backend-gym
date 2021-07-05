@@ -31,7 +31,7 @@
                   <td>{{ product.cant_existencia }}</td>
                   <td>{{ product.nom_producto }}</td>
                   <td>{{ product.descripcion }}</td>
-                  <td>{{ product.precio_venta.$numberDecimal | money }}</td>
+                  <td>{{ product.precio_venta | money }}</td>
                   <td>
                     {{ product.subtotal | money }}
                   </td>
@@ -128,8 +128,7 @@ export default {
             let productUpdated = product;
             productUpdated.cant_existencia = cantidad;
             productUpdated.subtotal =
-              parseInt(cantidad) *
-              parseInt(productUpdated.precio_venta.$numberDecimal);
+              parseInt(cantidad) * parseInt(productUpdated.precio_venta);
             this.listSellTable.push(productUpdated);
           }
         } else {
@@ -206,8 +205,7 @@ export default {
       let precioTotal = 0;
       this.listSellTable.forEach(
         (product) =>
-          (precioTotal +=
-            product.precio_venta.$numberDecimal * product.cant_existencia)
+          (precioTotal += product.precio_venta * product.cant_existencia)
       );
       return precioTotal;
     },

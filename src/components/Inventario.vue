@@ -157,7 +157,7 @@ export default {
       this.nom_producto = product.nom_producto;
       this.descripcion = product.descripcion;
       this.cant_existencia = product.cant_existencia;
-      this.precio_compra = product.precio_compra.$numberDecimal;
+      this.precio_compra = product.precio_compra;
     },
     addProductTable() {
       if (this.id != null) {
@@ -248,22 +248,24 @@ export default {
           "http://localhost:5000/home/products/update-all-products",
           this.listProducts
         )
-        .then(() => {
+        .then(function () {
+          console.log("Guardo");
           this.$swal({
             title: "Cantidades agregadas correctamente",
             text: "Las cantidades de cada producto fueron añadidas con exito",
+            timer: 2000,
             icon: "success",
-            timer: 3000,
           });
         })
         .catch((err) => {
-          this.$swal({
-            title: "Error",
-            text: err,
-            icon: "error",
-            timer: 2000,
-          });
+          console.log(err);
         });
+      this.$swal({
+        title: "Cantidades agregadas correctamente",
+        text: "Las cantidades de cada producto fueron añadidas con exito",
+        timer: 2000,
+        icon: "success",
+      });
       this.listProducts = [];
     },
   },

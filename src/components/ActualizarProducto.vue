@@ -48,8 +48,8 @@
                   <td>{{ product.registro }}</td>
                   <td>{{ product.nom_producto | capitalize }}</td>
                   <td>{{ product.descripcion | capitalize }}</td>
-                  <td>${{ product.precio_venta.$numberDecimal }}</td>
-                  <td>${{ product.precio_compra.$numberDecimal }}</td>
+                  <td>${{ product.precio_venta }}</td>
+                  <td>${{ product.precio_compra }}</td>
                   <td>{{ product.id_proveedor }}</td>
                   <td class="botones">
                     <button
@@ -149,8 +149,7 @@ export default {
       return this.productos.filter(
         (a) =>
           a.nom_producto.toLowerCase().includes(this.filter.toLowerCase()) ||
-          a.descripcion.toLowerCase().includes(this.filter.toLowerCase()) ||
-          a.precio_venta.$numberDecimal.includes(this.filter)
+          a.descripcion.toLowerCase().includes(this.filter.toLowerCase())
       );
     },
   },

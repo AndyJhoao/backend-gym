@@ -100,9 +100,7 @@ export default {
           cant_existencia: 0,
           nom_producto: "",
           descripcion: "",
-          precio_compra: {
-            $numberDecimal: 0,
-          },
+          precio_compra: 0,
         });
       } else {
         this.$emit("openProduct", this.product);

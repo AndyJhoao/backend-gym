@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const reporteVentasSchema = new Schema({
+const reporteMaquinasTotales = new Schema({
   type: String,
   description: String,
   fecha: {
@@ -20,6 +20,9 @@ const reporteVentasSchema = new Schema({
 });
 
 //Crear el modelo
-const reporteVentas = mongoose.model("reporteVentas", reporteVentasSchema);
+const maquinasTotales = mongoose.model(
+  "reporteMaquinasTotales",
+  reporteMaquinasTotales
+);
 
-module.exports = reporteVentas;
+module.exports = maquinasTotales;

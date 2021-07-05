@@ -45,7 +45,6 @@ app.get("/", (req, res) => {
   res.send("Hola");
 });
 app.post("/home/products/agregar-producto", (req, res) => {
-  console.log(req.body);
   const product = new Producto({
     nom_producto: req.body.name_product,
     precio_compra: req.body.precio_compra,
@@ -53,7 +52,7 @@ app.post("/home/products/agregar-producto", (req, res) => {
     cant_existencia: 0,
     descripcion: req.body.descripcion,
     id_proveedor: req.body.proveedor,
-    fecha: Date.now(),
+    fecha: moment().format("L"),
   });
   product.save((err) => {
     if (err)
@@ -66,6 +65,10 @@ app.post("/home/products/agregar-producto", (req, res) => {
     }
   });
 });
+// app.post("/imprimir-table/", (request, response) => {
+//   const id = request.body.id;
+
+// });
 
 app.post("/login", (req, res) => {
   Personal.findOne({ n_usuario: req.body.name }, (err, personal) => {
@@ -99,9 +102,8 @@ app.post("/home/products/punto-de-venta/:total", (request, response) => {
   const venta_data = request.body;
   let ventas_array = new Report_Ventas({
     type: "Venta",
-    description: "Ventas del dia " + moment(),
-    fecha_venta: moment(),
-    total: request.params.total,
+    description: request.params.total,
+    fecha_venta: moment().format("L"),
     ventas: [
       {
         nom_producto: venta_data[0].nom_producto,
@@ -183,15 +185,15 @@ app.post("/home/clients", (req, res) => {
     direccion: req.body.direccion,
     apellidos: req.body.apellidos,
     observaciones: req.body.observaciones,
-    fecha: Date.now(),
+    fecha: moment().format("L"),
     tipo_suscripcion: req.body.suscripcion,
     membresia: true,
     tipo_pago: req.body.tipopago,
     cuota: req.body.precio,
     renovar: true,
     estado_suscripcion: {
-      horario: moment(),
-      ini_suscripcion: moment(),
+      horario: moment().format("L"),
+      ini_suscripcion: moment().format("L"),
       exp_suscripcion: suscripcion,
     },
   });
@@ -244,7 +246,7 @@ app.post("/home/personal", (req, res) => {
     n_usuario: req.body.username,
     contraseña: req.body.password,
     permisos: permisosPersonal,
-    fecha: Date.now(),
+    fecha: moment().format("L"),
   });
   personal.save((err) => {
     if (err) {
@@ -260,8 +262,6 @@ app.post("/home/personal", (req, res) => {
 app.post("/home/personal/edit-personal/:id", (request, response) => {
   const id = request.params.id;
   const data = request.body;
-  console.log(id);
-  console.log(data);
   if (request.body.permisos == "administrador" || request.body.permisos == 2) {
     request.body.permisos = 2;
   } else {
@@ -285,9 +285,8 @@ app.post("/home/crear-maquina", (request, response) => {
     imagen: request.body.imagen,
     cantidad: request.body.cantidad,
     estado: request.body.estado,
-    fecha: moment(),
+    fecha: moment().format("L"),
   });
-  console.log(maquina);
   maquina.save((err) => {
     if (err) {
       console.log(err);
@@ -328,7 +327,6 @@ app.post("/home/machine/:id", (request, response) => {
 
 app.post("/home/personal/:id", (req, res) => {
   const id = req.params.id;
-  console.log(id);
   Personal.deleteOne({ _id: id })
     .then(() => {
       return res.status(200).json({
@@ -338,11 +336,10 @@ app.post("/home/personal/:id", (req, res) => {
     .catch((err) => console.log(err));
 });
 app.post("/home/reports/products", (req, res) => {
-  console.log(req.body);
   const report_products = new Report_Products({
     type: "Producto",
     description: "Descripcion de los productos vendidos abreviado",
-    fecha_reporte: Date.now(),
+    fecha_reporte: moment().format("L"),
   });
   report_products.save((err) => {
     if (err) {
@@ -354,11 +351,10 @@ app.post("/home/reports/products", (req, res) => {
   });
 });
 app.post("/home/reports/ventas", (req, res) => {
-  console.log(req.body);
   const report_ventas = new Report_Ventas({
     type: "Ventas",
     description: "Descripcion de las ventas por mes o por fecha",
-    fecha_reporte: Date.now(),
+    fecha_reporte: moment().format("L"),
   });
   report_ventas.save((err) => {
     if (err) {
@@ -374,7 +370,7 @@ app.post("/home/reports/proveedores", (req, res) => {
   const report_proveedores = new Report_Proveedores({
     type: "Proveedores",
     description: "Descripcion de los Proveedores y las compras",
-    fecha_reporte: Date.now(),
+    fecha_reporte: moment().format("L"),
   });
   report_proveedores.save((err) => {
     if (err) {
@@ -385,19 +381,41 @@ app.post("/home/reports/proveedores", (req, res) => {
     }
   });
 });
-app.post("/home/reports/clientes", (req, res) => {
-  console.log(req.body);
-  const report_clientes = new Report_Clientes({
-    type: "Clientes",
-    description: "Descripcion de los clientes hasta la fecha",
-    fecha_reporte: Date.now(),
+
+app.post("/home/reports/clientes", (request, response) => {
+  let suscripcion;
+  if (request.body.suscripcion == "mes") suscripcion = moment().add(1, "M");
+  else suscripcion = moment().add(1, "y");
+
+  let report_cliente = new Report_Clientes({
+    type: "Cliente",
+    description: "Formato por cada cliente",
+    fecha: moment().format("L"),
+    array: {
+      nombre: request.body.nombre,
+      genero: request.body.sexo,
+      telefono: request.body.telefono,
+      direccion: request.body.direccion,
+      apellidos: request.body.apellidos,
+      observaciones: request.body.observaciones,
+      fecha: moment().format("L"),
+      tipo_suscripcion: request.body.suscripcion,
+      membresia: true,
+      tipo_pago: request.body.tipopago,
+      cuota: request.body.precio,
+      renovar: true,
+      estado_suscripcion: {
+        horario: moment().format("L"),
+        ini_suscripcion: moment().format("L"),
+        exp_suscripcion: moment(suscripcion).format("L"),
+      },
+    },
   });
-  report_clientes.save((err) => {
+  report_cliente.save((err) => {
     if (err) {
-      return res.status(400).json({
-        title: "Error",
-        error: "No se pudo man",
-      });
+      console.log(err);
+    } else {
+      return response.status(200);
     }
   });
 });
@@ -406,7 +424,7 @@ app.post("/home/reports/maquinas", (req, res) => {
   const report_maquinas = new Report_Maquinas({
     type: "Maquinas",
     description: "Descripcion de las maquinas y sus usos",
-    fecha_reporte: Date.now(),
+    fecha_reporte: moment().format("L"),
   });
   report_maquinas.save((err) => {
     if (err) {
@@ -417,28 +435,27 @@ app.post("/home/reports/maquinas", (req, res) => {
     }
   });
 });
-app.post("/home/signup", (req, res) => {
-  console.log(req.body);
-  const personal = new Personal({
-    registro: "1",
-    nombre: "Andy",
-    apellidos: "Jhoao",
-    puesto: "administrador",
-    n_usuario: "andy",
-    contraseña: "1234",
-    permisos: 1,
-    fecha: Date.now(),
-  });
-  personal.save((err) => {
-    if (err) {
-      return res.status(400).json({
-        title: "Error",
-        error: "No se pudo man",
-      });
-    }
-  });
-});
-app.post("/home/products/update-all-products", (request) => {
+// app.post("/home/signup", (req, res) => {
+//   const personal = new Personal({
+//     registro: "1",
+//     nombre: "Andy",
+//     apellidos: "Jhoao",
+//     puesto: "administrador",
+//     n_usuario: "andy",
+//     contraseña: "1234",
+//     permisos: 1,
+//     fecha: moment().format("L"),
+//   });
+//   personal.save((err) => {
+//     if (err) {
+//       return res.status(400).json({
+//         title: "Error",
+//         error: "No se pudo man",
+//       });
+//     }
+//   });
+// });
+app.post("/home/products/update-all-products", (request, response) => {
   const listProducts = request.body;
   listProducts.forEach((product) =>
     Producto.findByIdAndUpdate(
@@ -453,6 +470,7 @@ app.post("/home/products/update-all-products", (request) => {
       console.log(updated);
     })
   );
+  return response.status(200);
 });
 app.get("/home/products/actualizar-producto", (req, res) => {
   Producto.find({})
@@ -523,20 +541,39 @@ app.get("/home/personal/:id", (req, res) => {
 });
 app.get("/home/reports/:type", (req, res) => {
   let type_report = req.params.type;
-  switch (type_report) {
-    case "products":
-      Report_Products.find({})
+  switch (type_report.toLocaleLowerCase()) {
+    case "productos":
+      Producto.find({})
         .then((data) => {
-          return res.send(data);
+          let format = data.map((e) => {
+            let obj = {};
+            obj["_id"] = e._id;
+            obj["type"] = "Producto";
+            obj["description"] = e.nom_producto;
+            obj["fecha"] = e.fecha;
+            obj["array"] = e;
+            return obj;
+          });
+          return res.send(format);
         })
         .catch((err) => {
           console.log(err);
         });
       break;
     case "clientes":
-      Report_Clientes.find({})
+      Cliente.find({})
         .then((data) => {
-          return res.send(data);
+          let format = data.map((e) => {
+            let obj = {};
+            obj["_id"] = e._id;
+            obj["type"] = "Cliente";
+            obj["description"] = e.nombre;
+            obj["fecha"] = e.fecha;
+            obj["array"] = e;
+            return obj;
+          });
+          console.log(format);
+          return res.send(format);
         })
         .catch((err) => {
           console.log(err);
@@ -561,18 +598,58 @@ app.get("/home/reports/:type", (req, res) => {
         });
       break;
     case "maquinas":
-      Report_Maquinas.find({})
+      Maquina.find({})
         .then((data) => {
-          return res.send(data);
+          let format = data.map((e) => {
+            let obj = {};
+            obj["_id"] = e._id;
+            obj["type"] = "Maquina";
+            obj["description"] = e.nombre;
+            obj["fecha"] = e.fecha;
+            obj["array"] = e;
+            return obj;
+          });
+          console.log(format);
+          return res.send(format);
         })
         .catch((err) => {
           console.log(err);
         });
       break;
-    default:
-      Report_Products.find({})
+    case "empleados":
+      Personal.find({})
         .then((data) => {
-          return res.send(data);
+          let format = data.map((e) => {
+            let obj = {};
+            obj["_id"] = e._id;
+            obj["type"] = "Empleado";
+            obj["description"] = e.nombre;
+            obj["fecha"] = e.fecha;
+            obj["array"] = e;
+            return obj;
+          });
+          console.log(format);
+          return res.send(format);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      break;
+
+    default:
+      Producto.find({})
+        .then((data) => {
+          let format = data.map((e) => {
+            let obj = {};
+            obj["_id"] = e._id;
+            obj["type"] = "Producto";
+            obj["description"] = e.nom_producto;
+            obj["fecha"] = e.fecha;
+            obj["array"] = e;
+            return obj;
+          });
+          console.log(format);
+          return res.send(format);
         })
         .catch((err) => {
           console.log(err);
@@ -580,6 +657,7 @@ app.get("/home/reports/:type", (req, res) => {
       break;
   }
 });
+
 // app.get("/home/signup", (req, res) => {
 //   Personal.find({})
 //     .then((data) => {

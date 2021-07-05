@@ -11,8 +11,8 @@ var counterProduct = mongoose.model("counterproduct", autoincrementProduct);
 const productoSchema = new Schema({
   registro: Number,
   nom_producto: String,
-  precio_compra: mongoose.Types.Decimal128,
-  precio_venta: mongoose.Types.Decimal128,
+  precio_compra: Number,
+  precio_venta: Number,
   cant_existencia: Number,
   descripcion: String,
   id_proveedor: String,

@@ -4,30 +4,35 @@
       <h2>
         <router-link to="/home"> Home </router-link> //
         <router-link to="/home/machines"> Maquinas </router-link> //
-        {{ machine.title }}
+        {{ machine.nombre }}
       </h2>
 
       <article class="Container">
         <div class="Container-Image">
           <img
             class="size-image"
-            :src="`${machine.image}`"
-            :alt="machine.title"
+            :src="`${machine.imagen}`"
+            :alt="machine.nombre"
           />
         </div>
 
         <div class="Container-Description">
-          <div class="subtitulo">{{ machine.title }}</div>
+          <div class="subtitulo">{{ machine.nombre }}</div>
 
           <div class="Container-Eliptica">
-            <img
-              v-for="i in 10"
+            <div
+              class="backgroud-machine"
+              v-for="i in machine.cantidad"
               :key="`${i}`"
-              :src="`${machine.image}`"
-              alt="Poleas"
-              width="120px"
-              height="110px"
-            />
+            >
+              <img
+                :src="`${machine.imagen}`"
+                alt="Poleas"
+                width="120px"
+                height="110px"
+              />
+              <p class="text-center">{{ machine.estado | membresia }}</p>
+            </div>
           </div>
         </div>
       </article>
@@ -36,7 +41,7 @@
 </template>
 
 <script>
-import { getMachine } from "@/fetchMachines";
+import axios from "axios";
 export default {
   name: "MachineView",
   data() {
@@ -50,7 +55,12 @@ export default {
   methods: {
     machineGET() {
       const idmachine = this.$route.params.id;
-      this.machine = getMachine(idmachine);
+      console.log(idmachine);
+      axios
+        .get("http://localhost:5000/home/machine/" + idmachine)
+        .then((data) => {
+          this.machine = data.data;
+        });
     },
   },
 };
@@ -111,5 +121,15 @@ h2 a {
 }
 .Container-Eliptica img {
   margin: 10px;
+}
+.text-center {
+  text-align: center;
+  color: black;
+  font-size: 1.3rem;
+}
+.backgroud-machine {
+  background-color: rgb(155, 146, 146);
+  margin: 5px;
+  border-radius: 5px;
 }
 </style>

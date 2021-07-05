@@ -119,6 +119,9 @@ export default {
             timer: 2000,
             icon: "success",
           });
+          axios
+            .post("http://localhost:5000/home/reports/clientes", user)
+            .then(() => {});
         })
         .finally(() => {
           this.updateTable();

@@ -30,7 +30,7 @@
                   <td>{{ productsSelect.descripcion }}</td>
                   <td>{{ productsSelect.cant_existencia }}</td>
                   <td>
-                    {{ productsSelect.precio_venta.$numberDecimal | money }}
+                    {{ productsSelect.precio_venta | money }}
                   </td>
                 </tr>
               </tbody>

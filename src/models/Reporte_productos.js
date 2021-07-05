@@ -4,10 +4,18 @@ const Schema = mongoose.Schema;
 const reporteProductosSchema = new Schema({
   type: String,
   description: String,
-  fecha_reporte: {
+  fecha: {
     type: Date,
     default: Date.now,
   },
+  array: [
+    {
+      id_producto: mongoose.Schema.Types.ObjectId,
+      nom_producto: String,
+      description: String,
+      cantidad: Number,
+    },
+  ],
 });
 
 //Crear el modelo

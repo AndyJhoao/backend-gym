@@ -12,7 +12,7 @@
         <editClients
           v-if="showEditClient"
           @close="closeEditClient"
-          @createNewUser="getClientes"
+          @update="getClientes"
           :dataClient="dataClient"
         />
         <div class="contenedor">
@@ -113,7 +113,7 @@ export default {
       dataClient: {},
     };
   },
-  created() {
+  mounted() {
     this.getClientes();
   },
   methods: {
@@ -163,9 +163,12 @@ export default {
   },
   computed: {
     Clients() {
-      return this.arrayClients.filter((a) =>
+      return this.arrayClientsComputed.filter((a) =>
         a.nombre.toLowerCase().includes(this.filter.toLowerCase())
       );
+    },
+    arrayClientsComputed() {
+      return this.arrayClients;
     },
   },
 };

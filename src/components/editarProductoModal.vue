@@ -29,12 +29,12 @@
               />
               <input
                 type="number"
-                :placeholder="productInfo.precio_compra.$numberDecimal"
+                :placeholder="productInfo.precio_compra"
                 v-model="precio_compra"
               />
               <input
                 type="number"
-                :placeholder="productInfo.precio_venta.$numberDecimal"
+                :placeholder="productInfo.precio_venta"
                 v-model="precio_venta"
               />
             </div>
@@ -88,8 +88,8 @@ export default {
       this.nom_producto = this.productInfo.nom_producto;
       this.descripcion = this.productInfo.descripcion;
       this.id_proveedor = this.productInfo.id_proveedor;
-      this.precio_compra = this.productInfo.precio_compra.$numberDecimal;
-      this.precio_venta = this.productInfo.precio_venta.$numberDecimal;
+      this.precio_compra = this.productInfo.precio_compra;
+      this.precio_venta = this.productInfo.precio_venta;
     },
     updateProduct() {
       let product = {
