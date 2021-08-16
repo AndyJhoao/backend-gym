@@ -56,7 +56,7 @@
                         imprimir(
                           reports.type,
                           reports.array,
-                          reports.descripcion
+                          reports.description
                         )
                       "
                     >
@@ -101,7 +101,6 @@ export default {
   },
   created() {
     this.getReports();
-    moment.locale("mx");
     moment().format("dddd, MMMM Do YYYY");
   },
   methods: {
@@ -540,7 +539,7 @@ export default {
         case "Producto": {
           producto = {
             Identificador: array._id,
-            Nombre: array.nombre,
+            Nombre: array.nom_producto,
             Descripcion: array.descripcion,
             "Precio venta": array.precio_venta,
             "Precio compra": array.precio_compra,
@@ -598,6 +597,15 @@ export default {
           } else {
             var data = moment(fecha.fecha).format("L");
             return data >= start && data <= end;
+            // if (
+            //   moment(data).get("month") == moment(start).get("month") &&
+            //   moment(data).get("month") == moment(end).get("month")
+            // ) {
+            //   console.log(true);
+
+            // } else {
+            //   console.log(false);
+            // }
           }
         });
       } else {

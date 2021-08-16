@@ -11,6 +11,7 @@
           v-if="listProductsModal"
           @close="closeList"
           @openProduct="addListVenta"
+          :filterDad="filter"
         />
         <div class="contenedor">
           <div class="container-table">
@@ -124,6 +125,9 @@ export default {
             const productToUpdate = this.listSellTable[indexProduct];
             productToUpdate.cant_existencia =
               parseInt(productToUpdate.cant_existencia) + parseInt(cantidad);
+            productToUpdate.subtotal =
+              parseInt(productToUpdate.cant_existencia) *
+              parseInt(productToUpdate.precio_venta);
           } else {
             let productUpdated = product;
             productUpdated.cant_existencia = cantidad;
@@ -193,7 +197,6 @@ export default {
           });
           this.listSellTable = [];
         });
-      console.log(datafull);
       axios.post(
         "http://localhost:5000/home/products/update/existencias",
         datafull

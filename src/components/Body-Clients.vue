@@ -8,7 +8,11 @@
           @close="showModalInfo = false"
           :data="dataClient"
         />
-        <agregar-usuario-modal v-if="showModal" @close="cerrarModalUser" />
+        <agregar-usuario-modal
+          v-if="showModal"
+          @close="cerrarModalUser"
+          @newData="updateTable"
+        />
         <editClients
           v-if="showEditClient"
           @close="closeEditClient"
@@ -157,8 +161,10 @@ export default {
     },
     cerrarModalUser() {
       this.showModal = false;
-      // console.log("aaaaaa");
       this.getClientes();
+    },
+    updateTable() {
+      console.log("");
     },
   },
   computed: {

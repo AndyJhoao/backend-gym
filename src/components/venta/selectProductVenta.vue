@@ -90,7 +90,7 @@
 import axios from "axios";
 export default {
   name: "selectProductVenta",
-  props: ["listProducts"],
+  props: ["listProducts", "filterDad"],
   data() {
     return {
       filter: "",
@@ -104,15 +104,13 @@ export default {
     this.getProducts();
   },
   methods: {
-    async getProducts() {
-      try {
-        this.products = await axios.get(
-          "http://localhost:5000/home/products/actualizar-producto"
-        );
-        this.products = this.products.data;
-      } catch (err) {
-        console.log(err);
-      }
+    getProducts() {
+      axios
+        .get("http://localhost:5000/home/products/actualizar-producto")
+        .then((data) => {
+          this.products = data.data;
+          this.filter = this.filterDad;
+        });
     },
     openProduct() {
       try {
@@ -145,7 +143,7 @@ export default {
   computed: {
     listProductsSearch() {
       if (this.products.length < 1) {
-        return "No hubo coincidencias :)";
+        return this.products;
       } else {
         return this.products.filter((a) =>
           a.nom_producto.toLowerCase().includes(this.filter.toLowerCase())

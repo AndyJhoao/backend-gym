@@ -104,7 +104,7 @@ app.post("/home/products/punto-de-venta/:total", (request, response) => {
     type: "Venta",
     description: request.params.total,
     fecha_venta: moment().format("L"),
-    ventas: [
+    array: [
       {
         nom_producto: venta_data[0].nom_producto,
         description: venta_data[0].descripcion,
@@ -136,7 +136,7 @@ app.post("/home/products/punto-de-venta/update/:id", (request) => {
         id,
         {
           $push: {
-            ventas: {
+            array: {
               nom_producto: venta_dinamico.nom_producto,
               description: venta_dinamico.descripcion,
               subtotal: venta_dinamico.subtotal,

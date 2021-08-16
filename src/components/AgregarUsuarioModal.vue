@@ -96,6 +96,7 @@ export default {
       suscripcion: "",
       tipopago: "",
       precio: "",
+      arrayNew: [],
     };
   },
   methods: {
@@ -111,27 +112,27 @@ export default {
         tipopago: this.tipopago,
         precio: this.precio,
       };
-      axios
-        .post("http://localhost:5000/home/clients", user)
-        .then(() => {
-          this.$swal({
-            title: "Usuario creado correctamente.!",
-            timer: 2000,
-            icon: "success",
-          });
-          axios
-            .post("http://localhost:5000/home/reports/clientes", user)
-            .then(() => {});
-        })
-        .finally(() => {
-          this.updateTable();
-          // console.log("alo");
+      axios.post("http://localhost:5000/home/clients", user).then(() => {
+        this.$swal({
+          title: "Usuario creado correctamente.!",
+          timer: 2000,
+          icon: "success",
         });
+        axios
+          .post("http://localhost:5000/home/reports/clientes", user)
+          .then(() => {});
+      });
+
+      this.updateTable();
       // axios.post("http://localhost:5000/home/signup");
       // axios.get("http://localhost:5000/home/signup");
     },
     updateTable() {
       this.$emit("createNewUser");
+      axios.get("http://localhost:5000/home/clients").then((data) => {
+        this.arrayNew = data.data;
+        this.$emit("newData", this.arrayNew);
+      });
     },
   },
 };

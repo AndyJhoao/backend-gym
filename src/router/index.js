@@ -3,7 +3,6 @@ import VueRouter from "vue-router";
 
 import Login from "../views/Login.vue";
 import Home from "../views/Home.vue";
-// import homeinfo from "../views/homeinfo.vue";
 import Machines from "../views/HomeMachines.vue";
 import Machine from "../views/Machines.vue";
 import Maquinas from "../views/machines/Machine.vue";
