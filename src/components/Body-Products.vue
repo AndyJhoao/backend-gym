@@ -1,9 +1,10 @@
 <template>
-  <div>
+  <div class="fullViewHeight">
     <main>
       <section>
         <h2><router-link to="/home"> Home </router-link>// Productos //</h2>
-        <div class="body">
+        <spinnerLoader class="center" :loading="isLoading" v-if="isLoading" />
+        <div class="body" v-if="!isLoading">
           <article class="card">
             <img
               class="img"
@@ -58,9 +59,22 @@
   </div>
 </template>
 <script>
+import spinnerLoader from "@/components/SpinnerLoader.vue";
 export default {
   name: "BodyProducts",
   props: ["lvlpermisos"],
+  data() {
+    return {
+      isLoading: false,
+    };
+  },
+  components: {
+    spinnerLoader,
+  },
+  created() {
+    this.isLoading = true;
+    setTimeout(() => (this.isLoading = false), 1000);
+  },
 };
 </script>
 
@@ -125,5 +139,8 @@ p {
   border-radius: 5px;
   width: 300px;
   height: 300px;
+}
+.fullViewHeight {
+  height: calc(100vh - 107px);
 }
 </style>

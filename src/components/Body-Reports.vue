@@ -1,80 +1,88 @@
 <template>
-  <div class="max">
+  <div class="max fullViewHeight">
     <main class="max">
       <section class="padre max">
         <h2><router-link to="/home/"> Home </router-link> // Reportes //</h2>
         <div class="contenedor">
-          <div class="form-search">
-            <div class="menu-op">
-              <select name="type_selected" class="menu" v-model="type_reports">
-                <option value="" selected disabled hidden>Productos</option>
-                <option value="productos" selected="selected">Productos</option>
-                <option value="clientes">Clientes</option>
-                <option value="ventas">Ventas</option>
-                <option value="maquinas">Maquinas</option>
-                <option value="empleados">Empleados</option>
-              </select>
-            </div>
+          <div>
+            <div class="form-search">
+              <div class="menu-op">
+                <select
+                  name="type_selected"
+                  class="menu"
+                  v-model="type_reports"
+                >
+                  <option value="" selected disabled hidden>Productos</option>
+                  <option value="productos" selected="selected">
+                    Productos
+                  </option>
+                  <option value="clientes">Clientes</option>
+                  <option value="ventas">Ventas</option>
+                  <option value="maquinas">Maquinas</option>
+                  <option value="empleados">Empleados</option>
+                </select>
+              </div>
 
-            <div class="in-date">
-              <p class="text">Inicia:</p>
-              <input type="date" class="fecha" v-model="startDate" />
-              <p class="text">Termina:</p>
-              <input type="date" class="fecha" v-model="endDate" />
-            </div>
+              <div class="in-date">
+                <p class="text">Inicia:</p>
+                <input type="date" class="fecha" v-model="startDate" />
+                <p class="text">Termina:</p>
+                <input type="date" class="fecha" v-model="endDate" />
+              </div>
 
-            <div class="b-search">
-              <button class="btn-b" @click="getReportsSelector(type_reports)">
-                Buscar
+              <div class="b-search">
+                <button class="btn-b" @click="getReportsSelector(type_reports)">
+                  Buscar
+                </button>
+              </div>
+            </div>
+            <spinner-loader v-if="isLoading" :loading="isLoading" />
+            <div class="container-table" v-if="!isLoading">
+              <table id="tablita" class="tabla">
+                <thead class="head">
+                  <tr class="head_row">
+                    <th class="a-cel15">Clave</th>
+                    <th class="a-cel20">Tipo</th>
+                    <th class="a-cel25">Descripcion</th>
+                    <th class="a-cel20">Fecha</th>
+                    <th class="a-cel20">Boton</th>
+                  </tr>
+                </thead>
+
+                <tbody class="body">
+                  <tr v-for="reports in searchDate" :key="reports._id">
+                    <td>{{ reports._id }}</td>
+                    <td>{{ reports.type }}</td>
+                    <td>{{ reports.description }}</td>
+                    <td>{{ reports.fecha | date }}</td>
+
+                    <td>
+                      <button
+                        class="b-editar"
+                        @click="
+                          imprimir(
+                            reports.type,
+                            reports.array,
+                            reports.description
+                          )
+                        "
+                      >
+                        Imprimir
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <p v-if="searchDate.length < 1" class="centerTextNotFound">
+                <i>No se encontraron coincidencias</i>
+              </p>
+            </div>
+            <div class="b-print">
+              <button class="btn-c" @click="printFull(type_reports)">
+                Imprimir tabla
               </button>
             </div>
-          </div>
-          <spinner-loader v-if="isLoading" :loading="isLoading" />
-          <div class="container-table" v-if="!isLoading">
-            <table id="tablita" class="tabla">
-              <thead class="head">
-                <tr class="head_row">
-                  <th class="a-cel15">Clave</th>
-                  <th class="a-cel20">Tipo</th>
-                  <th class="a-cel25">Descripcion</th>
-                  <th class="a-cel20">Fecha</th>
-                  <th class="a-cel20">Boton</th>
-                </tr>
-              </thead>
-
-              <tbody class="body">
-                <tr v-for="reports in searchDate" :key="reports._id">
-                  <td>{{ reports._id }}</td>
-                  <td>{{ reports.type }}</td>
-                  <td>{{ reports.description }}</td>
-                  <td>{{ reports.fecha | date }}</td>
-
-                  <td>
-                    <button
-                      class="b-editar"
-                      @click="
-                        imprimir(
-                          reports.type,
-                          reports.array,
-                          reports.description
-                        )
-                      "
-                    >
-                      Imprimir
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-
-            <p v-if="searchDate.length < 1" class="centerTextNotFound">
-              <i>No se encontraron coincidencias</i>
-            </p>
-          </div>
-          <div class="b-print">
-            <button class="btn-c" @click="printFull(type_reports)">
-              Imprimir tabla
-            </button>
           </div>
         </div>
       </section>
@@ -629,10 +637,10 @@ body {
 /* contenedor principal */
 .contenedor {
   margin: auto;
-  margin-top: 40px;
+  margin-top: 10px;
   padding: 20px;
   width: 80%;
-  height: 80%;
+  height: 90%;
   border: solid 1px grey;
   border-radius: 5px;
   background-color: white;
@@ -658,13 +666,13 @@ body {
 
 /* del boton buscar */
 .b-search {
-  width: 30%;
+  width: 20%;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
 }
 .b-print {
-  width: 40%;
+  width: 50%;
   height: 60px;
   margin-top: 20px;
 }
@@ -697,12 +705,12 @@ body {
 }
 .in-date {
   display: flex;
-  width: 36%;
+  width: 49%;
 }
 
 /* boton buscar */
 .btn-b {
-  width: 30%;
+  width: 70%;
   height: auto;
   font-family: sans-serif;
   font-weight: bold;
@@ -965,5 +973,8 @@ td {
 }
 .max {
   height: 95%;
+}
+.fullViewHeight {
+  height: calc(100vh - 107px);
 }
 </style>

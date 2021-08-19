@@ -88,6 +88,7 @@ header {
   background-color: #f08a5d;
   margin: 0;
   width: 100%;
+  height: 107px;
 }
 ul {
   list-style: none;
@@ -97,6 +98,7 @@ nav {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  height: 107px;
 }
 .header-nav-logo {
   display: flex;

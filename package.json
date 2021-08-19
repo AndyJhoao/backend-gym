@@ -6,12 +6,13 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "server": "nodemon ./src/server.js"
+    "server": "nodemon src/server.js"
   },
   "dependencies": {
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express-fileupload": "^1.2.1",
     "firebase": "^8.7.0",
     "jsonwebtoken": "^8.5.1",

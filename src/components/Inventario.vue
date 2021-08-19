@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="fullViewHeight">
     <main>
       <section class="padre">
         <h2>
@@ -167,7 +167,8 @@ export default {
               this.$swal({
                 title: "Ya existe.!",
                 text:
-                  "El producto que deseas agregar ya se enecuentra dentro de la tabla. ¿Deseas actualizar la cantidad y el precio por los actuales?",
+                  "El producto que deseas agregar ya se enecuentra dentro de la tabla." +
+                  "¿Deseas actualizar la cantidad y el precio por los actuales?",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
@@ -611,5 +612,8 @@ tr:nth-child(even) {
   font-size: 1.3rem;
   opacity: 0.5;
   padding-top: 30px;
+}
+.fullViewHeight {
+  height: calc(100vh - 107px);
 }
 </style>

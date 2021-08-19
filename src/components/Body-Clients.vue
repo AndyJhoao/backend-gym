@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="fullViewHeight">
     <main>
       <section>
         <h2><router-link to="/home/"> Home </router-link> // Clientes //</h2>
@@ -191,7 +191,7 @@ body {
   margin: auto;
   margin-top: 40px;
   padding: 20px;
-  width: 80%;
+  width: 90%;
   height: auto;
   border: solid 1px grey;
   border-radius: 5px;
@@ -482,5 +482,8 @@ td {
   font-size: 1.3rem;
   opacity: 0.5;
   padding-top: 30px;
+}
+.fullViewHeight {
+  height: calc(100vh - 107px);
 }
 </style>

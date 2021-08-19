@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="fullViewHeight">
     <main>
       <section class="padre">
         <h2>
@@ -171,5 +171,8 @@ input:focus {
   border-radius: 5px;
   border-width: 2px;
   border-color: green;
+}
+.fullViewHeight {
+  height: calc(100vh - 107px);
 }
 </style>

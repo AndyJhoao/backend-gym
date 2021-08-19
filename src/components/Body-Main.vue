@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="fullViewHeight">
     <main>
       <section>
         <h1><router-link to="/home/"> Home </router-link> //</h1>
@@ -125,5 +125,8 @@ p {
   border-radius: 5px;
   width: 300px;
   height: 300px;
+}
+.fullViewHeight {
+  height: calc(100vh - 107px);
 }
 </style>

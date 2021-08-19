@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="fullViewHeight">
     <main>
       <section class="padre">
         <h2>
@@ -522,5 +522,8 @@ td {
   font-size: 1.3rem;
   opacity: 0.5;
   padding-top: 30px;
+}
+.fullViewHeight {
+  height: calc(100vh - 107px);
 }
 </style>

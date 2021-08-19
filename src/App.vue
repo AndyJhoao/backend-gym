@@ -48,7 +48,7 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 100vh;
+  height: auto;
   background-image: url("https://firebasestorage.googleapis.com/v0/b/gym-project-7014c.appspot.com/o/fondo-1(1).png?alt=media&token=8dab756a-1c1e-4ff3-893e-1193808ec142");
   object-fit: cover;
 }

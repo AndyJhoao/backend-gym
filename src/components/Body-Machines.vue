@@ -1,7 +1,7 @@
 <template>
-  <div class="percent">
-    <main class="percent">
-      <section class="percent">
+  <div>
+    <main>
+      <section>
         <h2><router-link to="/home/"> Home </router-link> // Maquinas //</h2>
         <div class="contenedor-2 percent">
           <div class="imagenes-maquinas">
@@ -54,33 +54,31 @@ export default {
 .contenedor-2 {
   /*background-color: blue;*/
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  margin-top: 30px;
 }
 .imagenes-maquinas {
   display: flex;
-  flex-wrap: wrap;
-  width: 80%;
-  height: 80%;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
+  flex-flow: row wrap;
 }
 .imagen {
-  width: 200px;
-  height: 200px;
+  width: 190px;
+  height: 190px;
   border: 1px solid black;
   border-radius: 50px;
+  display: inherit;
 }
 
 .caja-maquina {
   background: rgba(14, 14, 14, 0.8);
   text-align: center;
-  margin: auto;
   transition: 1s;
   margin-bottom: 15px;
   border-radius: 10px;
-  width: 270px;
+  width: 260px;
 }
 .caja-maquina a {
   text-decoration: none;

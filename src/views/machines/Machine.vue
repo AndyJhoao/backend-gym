@@ -1,5 +1,5 @@
 <template>
-  <div class="contenedor-prin">
+  <div class="contenedor-prin fullViewHeight">
     <main>
       <section>
         <h2><router-link to="/home/"> Home </router-link> // Maquinas //</h2>
@@ -458,5 +458,8 @@ td {
 .imageTable {
   width: 70px;
   height: 70px;
+}
+.fullViewHeight {
+  height: calc(100vh - 107px);
 }
 </style>
