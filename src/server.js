@@ -16,7 +16,7 @@ require("dotenv").config();
 const port = process.env.PORT || 5000;
 mongoose
   .connect(
-    "mongodb+srv://admin:gymspartans@gym-spartans.ynbdd.mongodb.net/Gymspartans-db?retryWrites=true&w=majority",
+    process.env.DB,
     {
       useFindAndModify: false,
       useUnifiedTopology: true,
