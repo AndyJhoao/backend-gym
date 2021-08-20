@@ -9,46 +9,25 @@
     "start": "node src/server"
   },
   "dependencies": {
-    "axios": "^0.21.1",
-    "core-js": "^3.6.5",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express-fileupload": "^1.2.1",
-    "firebase": "^8.7.0",
     "jsonwebtoken": "^8.5.1",
-    "jspdf": "^2.3.1",
-    "jspdf-autotable": "^3.5.15",
     "moment": "^2.29.1",
-    "mongoose": "^5.12.2",
-    "nodemon": "^2.0.7",
-    "promise.prototype.finally": "^3.1.2",
-    "vue": "^2.6.11",
-    "vue-router": "^3.5.1",
-    "vue-swal": "^1.0.0"
+    "mongoose": "^5.12.2"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-plugin-router": "^4.5.12",
-    "@vue/cli-service": "~4.5.0",
-    "@vue/eslint-config-prettier": "^6.0.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^6.2.2",
-    "prettier": "^2.2.1",
-    "vue-template-compiler": "^2.6.11"
+    "prettier": "^2.2.1"
   },
-  "main": "server.js",
+  "main": "main.js",
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/AndyJhoao/gym-app.git"
+    "type": "git"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/AndyJhoao/gym-app/issues"
-  },
-  "homepage": "https://github.com/AndyJhoao/gym-app#readme",
   "description": ""
 }
