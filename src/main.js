@@ -1,37 +1,60 @@
-import Vue from "vue";
-import App from "./App.vue";
-import router from "./router/index";
-import VueSwal from "vue-swal";
-import firebase from "firebase";
-import {
-  activeMembership,
-  money_Format,
-  date_Format,
-  capitalize,
-} from "./filters/filters";
+const express = require("express");
+const app = express();
+const server = require("http").Server(app);
+const cors = require("cors");
+const router = require("./router");
+const path = require("path");
+// const { createSSRapp } = require("vue");
+// const { renderToString } = require("@vue/server-renderer");
+// const manifest = require("../dist/ssr-manifest.json");
 
-var firebaseConfig = {
-  apiKey: "AIzaSyBd6O6Ls9ARemH1ABEWRlXczHSCDnGiRn4",
-  authDomain: "gym-project-7014c.firebaseapp.com",
-  projectId: "gym-project-7014c",
-  storageBucket: "gym-project-7014c.appspot.com",
-  messagingSenderId: "66316355461",
-  appId: "1:66316355461:web:592849dd8357cf952fa6ec",
-  measurementId: "G-J5R4DK8SKH",
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-firebase.analytics();
+const fileUpload = require("express-fileupload");
 
-Vue.use(VueSwal);
-Vue.filter("membresia", activeMembership);
-Vue.filter("money", money_Format);
-Vue.filter("date", date_Format);
-Vue.filter("capitalize", capitalize);
+const mongoose = require("mongoose");
+require("dotenv").config();
 
-Vue.config.productionTip = false;
+const port = process.env.PORT || 5000;
+mongoose
+  .connect(process.env.DB, {
+    useFindAndModify: false,
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+  })
+  .then(() => console.log("DB Connect"))
+  .catch((err) => console.error(err));
 
-new Vue({
-  router,
-  render: (h) => h(App),
-}).$mount("#app");
+// const appPath = path.join(__dirname, "../dist", manifest["app.js"]);
+// const App = require(appPath).default;
+
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+app.use(fileUpload());
+
+// app.post("/home/products/actualizar-producto/:id", async (req, res) => {
+//   let producto = req.body;
+//   const response = await Producto.updateOne({});
+// });
+router(app);
+app.use(express.static(path.join(__dirname, "./public")));
+// app.get("*", (request, response) => {
+//   const ssrApp = createSSRapp(App);
+//   const appContent = renderToString(ssrApp);
+//   const html = `
+//   <html>
+//     <head>
+//       <title>
+//         Hello
+//       </title>
+//     </head>
+//     <body>
+//       ${appContent}
+//     </body>
+//   </html>
+//   `;
+//   response.end(html);
+// });
+server.listen(port, function () {
+  console.log("server is running in localhost:" + port);
+});
